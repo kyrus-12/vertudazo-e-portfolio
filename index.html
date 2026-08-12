@@ -7,11 +7,126 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --parchment:#f48ed0;
+      --parchment-shade:#e6d5b8;
+      --parchment-dark:#d4c4a8;
+      --ink:#2c1810;
+      --ink-soft:#5d4037;
+      --ink-faint:#8d6e63;
+      --gold:#b8860b;
+      --gold-light:#d4af37;
+      --gold-pale:#e6c86e;
+      --burgundy:#6a1b1b;
+      --cover:#2c1810;
+      --cover-light:#2e2723;
+      --font-display:'Cinzel Decorative', serif;
+      --font-title:'Cinzel', serif;
+      --font-body:'Cormorant Garamond', serif;
+      --font-script:'Tangerine', cursive;
+      --page-w:clamp(260px, 33vw, 420px);
+      --page-h:clamp(420px, 82vh, 640px);
+    }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      -webkit-tap-highlight-color:transparent;
+    }
+    html, body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:#1a0f0a;
+      font-family:var(--font-body);
+      color:var(--ink);
+    }
+    .bookshelf-scene{
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(ellipse at 20% 10%, rgba(62,39,35,0.5) 0% transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(44,24,16,0.6) 0% transparent 50%),
+        linear-gradient(180deg, #1a0f0a 0%, #2c1810 40%, #1a0f0a 100%);
+      position:relative;
+      transition:opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+    }
+    .bookshelf-scene.hidden{
+      opacity:0;
+      pointer-events:none;
+      transform:scale(0.92);
+      filter:blur(8px);
+    }
+    .bookshelf-scene::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity:0.4;
+      pointer-events:none;
+    }
+    .shelf-header{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:40px;
+      max-width:min(95vw, 1100px);
+      width:100%;
+      padding:0 20px;
+    }
+    .shelf-header h1{
+      font-family:var(--font-display);
+      font-size:clamp(28px, 5vw, 48px);
+      color:var(--gold-pale);
+      letter-spacing:0.1em; 
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    }
+    .shelf-header p{
+      font-family:var(--font-script);
+      font-size:clamp(22px, 2.5vw, 34px);
+      color:var(--gold-light);
+      margin-top:4px;
+    }
+    .shelf-container{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:40px;
+      max-width:min(95vw, 1100px);
+      width:100%;
+      padding:0 20px;
+    }
+    .shelf-row{
+      position:relative;
+      width:100%;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      gap:clamp(8px, 2vw, 24px);
+      padding:20px 30px 14px;
+      background:
+        linear-gradient(180deg, rgba(62,39,35,0) 0%, rgba(62,39,35,0.4) 100%),
+        linear-gradient(90deg, #3e2723 0%, #5d4037 20%, #4e342e 50%, #5d4037 80%, #3e2723 100%);
+      border-radius:4px;
+      box-shadow:inset 0 4px 8px rgba(0,0,0,0.4), inset 0 -2px 4px rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+        
+  </style>
   </head>
   
   <body>
     
-    <div class="bookshelf-scene" id="bookeshelfScene">
+    <div class="bookshelf-scene" id="bookshelfScene">
       <div class="shelf-header">
         <h1>e-Portfolio of John Renz I. Vertudazo</h1>
         <p>Choose a book to begin</p>
@@ -31,8 +146,8 @@
       <div class="hint" id="hint">Swipe to turn a page.</div>
       <div class="controls">
         <button class="ctrl-btn" id="btnPrev" aria-label="Previous page">⬅️</button>
-        <span class="page-indicator" id="pageInidicator">Cover</span>
-        <butotn class="ctrl-btn" id="btnNext" aria-label="Next page">➡️</butotn>
+        <span class="page-indicator" id="pageIndicator">Cover</span>
+        <button class="ctrl-btn" id="btnNext" aria-label="Next page">➡️</butotn>
       </div>
     </div>
 
