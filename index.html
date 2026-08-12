@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>John Renz I. Vertudazo (e-Portfolio)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    
+    <div class="bookshelf-scene" id="bookeshelfScene">
+      <div class="shelf-header">
+        <h1>e-Portfolio of John Renz I. Vertudazo</h1>
+        <p>Choose a book to begin</p>
+      </div>
+      <div class="shelf-container">
+        <div class="shelf-row" id="shelfRow1"></div>
+        <div class="shelf-row" id="shelfRow2"></div>
+      </div>
+    </div>
+
+    <div class="reader-scene" id="readerScene">
+      <div class="book-wrap">
+        <div class="base-left"></div>
+        <div class="spine-shadow"></div>
+        <div class="book" id="book"></div>
+      </div>
+      <div class="hint" id="hint">Swipe to turn a page.</div>
+      <div class="controls">
+        <button class="ctrl-btn" id="btnPrev" aria-label="Previous page">⬅️</button>
+        <span class="page-indicator" id="pageInidicator">Cover</span>
+        <butotn class="ctrl-btn" id="btnNext" aria-label="Next page">➡️</butotn>
+      </div>
+    </div>
+
+    <button class="close-shelf-btn" id="closeShelfBtn">🔄 Restart</button>
+    <div id="measure-container"></div>
