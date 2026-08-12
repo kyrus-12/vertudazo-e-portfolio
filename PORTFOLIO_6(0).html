@@ -1,0 +1,686 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Alex Rivera — A Fairytale Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment: #f4e8d0;
+    --parchment-shade: #e6d5b8;
+    --parchment-dark: #d4c4a8;
+    --ink: #2c1810;
+    --ink-soft: #5d4037;
+    --ink-faint: #8d6e63;
+    --gold: #b8860b;
+    --gold-light: #d4af37;
+    --gold-pale: #e6c86e;
+    --burgundy: #6a1b1b;
+    --cover: #2c1810;
+    --cover-light: #3e2723;
+    --font-display: 'Cinzel Decorative', serif;
+    --font-title: 'Cinzel', serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-script: 'Tangerine', cursive;
+    --page-w: clamp(260px, 33vw, 420px);
+    --page-h: clamp(420px, 82vh, 640px);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{width:100%;height:100%;overflow:hidden;background:#1a0f0a;font-family:var(--font-body);color:var(--ink);}
+
+  /* ========== BOOKSHELF ========== */
+  .bookshelf-scene{
+    width:100%;height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(62,39,35,0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(44,24,16,0.6) 0%, transparent 50%),
+      linear-gradient(180deg, #1a0f0a 0%, #2c1810 40%, #1a0f0a 100%);
+    position:relative;
+    transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+  }
+  .bookshelf-scene.hidden{opacity:0;pointer-events:none;transform:scale(0.92);filter:blur(8px);}
+  .bookshelf-scene::before{
+    content:'';position:absolute;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity:0.4;pointer-events:none;
+  }
+
+  .shelf-header{position:relative;z-index:2;text-align:center;margin-bottom:30px;animation: fadeInDown 1s ease;}
+  .shelf-header h1{font-family:var(--font-display);font-size:clamp(28px, 5vw, 48px);color:var(--gold-pale);letter-spacing:0.1em;text-shadow:0 2px 12px rgba(0,0,0,0.6);}
+  .shelf-header p{font-family:var(--font-script);font-size:clamp(22px, 3.5vw, 34px);color:var(--gold-light);margin-top:4px;}
+
+  .shelf-container{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:40px;max-width:min(95vw, 1100px);width:100%;padding:0 20px;}
+
+  .shelf-row{
+    position:relative;width:100%;display:flex;align-items:flex-end;justify-content:center;
+    gap:clamp(8px, 2vw, 24px);padding:20px 30px 14px;
+    background:
+      linear-gradient(180deg, rgba(62,39,35,0) 0%, rgba(62,39,35,0.4) 100%),
+      linear-gradient(90deg, #3e2723 0%, #5d4037 20%, #4e342e 50%, #5d4037 80%, #3e2723 100%);
+    border-radius:4px;
+    box-shadow:inset 0 4px 8px rgba(0,0,0,0.4), inset 0 -2px 4px rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .shelf-row::after{content:'';position:absolute;bottom:-10px;left:0;right:0;height:10px;background:linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 100%);border-radius:0 0 4px 4px;}
+
+  .book-spine{
+    position:relative;width:clamp(44px, 8vw, 72px);height:clamp(160px, 28vh, 260px);border-radius:3px 3px 0 0;
+    cursor:pointer;transform-origin:bottom center;
+    transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, filter 0.35s ease;
+    display:flex;flex-direction:column;align-items:center;padding:14px 6px 10px;text-align:center;
+    box-shadow:inset 2px 0 4px rgba(255,255,255,0.1), inset -2px 0 4px rgba(0,0,0,0.2), 0 2px 6px rgba(0,0,0,0.3);
+    overflow:hidden;
+  }
+  .book-spine::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.15) 100%);pointer-events:none;z-index:2;}
+  .book-spine::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:100%;background:linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.15) 100%);pointer-events:none;z-index:2;}
+  .book-spine:hover{transform:translateY(-18px) scale(1.05);box-shadow:inset 2px 0 4px rgba(255,255,255,0.12), inset -2px 0 4px rgba(0,0,0,0.15), 0 18px 40px rgba(0,0,0,0.5);filter:brightness(1.15);z-index:10;}
+  .book-spine:active{transform:translateY(-10px) scale(1.02);}
+
+  .spine-episode{font-family:var(--font-title);font-size:clamp(8px, 1.2vw, 11px);letter-spacing:0.15em;text-transform:uppercase;opacity:0.85;margin-bottom:8px;writing-mode:vertical-rl;text-orientation:mixed;flex-shrink:0;}
+  .spine-title{font-family:var(--font-display);font-size:clamp(11px, 1.8vw, 16px);font-weight:700;writing-mode:vertical-rl;text-orientation:mixed;flex:1;display:flex;align-items:center;line-height:1.3;text-shadow:0 1px 3px rgba(0,0,0,0.4);}
+  .spine-ornament{font-size:14px;margin-top:auto;opacity:0.7;}
+  .spine-band{position:absolute;left:0;right:0;height:3px;background:rgba(255,255,255,0.15);}
+  .spine-band.top{top:28px;}
+  .spine-band.bottom{bottom:28px;}
+
+  .palette-classic{background:linear-gradient(90deg, #3e2723, #5d4037, #3e2723);color:#e6c86e;border:1px solid #5d4037;}
+  .palette-ocean{background:linear-gradient(90deg, #0a2540, #154360, #0a2540);color:#7fdbda;border:1px solid #1a5276;}
+  .palette-forest{background:linear-gradient(90deg, #1b4332, #2d6a4f, #1b4332);color:#d8f3dc;border:1px solid #40916c;}
+
+  @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .book-spine{animation:fadeInUp 0.7s ease backwards;}
+
+  /* ========== READER ========== */
+  .reader-scene{
+    position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(62,39,35,0.6) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 30%, rgba(93,64,55,0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(44,24,16,0.8) 0%, transparent 60%),
+      linear-gradient(135deg, #2c1810 0%, #1a0f0a 50%, #2c1810 100%);
+    opacity:0;pointer-events:none;transform:scale(1.08);
+    transition:opacity 0.6s ease, transform 0.6s cubic-bezier(0.25,1,0.5,1);
+    z-index:100;
+  }
+  .reader-scene.active{opacity:1;pointer-events:auto;transform:scale(1);}
+  .reader-scene::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");opacity:0.5;pointer-events:none;}
+
+  .close-shelf-btn{
+    position:fixed;top:18px;left:18px;z-index:3000;
+    font-family:var(--font-title);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-pale);
+    background:rgba(26,15,10,0.7);border:1px solid rgba(212,175,55,0.3);padding:8px 16px;border-radius:20px;cursor:pointer;
+    backdrop-filter:blur(6px);transition:all 0.25s ease;opacity:0;pointer-events:none;
+  }
+  .close-shelf-btn.visible{opacity:1;pointer-events:auto;}
+  .close-shelf-btn:hover{background:rgba(212,175,55,0.15);border-color:var(--gold);color:var(--gold-light);}
+
+  .book-wrap{position:relative;perspective:2200px;width:calc(var(--page-w) * 2);height:var(--page-h);}
+  .book{position:relative;width:100%;height:100%;transform-style:preserve-3d;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.6));}
+  .base-left{position:absolute;top:0;left:0;width:50%;height:100%;background:var(--parchment-shade);border-radius:6px 0 0 6px;box-shadow:inset -3px 0 6px rgba(0,0,0,.15);}
+  .spine-shadow{position:absolute;top:0;left:50%;width:40px;height:100%;margin-left:-20px;background:linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.22) 50%, rgba(0,0,0,0) 100%);pointer-events:none;z-index:15;}
+
+  .sheet{position:absolute;top:0;right:0;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);}
+  .sheet.flipped{transform:rotateY(-180deg);}
+
+  .face{position:absolute;inset:0;backface-visibility:hidden;overflow:hidden;border-radius:2px 6px 6px 2px;box-shadow:inset 4px 0 8px rgba(0,0,0,0.1), inset -1px 0 2px rgba(255,255,255,0.3), 2px 0 6px rgba(0,0,0,0.15);}
+  .face-front{background:var(--parchment);}
+  .face-back{background:var(--parchment-shade);transform:rotateY(180deg);border-radius:6px 2px 2px 6px;box-shadow:inset -4px 0 8px rgba(0,0,0,0.1), inset 1px 0 2px rgba(255,255,255,0.3), -2px 0 6px rgba(0,0,0,0.15);}
+  .face::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%, rgba(212,196,168,0.3) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(230,213,184,0.3) 0%, transparent 50%);pointer-events:none;opacity:0.6;}
+
+  .page-content{position:relative;z-index:1;width:100%;height:100%;padding:clamp(20px, 4.5vw, 36px);display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--gold-pale) transparent;}
+  .page-content::-webkit-scrollbar{width:4px;}
+  .page-content::-webkit-scrollbar-thumb{background:var(--gold-pale);border-radius:2px;}
+
+  .corner{position:absolute;width:32px;height:32px;z-index:2;pointer-events:none;opacity:0.6;}
+  .corner-tl{top:12px;left:12px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);}
+  .corner-tr{top:12px;right:12px;border-top:2px solid var(--gold);border-right:2px solid var(--gold);}
+  .corner-bl{bottom:12px;left:12px;border-bottom:2px solid var(--gold);border-left:2px solid var(--gold);}
+  .corner-br{bottom:12px;right:12px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);}
+
+  .ornament{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0;color:var(--gold);font-size:13px;}
+  .ornament::before,.ornament::after{content:'';flex:1;height:1px;background:linear-gradient(90deg, transparent, var(--gold), transparent);max-width:80px;}
+
+  .cover-content{background:linear-gradient(135deg, var(--cover) 0%, var(--cover-light) 50%, var(--cover) 100%);color:var(--gold-pale);text-align:center;justify-content:center;align-items:center;border:2px solid var(--gold);outline:1px solid var(--gold);outline-offset:-6px;}
+  .cover-content .corner{border-color:var(--gold-light);opacity:0.8;}
+  .cover-title{font-family:var(--font-display);font-size:clamp(30px, 6vw, 52px);font-weight:700;letter-spacing:0.08em;line-height:1.1;text-shadow:0 2px 8px rgba(0,0,0,0.5);margin-bottom:12px;}
+  .cover-sub{font-family:var(--font-script);font-size:clamp(26px, 5vw, 42px);color:var(--gold-light);margin-bottom:24px;}
+  .cover-line{width:60px;height:2px;background:var(--gold);margin:16px auto;}
+  .cover-kicker{font-family:var(--font-title);font-size:11px;letter-spacing:0.25em;text-transform:uppercase;opacity:0.8;margin-top:40px;}
+
+  h1,h2,h3{font-family:var(--font-title);font-weight:600;color:var(--ink);}
+  .page-title{font-family:var(--font-display);font-size:clamp(18px, 3.6vw, 27px);text-align:center;margin-bottom:6px;color:var(--burgundy);}
+  .page-eyebrow{font-family:var(--font-title);font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:6px;}
+  .page-num{position:absolute;bottom:16px;font-family:var(--font-title);font-size:12px;color:var(--ink-faint);z-index:2;}
+  .face-front .page-num{right:20px;}
+  .face-back .page-num{left:20px;}
+
+  .drop-cap::first-letter{font-family:var(--font-display);float:left;font-size:3.4em;line-height:0.8;padding:6px 8px 0 0;color:var(--burgundy);}
+
+  p{font-size:clamp(13px, 2.3vw, 15.5px);line-height:1.55;margin-bottom:11px;color:var(--ink-soft);}
+
+  .toc-item{display:flex;align-items:baseline;gap:8px;padding:12px 14px;margin-bottom:9px;border:1px solid var(--gold-pale);border-radius:10px;background:rgba(184,134,11,0.05);cursor:pointer;transition:color 0.2s, background 0.2s, border-color 0.2s, transform 0.15s;width:100%;font-family:var(--font-body);text-align:left;box-shadow:0 1px 2px rgba(44,24,16,0.06);touch-action:manipulation;position:relative;z-index:5;}
+  .toc-item:last-child{margin-bottom:0;}
+  .toc-item:hover{color:var(--burgundy);background:rgba(184,134,11,0.14);border-color:var(--gold);}
+  .toc-item:active{transform:scale(0.98);}
+  .toc-item:focus-visible{outline:2px solid var(--burgundy);outline-offset:2px;}
+  .toc-num{font-family:var(--font-title);font-style:italic;font-size:14px;color:var(--gold);width:28px;flex-shrink:0;}
+  .toc-name{font-family:var(--font-title);font-size:14px;}
+  .toc-leader{flex:1;border-bottom:1px dotted var(--parchment-dark);margin:0 4px 4px;}
+  .toc-page{font-family:var(--font-title);font-size:12px;color:var(--ink-faint);}
+
+  .page-nav{display:flex;justify-content:flex-end;margin-top:auto;padding-top:10px;}
+  .back-btn{font-family:var(--font-title);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:transparent;border:1px solid var(--gold-pale);padding:5px 11px;border-radius:20px;cursor:pointer;transition:background .2s, color .2s, border-color .2s;touch-action:manipulation;position:relative;z-index:5;}
+  .back-btn:hover{background:var(--gold);color:var(--parchment);border-color:var(--gold);}
+  .back-btn:focus-visible{outline:2px solid var(--burgundy);outline-offset:2px;}
+
+  .plate{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--parchment-dark);}
+  .plate:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .plate-fig{font-family:var(--font-title);font-size:11px;color:var(--gold);margin-bottom:4px;}
+  .plate-title{font-size:17px;margin-bottom:4px;color:var(--burgundy);}
+  .plate-desc{font-size:13px;color:var(--ink-soft);margin-bottom:6px;line-height:1.45;}
+  .plate-stack{font-family:var(--font-title);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .plate-link{font-family:var(--font-title);font-size:12px;color:var(--burgundy);text-decoration:none;border-bottom:1px solid var(--gold-pale);padding-bottom:1px;transition:all 0.2s;}
+  .plate-link:hover{color:var(--gold);border-color:var(--gold);}
+
+  figure.plate-figure{margin-bottom:8px;}
+  .plate-img{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:var(--parchment-shade);border:2px solid var(--gold);outline:1px solid var(--gold-pale);outline-offset:-4px;border-radius:2px;filter:sepia(.12) saturate(1.05);}
+  figure.plate-figure figcaption{font-family:var(--font-title);font-size:10px;letter-spacing:.05em;color:var(--ink-faint);text-align:center;margin-top:5px;}
+
+  .margin-group{display:grid;grid-template-columns:82px 1fr;gap:5px 14px;padding:10px 0;border-top:1px solid var(--parchment-dark);}
+  .margin-group:last-child{border-bottom:1px solid var(--parchment-dark);}
+  .margin-label{font-family:var(--font-title);font-style:italic;font-size:13px;color:var(--ink-soft);padding-top:2px;}
+  .margin-items{display:flex;flex-wrap:wrap;gap:5px 7px;}
+  .margin-item{font-family:var(--font-title);font-size:11.5px;position:relative;padding-left:11px;color:var(--ink);}
+  .margin-item::before{content:'—';position:absolute;left:0;color:var(--gold);}
+
+  .colophon-rule{width:34px;height:2px;background:var(--gold);margin:10px auto 14px;}
+  .index-entry{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--parchment-dark);font-family:var(--font-title);font-size:12px;text-decoration:none;color:var(--ink);transition:color 0.2s;}
+  .index-entry:last-child{border-bottom:1px solid var(--parchment-dark);}
+  .index-entry:hover{color:var(--burgundy);}
+  .index-entry span:last-child{color:var(--ink-faint);font-size:11.5px;}
+
+  .stamp{width:58px;height:58px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(-8deg);opacity:0.7;margin:12px auto;}
+  .stamp span{font-family:var(--font-title);font-size:8.5px;letter-spacing:0.08em;color:var(--gold);text-align:center;line-height:1.4;text-transform:uppercase;}
+
+  .back-cover{background:linear-gradient(135deg, var(--cover-light) 0%, var(--cover) 100%);color:var(--gold-pale);text-align:center;justify-content:center;align-items:center;border:2px solid var(--gold);outline:1px solid var(--gold);outline-offset:-6px;}
+  .back-cover .corner{border-color:var(--gold-light);}
+  .the-end{font-family:var(--font-display);font-size:clamp(24px, 4.5vw, 40px);color:var(--gold-light);margin-bottom:14px;}
+  .back-script{font-family:var(--font-script);font-size:clamp(20px, 3.5vw, 32px);color:var(--gold-pale);opacity:0.9;}
+
+  .controls{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateZ(0);display:flex;align-items:center;gap:20px;z-index:2000;background:rgba(26,15,10,0.8);padding:10px 24px;border-radius:30px;backdrop-filter:blur(8px);border:1px solid rgba(212,175,55,0.2);isolation:isolate;-webkit-transform:translateX(-50%) translateZ(0);opacity:0;pointer-events:none;transition:opacity 0.4s ease;}
+  .reader-scene.active .controls{opacity:1;pointer-events:auto;}
+  .ctrl-btn{background:none;border:none;color:var(--gold-pale);font-family:var(--font-title);font-size:22px;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all 0.2s;touch-action:manipulation;position:relative;z-index:1;}
+  .ctrl-btn:hover{background:rgba(212,175,55,0.15);color:var(--gold-light);}
+  .ctrl-btn:disabled{opacity:0.3;cursor:not-allowed;}
+  .page-indicator{font-family:var(--font-title);font-size:13px;color:var(--gold-pale);min-width:80px;text-align:center;letter-spacing:0.05em;}
+
+  .hint{position:fixed;top:20px;left:50%;transform:translateX(-50%);font-family:var(--font-title);font-size:12px;color:var(--gold-pale);opacity:0.7;letter-spacing:0.1em;text-transform:uppercase;pointer-events:none;z-index:1000;text-align:center;transition:opacity .4s;}
+
+  #measure-container{position:fixed;left:-9999px;top:-9999px;overflow:hidden;visibility:hidden;pointer-events:none;}
+
+  @media (max-width: 720px){
+    .shelf-row{gap:6px;padding:16px 12px 10px;}
+    .book-spine{padding:10px 4px 8px;}
+    .reader-scene{background:linear-gradient(135deg, #2c1810 0%, #1a0f0a 100%);}
+    .book-wrap{width:100vw;height:100vh;height:100dvh;perspective:1600px;}
+    .base-left{display:none;}
+    .spine-shadow{display:none;}
+    .sheet{width:100%;}
+    .face{border-radius:0;}
+    .face-back{border-radius:0;}
+    .page-content{padding:20px 18px 84px;}
+    .corner{width:20px;height:20px;}
+    .margin-group{grid-template-columns:1fr;gap:4px;}
+    .margin-label{padding-top:0;margin-bottom:2px;}
+    .controls{bottom:14px;padding:8px 16px;gap:12px;}
+    .ctrl-btn{width:36px;height:36px;font-size:18px;}
+    .hint{top:14px;font-size:10.5px;}
+    .close-shelf-btn{top:10px;left:10px;padding:6px 12px;font-size:10px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sheet{transition:none;}
+    .bookshelf-scene, .reader-scene, .book-spine{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- BOOKSHELF -->
+<div class="bookshelf-scene" id="bookshelfScene">
+  <div class="shelf-header">
+    <h1>The Library of Alex Rivera</h1>
+    <p>Choose a volume to begin</p>
+  </div>
+  <div class="shelf-container">
+    <div class="shelf-row" id="shelfRow1"></div>
+    <div class="shelf-row" id="shelfRow2"></div>
+  </div>
+</div>
+
+<!-- READER -->
+<div class="reader-scene" id="readerScene">
+  <div class="book-wrap">
+    <div class="base-left"></div>
+    <div class="spine-shadow"></div>
+    <div class="book" id="book"></div>
+  </div>
+  <div class="hint" id="hint">Swipe to turn a page · Tap Contents to jump</div>
+  <div class="controls">
+    <button class="ctrl-btn" id="btnPrev" aria-label="Previous page">‹</button>
+    <span class="page-indicator" id="pageIndicator">Cover</span>
+    <button class="ctrl-btn" id="btnNext" aria-label="Next page">›</button>
+  </div>
+</div>
+
+<button class="close-shelf-btn" id="closeShelfBtn">← Back to Shelf</button>
+<div id="measure-container"></div>
+
+<script>
+const booksData = [
+  {
+    id: 'ep1', episode: 'Episode I', title: 'The Beginning', palette: 'classic', year: '2026',
+    chapters: [
+      { name: 'Foreword', type: 'foreword' },
+      { name: 'The Works', type: 'works' },
+      { name: 'Marginalia', type: 'skills' },
+      { name: 'Colophon', type: 'contact' }
+    ],
+    foreword: [
+      `<p class="drop-cap">Seven years ago I wrote a script to rename a folder of photos, and something about watching the computer do exactly what I told it to, no more, no less, has kept me writing software ever since.</p>`,
+      `<p>I care about the parts other people skip: the error state, the migration, the thing that still works at three in the morning when nobody is watching.</p>`,
+      `<p>Today I work across the stack, though I lean toward the back half of it — the systems that decide what the interface is even allowed to say. I have shipped products used by a few hundred people and a few million.</p>`,
+      `<p style="font-style:italic;color:var(--ink-faint);text-align:center;">What follows is a selection of that work, illustrated where it helps.</p>`
+    ],
+    works: [
+      {
+        fig: 'Fig. 1', title: 'Meridian',
+        image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 1 — Meridian, timeline view',
+        desc: 'A project-planning tool built around a single timeline instead of scattered boards. Teams drag milestones, dependencies auto-resolve, and the critical path glows in amber when it slips.',
+        stack: 'React · Postgres · Rails', link: '#'
+      },
+      {
+        fig: 'Fig. 2', title: 'Lighthouse',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 2 — Lighthouse incident dashboard',
+        desc: 'A monitoring dashboard that turns raw logs into a plain-language incident timeline. On-call engineers get a narrative instead of a wall of stack traces.',
+        stack: 'Go · ClickHouse', link: '#'
+      },
+      {
+        fig: 'Fig. 3', title: 'Cartograph',
+        desc: 'An open-source charting library with honest defaults and colorblind-safe palettes. No more pie charts with twelve slices.',
+        stack: 'TypeScript · D3', link: '#'
+      },
+      {
+        fig: 'Fig. 4', title: 'Aether',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 4 — Aether analytics overview',
+        desc: 'Real-time analytics pipeline processing two million events per second with sub-second query latency. Built for a fintech startup that outgrew off-the-shelf solutions.',
+        stack: 'Rust · Kafka · ClickHouse', link: '#'
+      },
+      {
+        fig: 'Fig. 5', title: 'Vellum',
+        desc: 'A collaborative document editor with operational-transform sync, offline support, and version history that feels like flipping through a photo album.',
+        stack: 'TypeScript · Yjs · Node', link: '#'
+      }
+    ],
+    skills: { languages: ['TypeScript','Go','Python','Rust','Elixir'], frameworks: ['React','Rails','Node','Phoenix','Next.js'], infra: ['Postgres','Docker','AWS','Kafka','Redis'] },
+    contact: { email: 'alex@rivera.dev', github: '@alexrivera', linkedin: 'in/alexrivera' }
+  },
+  {
+    id: 'ep2', episode: 'Episode II', title: 'Deep Waters', palette: 'ocean', year: '2026',
+    chapters: [
+      { name: 'Prologue', type: 'foreword' },
+      { name: 'Expeditions', type: 'works' },
+      { name: 'Instruments', type: 'skills' },
+      { name: 'Logbook', type: 'contact' }
+    ],
+    foreword: [
+      `<p class="drop-cap">The second chapter of any journey is where the shoreline disappears. You are far enough from home that turning back feels like failure, yet the destination is still beyond the horizon.</p>`,
+      `<p>In this volume I document the systems built under pressure — the architectures sketched on napkins at midnight, the databases that had to survive Black Friday, the APIs that became the backbone of products I never expected to scale.</p>`,
+      `<p>Every project here taught me that elegance is not the absence of complexity, but the hiding of it so well that the next engineer thinks it was always simple.</p>`
+    ],
+    works: [
+      {
+        fig: 'Fig. 1', title: 'Tidepool',
+        image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 1 — Tidepool data flow diagram',
+        desc: 'A distributed event-sourcing platform that lets microservices communicate through immutable streams. Think Kafka with a built-in schema registry and automatic replay capabilities.',
+        stack: 'Go · gRPC · etcd', link: '#'
+      },
+      {
+        fig: 'Fig. 2', title: 'Bathysphere',
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 2 — Bathysphere network topology',
+        desc: 'A service-mesh observability layer that traces requests across fifty-plus services and renders them as a force-directed graph you can actually read.',
+        stack: 'Rust · eBPF · React', link: '#'
+      },
+      {
+        fig: 'Fig. 3', title: 'Atlantis',
+        desc: 'A multi-tenant SaaS billing engine handling usage-based pricing, proration, and tax calculation across forty jurisdictions. Never undercharge, never overcharge.',
+        stack: 'Elixir · Postgres · Stripe API', link: '#'
+      },
+      {
+        fig: 'Fig. 4', title: 'Nautilus',
+        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 4 — Nautilus deployment pipeline',
+        desc: 'A GitOps deployment platform with progressive delivery, canary analysis, and automatic rollback on error-rate spikes. Deploys went from terrifying to boring.',
+        stack: 'Go · Kubernetes · Prometheus', link: '#'
+      }
+    ],
+    skills: { languages: ['Go','Rust','Elixir','Python','C'], frameworks: ['gRPC','Phoenix','React','Echo','Fiber'], infra: ['Kubernetes','etcd','Prometheus','Kafka','Terraform'] },
+    contact: { email: 'alex@rivera.dev', github: '@alexrivera', linkedin: 'in/alexrivera' }
+  },
+  {
+    id: 'ep3', episode: 'Episode III', title: 'Wildwood', palette: 'forest', year: '2026',
+    chapters: [
+      { name: 'Into the Green', type: 'foreword' },
+      { name: 'Clearings', type: 'works' },
+      { name: 'Tools of the Path', type: 'skills' },
+      { name: 'Trail Markers', type: 'contact' }
+    ],
+    foreword: [
+      `<p class="drop-cap">There is a particular kind of clarity that comes from working close to the metal. When you are writing a database engine or a compiler, there is no framework to hide behind — only the truth of bytes and clock cycles.</p>`,
+      `<p>This volume gathers the projects where I wandered off the paved road. Some were experiments that grew into products. Others were products that demanded I learn things I had been avoiding.</p>`,
+      `<p>The forest does not care about your roadmap. It cares about whether you can read the moss, follow the stream, and build a fire when the temperature drops.</p>`
+    ],
+    works: [
+      {
+        fig: 'Fig. 1', title: 'Canopy',
+        image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 1 — Canopy search interface',
+        desc: 'A full-text search engine built from scratch with inverted indices, BM25 ranking, and fuzzy matching. Handles a million documents on a single modest server.',
+        stack: 'Rust · Tantivy-inspired', link: '#'
+      },
+      {
+        fig: 'Fig. 2', title: 'Rootwork',
+        image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 2 — Rootwork dependency graph',
+        desc: 'A package manager for internal company libraries with automatic versioning, changelogs, and dependency health scoring. Stopped the "which version do we use?" meetings.',
+        stack: 'TypeScript · Node · SQLite', link: '#'
+      },
+      {
+        fig: 'Fig. 3', title: 'Fern',
+        desc: 'A WebAssembly runtime embedded in a CDN edge worker, letting customers upload custom request-modification logic that runs in under a millisecond.',
+        stack: 'Rust · Wasmtime · V8', link: '#'
+      },
+      {
+        fig: 'Fig. 4', title: 'Mycelium',
+        image: 'https://images.unsplash.com/photo-1511497584788-876760111969?w=640&h=360&fit=crop',
+        imageCaption: 'Fig. 4 — Mycelium sync architecture',
+        desc: 'A CRDT-based sync layer for mobile apps that keeps state consistent across devices even when they go offline for days. Conflict resolution feels like magic.',
+        stack: 'Rust · Swift · Kotlin', link: '#'
+      }
+    ],
+    skills: { languages: ['Rust','TypeScript','Swift','Kotlin','C++'], frameworks: ['Tauri','React Native','Tokio','Axum'], infra: ['SQLite','Redis','NATS','Wasmtime','CDN Edge'] },
+    contact: { email: 'alex@rivera.dev', github: '@alexrivera', linkedin: 'in/alexrivera' }
+  }
+];
+
+const palettes = {
+  classic: { parchment:'#f4e8d0', parchmentShade:'#e6d5b8', parchmentDark:'#d4c4a8', ink:'#2c1810', inkSoft:'#5d4037', inkFaint:'#8d6e63', gold:'#b8860b', goldLight:'#d4af37', goldPale:'#e6c86e', burgundy:'#6a1b1b', cover:'#2c1810', coverLight:'#3e2723' },
+  ocean:   { parchment:'#e8f4f8', parchmentShade:'#d0e8f0', parchmentDark:'#b0d4e0', ink:'#0a2540', inkSoft:'#1a5276', inkFaint:'#5dade2', gold:'#117a8b', goldLight:'#17a2b8', goldPale:'#7fdbda', burgundy:'#1b4f72', cover:'#0a2540', coverLight:'#154360' },
+  forest:  { parchment:'#f1f8e9', parchmentShade:'#dcedc8', parchmentDark:'#c5e1a5', ink:'#1b4332', inkSoft:'#2d6a4f', inkFaint:'#74c69d', gold:'#40916c', goldLight:'#52b788', goldPale:'#95d5b2', burgundy:'#1b4332', cover:'#1b4332', coverLight:'#2d6a4f' }
+};
+
+/* ===== RENDER BOOKSHELF ===== */
+function renderBookshelf(){
+  const row1 = document.getElementById('shelfRow1');
+  const row2 = document.getElementById('shelfRow2');
+  const half = Math.ceil(booksData.length / 2);
+  booksData.forEach((book, i) => {
+    const spine = document.createElement('div');
+    spine.className = `book-spine palette-${book.palette}`;
+    spine.style.animationDelay = `${i * 0.1}s`;
+    spine.innerHTML = `<div class="spine-band top"></div><span class="spine-episode">${book.episode}</span><span class="spine-title">${book.title}</span><span class="spine-ornament">❦</span><div class="spine-band bottom"></div>`;
+    spine.addEventListener('click', () => openBook(book));
+    if (i < half) row1.appendChild(spine); else row2.appendChild(spine);
+  });
+}
+
+/* ===== APPLY PALETTE ===== */
+function applyPalette(name){
+  const p = palettes[name];
+  const r = document.documentElement;
+  r.style.setProperty('--parchment', p.parchment);
+  r.style.setProperty('--parchment-shade', p.parchmentShade);
+  r.style.setProperty('--parchment-dark', p.parchmentDark);
+  r.style.setProperty('--ink', p.ink);
+  r.style.setProperty('--ink-soft', p.inkSoft);
+  r.style.setProperty('--ink-faint', p.inkFaint);
+  r.style.setProperty('--gold', p.gold);
+  r.style.setProperty('--gold-light', p.goldLight);
+  r.style.setProperty('--gold-pale', p.goldPale);
+  r.style.setProperty('--burgundy', p.burgundy);
+  r.style.setProperty('--cover', p.cover);
+  r.style.setProperty('--cover-light', p.coverLight);
+}
+
+/* ===== PAGINATION ===== */
+function paginateContent(chunks){
+  const measure = document.getElementById('measure-container');
+  const isMobile = window.innerWidth <= 720;
+  const paddingH = isMobile ? 36 : 72;
+  const paddingV = isMobile ? 104 : 72;
+  const pageW = (document.querySelector('.book-wrap')?.offsetWidth || 680) / 2 - paddingH;
+  const pageH = (document.querySelector('.book-wrap')?.offsetHeight || 530) - paddingV;
+  measure.style.cssText = `position:fixed;left:-9999px;top:-9999px;width:${pageW}px;height:${pageH}px;overflow:hidden;visibility:hidden;pointer-events:none;display:flex;flex-direction:column;`;
+
+  const pages = [];
+  let current = '';
+  for (let i = 0; i < chunks.length; i++){
+    const test = current + chunks[i];
+    measure.innerHTML = test;
+    if (measure.scrollHeight > pageH && current !== ''){
+      pages.push(current);
+      current = chunks[i];
+    } else {
+      current = test;
+    }
+  }
+  if (current) pages.push(current);
+  if (!pages.length) pages.push('');
+  measure.innerHTML = '';
+  return pages;
+}
+
+/* ===== BUILD BOOK ===== */
+function buildBookHTML(book){
+  const sheets = [];
+  let idx = 0, pg = 1;
+  const mk = (f, b, fc, bc) => {
+    const i = idx++;
+    const fC = fc ? 'cover-content' : '';
+    const bC = bc ? 'back-cover' : '';
+    const fN = fc ? '' : `<span class="page-num">${pg++}</span>`;
+    const bN = bc ? '' : `<span class="page-num">${pg++}</span>`;
+    return `<div class="sheet" data-index="${i}"><div class="face face-front ${fC}"><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div class="page-content ${fC}">${f}</div>${fN}</div><div class="face face-back ${bC}"><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div class="page-content ${bC}">${b}</div>${bN}</div></div>`;
+  };
+
+  // Cover
+  sheets.push(mk(
+    `<p class="cover-kicker">A Portfolio</p><div class="cover-line"></div><h1 class="cover-title">Alex<br>Rivera</h1><p class="cover-sub">${book.title}</p><div class="cover-line"></div><p class="cover-kicker" style="margin-top:24px;font-size:10px;">${book.episode}</p>`,
+    `<div class="ornament">❦</div><p style="text-align:center;font-style:italic;color:var(--ink-faint);font-size:14px;">"Every great story begins with a single line of code."</p><div class="ornament">❦</div>`,
+    true, false
+  ));
+
+  // Title page + TOC
+  const tocItems = book.chapters.map((c, i) =>
+    `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I','II','III','IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${3 + i*2}</span></button>`
+  ).join('');
+
+  sheets.push(mk(
+    `<p class="page-eyebrow">A portfolio, in four chapters</p><div class="ornament">❦</div><h1 class="page-title" style="font-size:clamp(22px,3.6vw,32px);margin-bottom:10px;">Alex Rivera</h1><p style="font-family:var(--font-script);font-size:clamp(20px,3.6vw,28px);color:var(--burgundy);margin-bottom:14px;">${book.title}</p><p style="font-size:13px;color:var(--ink-faint);max-width:280px;margin:0 auto 18px;">Building software that holds up under real use — from database schema to the pixel you click.</p><div class="stamp"><span>Est.<br>${book.year}</span></div>`,
+    `<p class="page-eyebrow">Contents</p><h2 class="page-title">Table of Contents</h2><div class="ornament">❦</div>${tocItems}`,
+    false, false
+  ));
+
+  // Foreword (auto-paginated)
+  const fwChunks = book.foreword.map(p => `<div class="ornament">❦</div>` + p);
+  const fwPages = paginateContent(fwChunks);
+  fwPages.forEach((content, i) => {
+    const eyebrow = i === 0 ? `<p class="page-eyebrow">Chapter I</p><h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Chapter I <span style="color:var(--ink-faint);font-size:10px;">(continued)</span></p><div class="ornament">❦</div>`;
+    const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="1">&lsaquo; Contents</button></div>` : '';
+    sheets.push(mk(eyebrow + content + nav, `<div class="ornament">❦</div><p style="text-align:center;font-style:italic;color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
+  });
+
+  // Works (auto-paginated)
+  const workChunks = book.works.map(w => {
+    let html = `<article class="plate"><span class="plate-fig">${w.fig}</span><h3 class="plate-title">${w.title}</h3>`;
+    if (w.image) html += `<figure class="plate-figure"><img class="plate-img" src="${w.image}" alt="${w.title} screenshot" loading="lazy"><figcaption>${w.imageCaption || ''}</figcaption></figure>`;
+    html += `<p class="plate-desc">${w.desc}</p><p class="plate-stack">${w.stack}</p><a class="plate-link" href="${w.link}">View the work &rarr;</a></article>`;
+    return html;
+  });
+  const workPages = paginateContent(workChunks);
+  workPages.forEach((content, i) => {
+    const eyebrow = i === 0 ? `<p class="page-eyebrow">Chapter II</p><h2 class="page-title">${book.chapters[1].name}</h2><div class="ornament">❦</div>` : `<p class="page-eyebrow">Chapter II <span style="color:var(--ink-faint);font-size:10px;">(continued)</span></p><div class="ornament">❦</div>`;
+    const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="1">&lsaquo; Contents</button></div>` : '';
+    sheets.push(mk(eyebrow + content + nav, `<div class="ornament">❦</div><p style="text-align:center;font-style:italic;color:var(--ink-faint);">More works ahead...</p>`, false, false));
+  });
+
+  // Skills
+  const skillGroups = Object.entries(book.skills).map(([label, items]) =>
+    `<div class="margin-group"><span class="margin-label">${label.charAt(0).toUpperCase()+label.slice(1)}</span><div class="margin-items">${items.map(it => `<span class="margin-item">${it}</span>`).join('')}</div></div>`
+  ).join('');
+  sheets.push(mk(
+    `<p class="page-eyebrow">Chapter III</p><h2 class="page-title">${book.chapters[2].name}</h2><div class="ornament">❦</div>${skillGroups}<div class="page-nav"><button type="button" class="back-btn" data-goto="1">&lsaquo; Contents</button></div>`,
+    `<div class="ornament">❦</div><p style="text-align:center;font-style:italic;color:var(--ink-faint);">Tools sharpened by use.</p>`,
+    false, false
+  ));
+
+  // Contact
+  sheets.push(mk(
+    `<p class="page-eyebrow">Chapter IV</p><h2 class="page-title">${book.chapters[3].name}</h2><div class="colophon-rule"></div><p style="font-size:12.5px;text-align:center;">Set in <em>Cinzel Decorative</em> for display and <em>Cormorant Garamond</em> for text.</p><div class="colophon-index"><a class="index-entry" href="mailto:${book.contact.email}"><span>Email</span><span>${book.contact.email}</span></a><a class="index-entry" href="#"><span>GitHub</span><span>${book.contact.github}</span></a><a class="index-entry" href="#"><span>LinkedIn</span><span>${book.contact.linkedin}</span></a></div>`,
+    `<div class="ornament">❦</div><p style="font-family:var(--font-script);font-size:24px;color:var(--gold);text-align:center;">Thank you for reading.</p><div class="ornament">❦</div>`,
+    false, false
+  ));
+
+  // Back cover
+  sheets.push(mk(
+    `<div class="ornament">❦</div><p style="font-family:var(--font-script);font-size:24px;color:var(--gold);text-align:center;">Thank you for reading.</p><div class="ornament">❦</div>`,
+    `<p class="the-end">The End</p><div class="cover-line" style="background:var(--gold-light);margin:14px auto;"></div><p class="back-script">Alex Rivera</p><p class="cover-kicker" style="margin-top:26px;font-size:10px;opacity:0.6;">&copy; MMXXVI</p>`,
+    false, true
+  ));
+
+  return sheets.join('');
+}
+
+/* ===== OPEN / CLOSE BOOK ===== */
+let currentBook = null;
+let sheets = [];
+let current = 0;
+let total = 0;
+let animating = false;
+
+function openBook(book){
+  currentBook = book;
+  applyPalette(book.palette);
+  document.getElementById('book').innerHTML = buildBookHTML(book);
+  sheets = Array.from(document.querySelectorAll('.sheet'));
+  total = sheets.length;
+  current = 0;
+  animating = false;
+
+  document.getElementById('bookshelfScene').classList.add('hidden');
+  document.getElementById('readerScene').classList.add('active');
+  document.getElementById('closeShelfBtn').classList.add('visible');
+
+  render();
+}
+
+function closeBook(){
+  document.getElementById('bookshelfScene').classList.remove('hidden');
+  document.getElementById('readerScene').classList.remove('active');
+  document.getElementById('closeShelfBtn').classList.remove('visible');
+  document.getElementById('book').innerHTML = '';
+  currentBook = null;
+}
+
+/* ===== READER LOGIC ===== */
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+const indicator = document.getElementById('pageIndicator');
+const hint = document.getElementById('hint');
+const bookWrap = document.querySelector('.book-wrap');
+
+function render(){
+  sheets.forEach((sheet, i) => {
+    const front = sheet.querySelector('.face-front');
+    const back = sheet.querySelector('.face-back');
+    if (i < current){
+      sheet.classList.add('flipped');
+      sheet.style.zIndex = total + i;
+      if (front) front.style.pointerEvents = 'none';
+      if (back) back.style.pointerEvents = 'auto';
+    } else {
+      sheet.classList.remove('flipped');
+      sheet.style.zIndex = total - i;
+      if (front) front.style.pointerEvents = 'auto';
+      if (back) back.style.pointerEvents = 'none';
+    }
+  });
+  btnPrev.disabled = current === 0;
+  btnNext.disabled = current === total;
+  const labels = ["Cover","Title","Contents"].concat(
+    currentBook ? currentBook.chapters.map(c => c.name) : []
+  ).concat(["End"]);
+  indicator.textContent = labels[current] || (current >= total ? 'End' : current + 1);
+  if (current > 0) hint.style.opacity = '0';
+}
+
+function turnTo(target){
+  if (animating || target === current || target < 0 || target > total) return;
+  animating = true;
+  current = target;
+  render();
+  window.setTimeout(() => { animating = false; }, 950);
+}
+function next(){ turnTo(current + 1); }
+function prev(){ turnTo(current - 1); }
+
+btnNext.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+
+document.addEventListener('click', (e) => {
+  const navBtn = e.target.closest('.toc-item, .back-btn');
+  if (navBtn) {
+    e.stopPropagation();
+    e.preventDefault();
+    const target = parseInt(navBtn.dataset.goto, 10);
+    if (!isNaN(target)) turnTo(target);
+  }
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') next();
+  if (e.key === 'ArrowLeft') prev();
+});
+
+let touchStartX = 0, touchStartY = 0;
+bookWrap.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, {passive:true});
+
+bookWrap.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  const dy = e.changedTouches[0].screenY - touchStartY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40){
+    if (dx < 0) next(); else prev();
+  }
+}, {passive:true});
+
+document.getElementById('closeShelfBtn').addEventListener('click', closeBook);
+
+/* ===== INIT ===== */
+renderBookshelf();
+</script>
+</body>
+</html>
+
