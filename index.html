@@ -1334,12 +1334,12 @@ function render(){
     const front = sheet.querySelector('.face-front');
     const back = sheet.querySelector('.face-back');
     if (i < current){
-      sheet.classList.add('flipped');
+      sheet.classList.add('sheet-flipped');
       sheet.style.zIndex = total + i;
       if (front) front.style.pointerEvents = 'none';
       if (back) back.style.pointerEvents = 'auto';
     } else {
-      sheet.classList.remove('flipped');
+      sheet.classList.remove('sheet-flipped');
       sheet.style.zIndex = total - i;
       if (front) front.style.pointerEvents = 'auto';
       if (back) back.style.pointerEvents = 'none';
