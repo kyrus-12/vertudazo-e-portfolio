@@ -1001,4 +1001,170 @@
     <button class="close-shelf-btn" id="closeShelfBtn">🔄 Restart</button>
     <div id="measure-container"></div>
 
+    <script>
+      const booksData = [
+        {
+          id:'ep1', episode:'Field Study 1', title:'Episode 1', palette:'classic', year:'2026',
+          chapters: [
+            {name:'Foreword', type:'foreword'},
+            {name:'Activity_1', type:'activity_1'},
+            {name:'Activity_2', type:'activity_2'},
+            {name:'Activity_3', type:'activity_3'},
+            ],
+          foreword: [
+            `<p>This is my portfolio.</p>`
+            ],
+          activity_1: [
+            `<p>Basta activity ito.</p>`,
+            ],
+          activity_2: [
+            `<p>Pangalawang activity ito.</p>`,
+            ],
+          activity_3: [
+            `<p>Pangatlong activity ito.</p>`,
+            ],
+        },
+         {
+          id:'ep2', episode:'Field Study 1', title:'Episode 2', palette:'ocean', year:'2026',
+          chapters: [
+            {name:'Foreword', type:'foreword'},
+            {name:'Activity_1', type:'activity_1'},
+            {name:'Activity_2', type:'activity_2'},
+            {name:'Activity_3', type:'activity_3'},
+            ],
+          foreword: [
+            `<p>This is my portfolio.</p>`
+            ],
+          activity_1: [
+            `<p>Basta activity ito.</p>`,
+            ],
+          activity_2: [
+            `<p>Pangalawang activity ito.</p>`,
+            ],
+          activity_3: [
+            `<p>Pangatlong activity ito.</p>`,
+            ],
+        },
+         {
+          id:'ep3', episode:'Field Study 1', title:'Episode 3', palette:'forest', year:'2026',
+          chapters: [
+            {name:'Foreword', type:'foreword'},
+            {name:'Activity_1', type:'activity_1'},
+            {name:'Activity_2', type:'activity_2'},
+            {name:'Activity_3', type:'activity_3'},
+            ],
+          foreword: [
+            `<p>This is my portfolio.</p>`
+            ],
+          activity_1: [
+            `<p>Basta activity ito.</p>`,
+            ],
+          activity_2: [
+            `<p>Pangalawang activity ito.</p>`,
+            ],
+          activity_3: [
+            `<p>Pangatlong activity ito.</p>`,
+            ],
+        },
+        ];
+
+      const palettes = {
+        classic: {parchment:'#f4e8d0', parchmentShade:'#e6d5b8', parchmentDark:'#d4c4a8', ink:'#2c1810', inkSoft:'#5d4037', inkFaint:'#8d6e63', gold:'#b8860b', goldLight:'#d4af37', goldPale:'#e6c86e', burgundy:'#6a1b1b', cover:'#2c1810', coverLight:'#3e2723'},
+        ocean: {parchment:'#e8f4f8', parchmentShade:'#d0e8f0', parchmentDark:'#b0d4e0', ink:'#0a2540', inkSoft:'#1a5276', inkFaint:'#5dade2', gold:'#117a8b', goldLight:'#17a2b8', goldPale:'#7fdbda', burgundy:'#1b4f72', cover:'#0a2540', coverLight:'#154360'},
+        forest: {parchment:'#f1f8e9', parchmentShade:'#dcedc8', parchmentDark:'#c5e1a5', ink:'#1b4332', inkSoft:'#2d64af', inkFaint:'#74c69d', gold:'#40916c', goldLight:'#52b788', goldPale:'#95d5b2', burgundy:'#1b4332', cover:'#1b4332', coverLight:'#2d6a4f'},
+      };
+
+      function renderBookshelf(){
+        const row1 = document.getElementById('shelfRow1');
+        const row2 = document.getElementById('shelfRow2');
+        const half = Math.ceil(booksData.length / 2);
+        booksData.forEach((book, i) => {
+          const spine = document.createElement('div');
+          spine.className = `book-spine palette-${book.palette}`;
+          spine.style.animationDelay = `${i * 0.1}s`;
+          spine.innerHTML = `<div class="spine-band top"></div><span class="spine-episode">${book.episode}</span><span class="spine-title">${book.title}</span><span class="spine-ornament">෴</span><div class="spine-band bottom"></div>`;
+          spine.addEventListener('click', () => openBook(book));
+          if (i < half) row1.appendChild(spine); else row2.appendChild(spine);
+        });
+      }
+
+      function applyPalette(name){
+        const p = palettes[name];
+        const r = document.documentElement;
+        r.style.setProperty('--parchment', p.parchment);
+        r.style.setProperty('--parchment-shade', p.parchmentShade);
+        r.style.setProperty('--parchment-dark', p.parchmentDark);
+        r.style.setProperty('--ink', p.ink);
+        r.style.setProperty('--ink-soft', p.inkSoft);
+        r.style.setProperty('--ink-faint', p.inkFaint);
+        r.style.setProperty('--gold', p.gold);
+        r.style.setProperty('--gold-light', p.goldLight);
+        r.style.setProperty('--gold-pale', p.goldPale);
+        r.style.setProperty('--burgundy', p.burgundy);
+        r.style.setProperty('--cover', p.cover);
+        r.style.setProperty('--cover-light', p.coverLight);
+      }
+
+      function paginateContent(chunks){
+        const measure = document.getElementById('measure-container');
+        const isMobile = window.innerWidth <= 720;
+        const paddingH = isMobile ? 36 : 72;
+        const paddingV = isMobile ? 104 : 72;
+        const pageW = (document.querySelector('.book-wrap')?.offsetWidth || 680) / 2 - paddingH;
+        const pageH = (document.querySelector('.book-wrap')?.offsetHeight || 530) - paddingV;
+        measure.style.cssText = `position:fixed; left:-9999px; width:${pageW}px; height:${pageH}px; overflow:hidden; visibility:hidden; pointer-events:none; display:flex; flex-direction:column;`;
+
+        const pages = [];
+        let current = '';
+        for (let i = 0; i < chunks.length; i++){
+          const test = current + chunks[i];
+          measure.innerHTML = test;
+          if (measure.scrollHeight > pageH && current !== ''){
+            pages.push(current);
+            current = chunks[i];
+          } else {
+            current = test;
+          }
+        }
+        if (current) pages.push(current);
+        if (!pages.length) pages.push('');
+        measure.innerHTML = '';
+        return pages;
+      }
+
+      function buildBookHTML(book){
+        const sheets = [];
+        let idx = 0, pg = 1;
+        const mk = (f, b, fc, bc) => {
+          const i = idx++;
+          const fC = fc ? 'cover-content' : '';
+          const bC = bc ? 'back-cover' : '';
+          const fN = fc ? '' : `<span class="page-num">${pg++}</span>`;
+          const bN = bc ? '' : `<span class="page-num">${pg++}</span>`;
+          return `<div class="sheet" data-index="${i}"><div class="face face-front ${fC}"><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div class="page-content ${fC}">${f}</div>${fN}</div><div class="face face-back ${bC}"><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div class="page-content ${bC}">${b}</div>${bN}</div></div>`;
+        };
+
+        sheets.push(mk(
+          `<p class="cover-kicker">A portfolio</p><div class="cover-line"></div><h1 class="cover-title">John Renz I. Vertudazo</h1><p class="cover-sub">${book.title}</p><div class="cover-line"></div><p class="cover-kicker" style="margin-top:24px; font-size:10px;">${book.episode}</p>`,
+          `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:14px;">"Every story begins with a single line of code."</p><div class="ornament">෴</div>`,
+          true, false
+        ));
+        
+        const tocItems = book.chapters.map((c, i) =>
+          `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I', 'II', 'III', 'IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${3 + i*2}</span></button>`).join('');
+
+        sheets.push(mk(
+          `<p class="page-eyebrow">Enjoy reading the three activites</p><div class="ornament">෴</div><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:10px;">John Renz I. Vertudazo</h1><p style="font-family:var(--font-script); font-size:clamp(20px, 3.6vw, 28px); color:var(--burgundy); margin-bottom:14px;">${book.title}</p><p style="font-size:13px; color:var(--ink-faint); max-width:280px; margin:0 auto 18px;">Building software that can be used in real life. </p><div class="stamp"><span>Est.<br>${book.year}</span></div>`,
+          `<p class="page-eyebrow">Contents</p><h2 class="page-title">Table of Contents</h2><div class="ornament">෴</div>${tocItems}`,
+          false, false
+        ));
+        
+
+        
+      
+      
+        
+          
+    </script>
+
   
