@@ -429,7 +429,7 @@ const palettes = {
   forest:  { parchment:'#f1f8e9', parchmentShade:'#dcedc8', parchmentDark:'#c5e1a5', ink:'#1b4332', inkSoft:'#2d6a4f', inkFaint:'#74c69d', gold:'#40916c', goldLight:'#52b788', goldPale:'#95d5b2', burgundy:'#1b4332', cover:'#1b4332', coverLight:'#2d6a4f' }
 };
 
-/* ===== RENDER BOOKSHELF ===== */
+
 function renderBookshelf(){
   const row1 = document.getElementById('shelfRow1');
   const row2 = document.getElementById('shelfRow2');
@@ -444,7 +444,7 @@ function renderBookshelf(){
   });
 }
 
-/* ===== APPLY PALETTE ===== */
+
 function applyPalette(name){
   const p = palettes[name];
   const r = document.documentElement;
@@ -462,7 +462,7 @@ function applyPalette(name){
   r.style.setProperty('--cover-light', p.coverLight);
 }
 
-/* ===== PAGINATION ===== */
+
 function paginateContent(chunks){
   const measure = document.getElementById('measure-container');
   const isMobile = window.innerWidth <= 720;
@@ -490,7 +490,7 @@ function paginateContent(chunks){
   return pages;
 }
 
-/* ===== BUILD BOOK ===== */
+
 function buildBookHTML(book){
   const sheets = [];
   let idx = 0, pg = 1;
@@ -503,14 +503,14 @@ function buildBookHTML(book){
     return `<div class="sheet" data-index="${i}"><div class="face face-front ${fC}"><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div class="page-content ${fC}">${f}</div>${fN}</div><div class="face face-back ${bC}"><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div class="page-content ${bC}">${b}</div>${bN}</div></div>`;
   };
 
-  // Cover
+  
   sheets.push(mk(
     `<p class="cover-kicker">A Portfolio</p><div class="cover-line"></div><h1 class="cover-title">Alex<br>Rivera</h1><p class="cover-sub">${book.title}</p><div class="cover-line"></div><p class="cover-kicker" style="margin-top:24px;font-size:10px;">${book.episode}</p>`,
     `<div class="ornament">❦</div><p style="text-align:center;font-style:italic;color:var(--ink-faint);font-size:14px;">"Every great story begins with a single line of code."</p><div class="ornament">❦</div>`,
     true, false
   ));
 
-  // Title page + TOC
+  
   const tocItems = book.chapters.map((c, i) =>
     `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I','II','III','IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${3 + i*2}</span></button>`
   ).join('');
@@ -521,7 +521,7 @@ function buildBookHTML(book){
     false, false
   ));
 
-  // Foreword (auto-paginated)
+ 
   const fwChunks = book.foreword.map(p => `<div class="ornament">❦</div>` + p);
   const fwPages = paginateContent(fwChunks);
   fwPages.forEach((content, i) => {
@@ -530,7 +530,7 @@ function buildBookHTML(book){
     sheets.push(mk(eyebrow + content + nav, `<div class="ornament">❦</div><p style="text-align:center;font-style:italic;color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
   });
 
-  // Works (auto-paginated)
+  
   const workChunks = book.works.map(w => {
     let html = `<article class="plate"><span class="plate-fig">${w.fig}</span><h3 class="plate-title">${w.title}</h3>`;
     if (w.image) html += `<figure class="plate-figure"><img class="plate-img" src="${w.image}" alt="${w.title} screenshot" loading="lazy"><figcaption>${w.imageCaption || ''}</figcaption></figure>`;
@@ -544,7 +544,7 @@ function buildBookHTML(book){
     sheets.push(mk(eyebrow + content + nav, `<div class="ornament">❦</div><p style="text-align:center;font-style:italic;color:var(--ink-faint);">More works ahead...</p>`, false, false));
   });
 
-  // Skills
+ 
   const skillGroups = Object.entries(book.skills).map(([label, items]) =>
     `<div class="margin-group"><span class="margin-label">${label.charAt(0).toUpperCase()+label.slice(1)}</span><div class="margin-items">${items.map(it => `<span class="margin-item">${it}</span>`).join('')}</div></div>`
   ).join('');
@@ -554,14 +554,14 @@ function buildBookHTML(book){
     false, false
   ));
 
-  // Contact
+  
   sheets.push(mk(
     `<p class="page-eyebrow">Chapter IV</p><h2 class="page-title">${book.chapters[3].name}</h2><div class="colophon-rule"></div><p style="font-size:12.5px;text-align:center;">Set in <em>Cinzel Decorative</em> for display and <em>Cormorant Garamond</em> for text.</p><div class="colophon-index"><a class="index-entry" href="mailto:${book.contact.email}"><span>Email</span><span>${book.contact.email}</span></a><a class="index-entry" href="#"><span>GitHub</span><span>${book.contact.github}</span></a><a class="index-entry" href="#"><span>LinkedIn</span><span>${book.contact.linkedin}</span></a></div>`,
     `<div class="ornament">❦</div><p style="font-family:var(--font-script);font-size:24px;color:var(--gold);text-align:center;">Thank you for reading.</p><div class="ornament">❦</div>`,
     false, false
   ));
 
-  // Back cover
+ 
   sheets.push(mk(
     `<div class="ornament">❦</div><p style="font-family:var(--font-script);font-size:24px;color:var(--gold);text-align:center;">Thank you for reading.</p><div class="ornament">❦</div>`,
     `<p class="the-end">The End</p><div class="cover-line" style="background:var(--gold-light);margin:14px auto;"></div><p class="back-script">Alex Rivera</p><p class="cover-kicker" style="margin-top:26px;font-size:10px;opacity:0.6;">&copy; MMXXVI</p>`,
@@ -571,7 +571,7 @@ function buildBookHTML(book){
   return sheets.join('');
 }
 
-/* ===== OPEN / CLOSE BOOK ===== */
+
 let currentBook = null;
 let sheets = [];
 let current = 0;
@@ -602,7 +602,6 @@ function closeBook(){
   currentBook = null;
 }
 
-/* ===== READER LOGIC ===== */
 const btnPrev = document.getElementById('btnPrev');
 const btnNext = document.getElementById('btnNext');
 const indicator = document.getElementById('pageIndicator');
@@ -614,12 +613,12 @@ function render(){
     const front = sheet.querySelector('.face-front');
     const back = sheet.querySelector('.face-back');
     if (i < current){
-      sheet.classList.add('flipped');
+      sheet.classList.add('sheet-flipped');
       sheet.style.zIndex = total + i;
       if (front) front.style.pointerEvents = 'none';
       if (back) back.style.pointerEvents = 'auto';
     } else {
-      sheet.classList.remove('flipped');
+      sheet.classList.remove('sheet-flipped');
       sheet.style.zIndex = total - i;
       if (front) front.style.pointerEvents = 'auto';
       if (back) back.style.pointerEvents = 'none';
@@ -678,7 +677,6 @@ bookWrap.addEventListener('touchend', (e) => {
 
 document.getElementById('closeShelfBtn').addEventListener('click', closeBook);
 
-/* ===== INIT ===== */
 renderBookshelf();
 </script>
 </body>
