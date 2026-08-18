@@ -1204,14 +1204,120 @@
 
         return sheets.join('');
       }
-      
-        
 
-        
-      
-      
-        
-          
+      let currentBook = null; 
+      let sheets = [];
+      let current = 0;
+      let total = 0;
+      let animating = false;
+
+      function openBook(book){
+        currentBook = book;
+        applyPalette(book.palette);
+        document.getElementById('book').innerHTML = buildBookHTML(book);
+        sheets = Array.from(document.querySelectorAll('.sheet'));
+        total = sheets.length;
+        current = 0;
+        animating = false;
+
+        document.getElementById('bookshelfScene').classList.add('hidden');
+        document.getElementById('readerScene').classList.add('active');
+        document.getElementById('closeShelfBtn').classList.add('visible');
+
+        render();
+      }
+
+      function closeBook(){
+        document.getElementById('bookshelfScene').classList.remove('hidden');
+        document.getElementById('readerScene').classList.remove('active');
+        document.getElementById('closeShelfBtn').classList.remove('visible');
+        document.getElementById('book').innerHTML = '';
+        currentBook = null;
+      }
+
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const indicator = document.getElementById('pageIndicator');
+      const hint = document.getElementById('hint');
+      const bookWrap = document.querySelector('.book-wrap');
+
+      function render(){
+        sheets.forEach((sheet, i) => {
+          const front = sheet.querySelector('.face-front');
+          const back = sheet.querySelector('.face-back');
+          if (i < current){
+            sheet.classList.add('sheet-flipped');
+            sheet.style.zIndex = total + i;
+            if (front) front.style.pointerEvents = 'none';
+            if (back) back.style.pointerEvents = 'auto';
+          } else { 
+            sheet.classList.remove('sheet-flipped');
+            sheet.style.zIndex = total - i;
+            if (front) front.style.pointerEvents = 'auto';
+            if (back) back.style.pointerEvents = 'none';
+          }
+        });
+        btnPrev.disabled = current === 0;
+        btnNext.disabled = current === total;
+        const labels = ["Cover", "Title", "Contents"].concat(
+          currentBook ? currentBook.chapters.map(c => c.name) : []
+          ).concat(["End"]);
+        indicator.textContent = labels[current] || (current >= total ? 'End' : current + 1);
+        if (current > 0) hint.style.opacity = '0';
+      }
+
+      function turnTo(target){
+        if (animating || target === current || target < 0 || target > total) return;
+        animating = true;
+        current = target;
+        render();
+        window.setTimeout(() => {animating = false;}, 950);
+      }
+
+      function next(){
+        turnTo(current + 1);
+      }
+      function prev(){
+        turnTo(current - 1);
+      }
+
+      btnNext.addEventListener('click', (e) => {e.stopPropagation(); next(); });
+      btnPrev.addEventListener('click', (e) => {e.stopPropagation(); prev(); });
+
+      document.addEventListener('click', (e) => {
+        const navBtn = e.target.closest('.toc-item, .back-btn');
+        if (navBtn) {
+          e.stopPropagation();
+          e.preventDefault();
+          const target = parseInt(navBtn.dataset.goto, 10);
+          if (!isNaN(target)) turnTo(target);
+        }
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') next();
+        if (e.key === 'ArrowLeft') prev();
+      });
+
+      let touchStartX = 0, touchStartY = 0;
+      bookWrap.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, {passive:true});
+
+      bookWrap.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].screenX - touchStartX;
+        const dy = e.changedTouches[0].screenY - touchStartY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40){
+          if (dx < 0) next(); else prev();
+        }
+      }, {passive:true});
+
+      document.getElementById('closeShelfBtn').addEventListener('click', closeBook);
+
+      renderBookShelf();
+
     </script>
-
+  </body>
+</html>
   
