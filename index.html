@@ -1159,7 +1159,7 @@
           false, false
         ));
 
-        const fwChunks = book.foreword.map(=> `<div class="ornament">෴</div>` + p);
+        const fwChunks = book.foreword.map(p => `<div class="ornament">෴</div>` + p);
         const fwPages = paginateContent(fwChunks);
         fwPages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<p class="page-eyebrow">Foreword</p><h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
