@@ -1158,6 +1158,52 @@
           `<p class="page-eyebrow">Contents</p><h2 class="page-title">Table of Contents</h2><div class="ornament">෴</div>${tocItems}`,
           false, false
         ));
+
+        const fwChunks = book.foreword.map(=> `<div class="ornament">෴</div>` + p);
+        const fwPages = paginateContent(fwChunks);
+        fwPages.forEach((content, i) => {
+          const eyebrow = i === 0 ? `<p class="page-eyebrow">Foreword</p><h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+          const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="1">&lsaquo; Contents</button></div>` : '';
+          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
+        });
+
+        const workChunks = book.works.map(w => {
+          let html = `<article class="plate"><span class="plate-fig">${w.fig}</span><h3 class="plate-title">${w.title}</h3>`;
+          if (w.image) html += `<figure class="plate-figure"><img class="plate-img" src="${w.image}" alt="${w.title} screenshot" loading="lazy"><figcaption>${w.imageCaption || ''}</figcaption></figure>`;
+          html += `<p class="plate-desc">${w.desc}</p><p class="plate-stack">${w.stack}</p><a class="plate-link" href="${w.link}">View the work &arr;</a></article>`;
+          return html;
+        });
+
+        const workPages = paginateContent(workChunks);
+        workPages.forEach((content, i) => {
+          const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 1</p><h2 class="page-title">${book.chapters[1].name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">Activity 1<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+          const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="1">&lsaquo; Contents</button></div>` : '';
+          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">More works ahead...</p>`, false, false));
+        });
+
+        const  skillGroups = Object.entries(book.skills).map(([label, items]) => 
+          `<div class="margin-group"><span class="margin-label">${label.charAt(0).toUpperCase()+label.slice(1)}</span><div class="margin-items">${items.map(it => `<span class="margin-item">${it}</span>`).join('')}</div></div>`
+          ).join('');
+        sheets.push(mk(
+          `<p class="page-eyebrow">Activity 2</p><h2 class="page-title">${book.chapters[2].name}</h2><div class="ornament">෴</div>${skillGroups}<div class="page-nav"><button type="button" class="back-btn" data-goto='1'>&lsaquo; Contents</button></div>`,
+          `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Tools I used.</p>`,
+          false, false
+        ));
+
+        sheets.push(mk(
+          `<p class="page-eyebrow">Activity 3</p><h2 class="page-title">${book.chapters[3].name}</h2><div class="colophon-rule"></div><p style="font-size:12.5px; text-align:center;">Set in <em>Cinzel Decorative</em> for display and <em>Cormorant Garamond</em> for text.</p><div class="colophon-index"><a class="index-entry" href="mailto:${book.contact.email}"><span>Email</span><span>${book.contact.email}</span></a><a class="index-entry" href="#"><span>Github</span><span>${book.contact.github}</span></a><a class="index-entry" href="#"><span>LInkedIn</span><span>${book.contact.linkedin}</span></a></div>`,
+          `<div class="ornament">෴</div><p style="font-family:var(--font-script); font-size:24px; color:var(--gold); text-align:center;">Thank you for reading...</p><div class="ornament">෴</div>`,
+          false, false
+        ));
+
+        sheets.push(mk(
+          `<div class="ornament">෴</div><p style="font-family:var(--font-script); font-size:24px; color:var(--gold); text-align:center;">Thank you for reading...</p><div class="ornament">෴</div>`,
+          `<p class="the-end">The End</p><div class="cover-line" style="background:var(--gold-light); margin:14px auto;"></div><p class="back-script">John Renz I. Vertudazo</p><p class="cover-kicker" style="margin-top:26px; font-size:10px; opacity:0.6;">&copy; MMXXVI</p>`,
+          false, true
+        ));
+
+        return sheets.join('');
+      }
       
         
 
