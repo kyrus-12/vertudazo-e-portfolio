@@ -1308,6 +1308,19 @@
         window.setTimeout(() => {animating = false;}, 950);
       }
 
+      function renderChunk(item){
+        if (typeof item === 'string') return item;
+        let html = `<article class="plate">`;
+        if (item.fig) html += `<span class="plate-fig">${item.fig}</span>`;
+        if (item.title) html += `<h3 class="plate-title">${item.title}</h3>`;
+        if (item.image) html += `<figure class="plate-figure"><img class="plate-img" src="${item.image}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
+        if (item.desc) html += `<p class="plate-desc">${item.desc}</p>`;
+        if (item.stack) html += `<p class="plate-stack">${item.stack}</p>`;
+        if (item.link) html += `<a class="plate-link" href="${item.link}">View the work &arr</a>`;
+        html += `</article>`;
+        return html;
+      }
+
       function next(){
         turnTo(current + 1);
       }
