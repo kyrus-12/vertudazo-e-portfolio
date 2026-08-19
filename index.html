@@ -1032,17 +1032,7 @@
           activity_3: [
             `<p>Pangatlong activity ito.</p>`,
             ],
-          works: [
-             {
-               fig: 'Fig. 1',
-               title: 'First Image',
-               image: 'https://i.imgur.com/roKDA4r.jpg',
-               imageCaption: 'Basta',
-               desc: 'Haist',
-               stack: 'Secret',
-               link: 'https://imgur.com/roKDA4r'
-             }
-             ],
+          
           skills: {language: ['CSS', 'HTML', 'JAVASCRIPT']},
           contact: {email:'rusky0537@gmail.com', github:'kyky-12', linkedin: 'in/kyky-12'}
         },
@@ -1075,17 +1065,7 @@
           activity_3: [
             `<p>Pangatlong activity ito.</p>`,
             ],
-           works: [
-             {
-               fig: 'Fig. 2',
-               title: 'Second Image',
-               image: 'https://i.imgur.com/1A8G8po.jpg',
-               imageCaption: 'Basta',
-               desc: 'Haist',
-               stack: 'Secret',
-               link: 'https://imgur.com/1A8G8po'
-             }
-             ],
+           
            skills: {language: ['CSS', 'HTML', 'JAVASCRIPT']},
            contact: {email:'rusky0537@gmail.com', github:'kyky-12', linkedin: 'in/kyky-12'}
         },
@@ -1118,17 +1098,7 @@
                link: 'https://imgur.com/494TnSC'
              },
             ],
-            works: [
-             {
-               fig: 'Fig. 3',
-               title: 'Third Image',
-               image: 'https://i.imgur.com/494TnSC.jpg',
-               imageCaption: 'Basta',
-               desc: 'Haist',
-               stack: 'Secret',
-               link: 'https://imgur.com/494TnSC'
-             }
-             ],
+            
            skills: {language: ['CSS', 'HTML', 'JAVASCRIPT']},
            contact: {email:'rusky0537@gmail.com', github:'kyky-12', linkedin: 'in/kyky-12'}
         },
@@ -1247,7 +1217,7 @@
         const activity2Chunks = book.activity_2.map(renderChunk);
         const acitvity2Pages = paginateContent(activity2Chunks);
         activity2Pages.forEach((content, i) => {
-          const eyebrow = i === 0 ? `<p class="page-eyebrow">Foreword</p><h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+          const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 2</p><h2 class="page-title">${book.chapters[2].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
         });
@@ -1255,7 +1225,7 @@
         const activity3Chunks = book.activity_3.map(renderChunk);
         const acitvity3Pages = paginateContent(activity3Chunks);
         activity3Pages.forEach((content, i) => {
-          const eyebrow = i === 0 ? `<p class="page-eyebrow">Foreword</p><h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+          const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 3</p><h2 class="page-title">${book.chapters[3].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
         });  
