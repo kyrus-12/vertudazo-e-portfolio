@@ -1211,7 +1211,7 @@
           sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">More works ahead...</p>`, false, false));
         });
 
-        const  skillGroups = Object.entries(book.skills).map(([label, items]) => 
+        const  skillGroups = Object.entries ? Object.entries(book.skills).map(([label, items]) => 
           `<div class="margin-group"><span class="margin-label">${label.charAt(0).toUpperCase()+label.slice(1)}</span><div class="margin-items">${items.map(it => `<span class="margin-item">${it}</span>`).join('')}</div></div>`
           ).join('');
         const activity2Chunks = book.activity_2.map(renderChunk);
