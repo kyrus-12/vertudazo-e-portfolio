@@ -1217,7 +1217,7 @@
         const activity2Chunks = book.activity_2.map(renderChunk);
         const acitvity2Pages = paginateContent(activity2Chunks);
         activity2Pages.forEach((content, i) => {
-          const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 2</p><h2 class="page-title">${book.chapters[2].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+          const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 2</p><h2 class="page-title">${book.chapters[2].name}</h2>` : `<p class="page-eyebrow">Activity 2<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
         });
@@ -1225,7 +1225,7 @@
         const activity3Chunks = book.activity_3.map(renderChunk);
         const acitvity3Pages = paginateContent(activity3Chunks);
         activity3Pages.forEach((content, i) => {
-          const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 3</p><h2 class="page-title">${book.chapters[3].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+          const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 3</p><h2 class="page-title">${book.chapters[3].name}</h2>` : `<p class="page-eyebrow">Activity 3<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
         });  
