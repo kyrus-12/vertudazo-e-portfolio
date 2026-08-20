@@ -40,7 +40,6 @@
     html, body{
       width:100%;
       height:100%;
-      overflow:hidden;
       background:#1a0f0a;
       font-family:var(--font-body);
       color:var(--ink);
@@ -259,7 +258,7 @@
         radial-gradient(ellipse at 30% 80%, rgba(120,90,70,0.5) 0%, transparent 50%),
         linear-gradient(180deg, #4a3020 0%, #5c4030 50%, #4a3020 100%);
     }
-    #image{
+    #image img{
       max-width:min(90vw, 560px);
       width:100%;
       border-radius:6px;
@@ -338,19 +337,6 @@
       justify-content:center;
       gap:clamp(8px, 2vw, 24px);
       padding:20px 30px 14px;
-      background:
-        linear-gradient(180deg, rgba(62,39,35,0) 0%, rgba(62,39,35,0.4) 100%),
-        linear-gradient(90deg, #3e2723 0%, #5d4037 20%, #4e342e 50%, #5d4037 80%, #3e2723 100%);
-      border-radius:4px;
-      box-shadow:inset 0 4px 8px rgba(0,0,0,0.4), inset 0 -2px 4px rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.5);
-    }
-    .shelf-row{
-      position:relative;
-      width:100%;
-      display:flex;
-      align-items:flex-end; 
-      justify-content:center;
-      gap:clamp(8px, 2vw, 24px);
       background:
         linear-gradient(180deg, rgba(62,39,35,0) 0%, rgba(62,39,35,0.4) 100%),
         linear-gradient(90deg, #3e2723 0%, #5d4037 20%, #4e342e 50%, #5d4037 80%, #3e2723 100%);
@@ -1512,6 +1498,7 @@
         document.getElementById('bookshelfScene').classList.add('hidden');
         document.getElementById('readerScene').classList.add('active');
         document.getElementById('closeShelfBtn').classList.add('visible');
+        document.body.classList.add('no-scroll');
 
         render();
       }
@@ -1520,6 +1507,7 @@
         document.getElementById('bookshelfScene').classList.remove('hidden');
         document.getElementById('readerScene').classList.remove('active');
         document.getElementById('closeShelfBtn').classList.remove('visible');
+        document.body.classList.remove('no-scroll');
         document.getElementById('book').innerHTML = '';
         currentBook = null;
       }
