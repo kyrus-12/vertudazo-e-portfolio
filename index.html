@@ -1619,6 +1619,68 @@
 
       renderBookshelf();
 
+      const SHORT_TEXT_MAX = 30;
+
+      function splitIntoLetters(el){
+        const text = el.textContent;
+        const isShort = text.trim().length <= SHORT_TEXT_MAX;
+        el.textContent = '';
+        el.classList.add('split-text', isShort ? 'text-short' : 'text-long');
+        el.classList.remove('reveal-item');
+        const perLetterDelay = isShort ? 0.05 : 0.008;
+        [...text].forEach((ch, i) => {
+          const span = document.createElement('span');
+          span.className = 'letter';
+          span.textContent = ch === ' ' ? '\u00A0' : ch;
+          const ty = (Math.random() * 30 + 15).toFixed(0);
+          const rot = (Math.random() * 34 - 17).toFixed(0);
+          span.style.setProperty('--ty', ty + 'px');
+          span.style.setProperty('--rot', rot + 'deg');
+          span.style.transitionDelay = (i * perLetterDelay) + 's';
+          el.appendChild(span);
+        });
+      }
+      document.querySelectorAll('#home h1, #home p, #about h2, #image h2').forEach(splitIntoLetters);
+
+      document.querySelectorAll('.reveal-item').forEach(el => {
+        if (el.classList.contains('split-text')) return;
+        const len = el.textContent.trim().length;
+        if (len > 0 && len <= SHORT_TEXT_MAX){
+          el.classList.add('reveal-slow');
+        } else if (len > SHORT_TEXT_MAX){
+          el.classList.add('reveal-fast');
+        }
+      });
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle('in-view', entry.isIntersecting);
+        });
+      }, {threshold: 0.2});
+      document.querySelectorAll('.landing-section').forEach(sec => revealObserver.observe(sec));
+
+      const parallaxLayers = document.querySelectorAll('.parallax-layer');
+      function updateParallax(){
+        parallaxLayers.forEach(layer => {
+          const rect = layer.parentElement.getBoundingClientRect();
+          layer.style.transform = `translateY(${rect.top * 0.25}px)`;
+        });
+      }
+      window.addEventListener('scroll', () => requestAnimationFrame(updateParallax), {passive:true});
+      updateParallax();
+
+      const navLinks = document.querySelectorAll('.site-nav a');
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting){
+            navLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+            });
+          }
+        });
+      }, {threshold: 0.5});
+      document.querySelectorAll('.landing-section').forEach(sec => navObserver.observe(sec));
+      
     </script>
   </body>
 </html>
