@@ -1196,17 +1196,48 @@
   </head>
   
   <body>
-    
-    <div class="bookshelf-scene" id="bookshelfScene">
-      <div class="shelf-header">
-        <h1>John Renz I. Vertudazo <br> (e-Portfolio)</h1>
-        <p>Choose a book to begin</p>
+    <nav class="site-nav" id="siteNav">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#contents">Contents</a>
+      <a href="#image">Image</a>
+    </nav>
+
+    <section id="home" class="landing-section">
+      <div class="parallax-layer"></div>
+      <div class="home-header">
+        <img class="home-photo reveal-item" src="https://i.imgur.com/.jpg" alt="Profile photo">
+        <div class="home-text">
+          <h1>John Renz I. Vertudazo</h1>
+          <p class="reveal-item">Welcome to my e-Portfolio. Scroll down to learn more, or explore my work.</p>
+        </div>
       </div>
-      <div class="shelf-container">
-        <div class="shelf-row" id="shelfRow1"></div>
-        <div class="shelf-row" id="shelfRow2"></div>
+    </section>
+
+    <section id="about" class="landing-section">
+      <div class="parallax-layer"></div>
+      <h2 class="reveal-item">About Me</h2>
+      <p class="reveal-item">Write a short introduction about your work here.</p>
+    </section>
+
+    <section id="contents" class="landing-section"> 
+      <div class="bookshelf-scene" id="bookshelfScene">
+        <div class="shelf-header reveal-item">
+          <h1>Title of the Shelves</h1>
+          <p>Choose a book</p>
+        </div>
+        <div class="shelf-container reveal-item">
+          <div class="shelf-row" id="shelfRow1"></div>
+          <div class="shelf-row" id="shelfRow2"></div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section id="image" class="landing-section"> 
+      <div class="parallax-layer"></div>
+      <h2 class="reveal-item">Gallery</h2>
+      <img class="reveal-item" src="https://i.imgur.com/.jpg" alt="Featured photo">
+    </section>
 
     <div class="reader-scene" id="readerScene">
       <div class="book-wrap">
