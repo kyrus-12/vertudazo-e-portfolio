@@ -52,11 +52,15 @@
       position:fixed;
       top:18px;
       left:18px;
+      right:18px;
       z-index:50;
       display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      max-width:calc(100vw - 36px);
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
     }
     .site-nav a{
       font-family:var(--font-title);
@@ -79,6 +83,70 @@
       color:#ffffff;
     }
     .site-nav a.active{
+      background:#2c1810;
+      border-color:var(--gold);
+      color:#ffffff;
+    }
+    .nav-logo{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+      flex-shrink:0;
+    }
+    .logo-text{
+      font-family:var(--font-display);
+      font-size:18px;
+      letter-spacing:0.12em;
+      color:var(--gold-pale);
+      text-shadow:0 2px 8px rgba(0,0,0,0.5);
+      border:1px solid rgba(212,175,55,0.4);
+      padding:6px 14px;
+      border-radius:20px;
+      background:rgba(26,15,10,0.6);
+      backdrop-filter:blur(6px);
+      transition:all 0.25s ease;
+    }
+    .nav-logo:hover .logo-text{
+      background:rgba(212,175,55,0.15);
+      border-color:var(--gold);
+      color:var(--gold-light);
+    }
+    .logo-img{
+      object-fit:cover;
+      height:100px;
+      width:100px;
+      border-radius:6px;
+      filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+      background:white;
+    }
+    .nav-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      font-family:var(--font-title);
+      font-size:15px;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      color:#ffffff;
+      background:#3e2418;
+      border:1px solid rgba(212,175,55,0.3);
+      padding:8px 16px;
+      border-radius:20px;
+      text-decoration:none;
+      backdrop-filter:blur(6px);
+      transition:all 0.25s ease;
+      white-space:nowrap;
+      font-weight:600;
+    }
+    .nav-links a:hover{
+      background:#2c1810;
+      border-color:var(--gold);
+      color:#ffffff;
+    }
+    .nav-links a.active{
       background:#2c1810;
       border-color:var(--gold);
       color:#ffffff;
@@ -1345,10 +1413,17 @@
   
   <body>
     <nav class="site-nav" id="siteNav">
+      <div class="nav-logo">
+        <img style="margin-right:10px;" src="https://i.imgur.com/UzZk0s9.jpg" alt="Logo" class="logo-img">
+        <img src="https://i.imgur.com/m6vV19E.jpg" alt="Logo" class="logo-img">
+      </div>
+
+      <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#contents">Contents</a>
       <a href="#image">Album</a>
+      </div>
     </nav>
 
     <section id="home" class="landing-section">
