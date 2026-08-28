@@ -1497,6 +1497,11 @@
       border-radius:2px;
       box-shadow:0 1px 4px rgba(0,0,0,0.4);
     }
+    @media (min-widthh:1200px){
+      html{
+        zoom0.8;
+      }
+    }
   
   </style>
   </head>
@@ -2268,11 +2273,27 @@
       document.addEventListener('mouseup', onMagEnd);
       document.addEventListener('touchend', onMagEnd, {passive:true});
 
-      const _origOpenBook = openBook;
+
       openBook = function(book){
+        _origOpenBook(book);
         if (isMagDragging) setTimeout(refreshMagView, 120);
       };
-      
+
+      if ('scrollrestoration' in history){
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      if (location.hash)(
+        'load', function(){
+          window.scrollTo(0, 0);
+        }
+      );
+
+      var isPhone = /iPhone|Android/i.test(navigator.userAgent) && Math.min(window.innerWidth, wwindow.innerHeight) < 900;
+      if (isPhone){
+        meta.setAttribute('content', 'width=1280, initial-scale=' + (window.innerWidth/1280) + ', user-scalable=yes');
+      }
+
     </script>
   </body>
 </html>
