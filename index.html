@@ -2138,10 +2138,10 @@
       let magAddedNoScroll = false;
 
       function refreshMagView(){
-        const clone = document.body.classNode(true);
+        const clone = document.body.cloneNode(true);
         clone.classList.remove('no-scroll');
         clone.querySelectorAll('.mag-glass, .site-nav, .reader-scene, .controls, .close-shelf-btn, .hint').forEach(el => el.remove());
-        clone.querySelectorAll('..landing-site').forEach(sec => sec.classList.add('in-view'));
+        clone.querySelectorAll('..landing-section').forEach(sec => sec.classList.add('in-view'));
 
         const liveSections = document.querySelectorAll('.landing-section');
         const cloneSections = clone.querySelectorAll('.landing-section');
@@ -2164,7 +2164,7 @@
       }
 
       function updateMagLens(clientX, clientY){
-        const glassLeft = clientX - maggOffsetX;
+        const glassLeft = clientX - magOffsetX;
         const glassTop = clientY - magOffsetY;
 
         magGlass.style.left = glassLeft + 'px';
@@ -2220,7 +2220,7 @@
       }
 
       function onMagEnd(e){
-        if (isMagDragging) return;
+        if (!isMagDragging) return;
         const cx = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
         const cy = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
 
