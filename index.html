@@ -121,7 +121,7 @@
     .nav-links{
       display:flex;
       gap:8px;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
       justify-content:flex-end;
     }
     .nav-links a{
@@ -137,7 +137,7 @@
       text-decoration:none;
       backdrop-filter:blur(6px);
       transition:all 0.25s ease;
-      white-space:nowrap;
+      white-space:wrap;
       font-weight:600;
     }
     .nav-links a:hover{
@@ -1406,6 +1406,97 @@
         transition:none;
       }
     }
+    .mag-glass{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      width:100%;
+      height:155px;
+      z-index:3000;
+      cursor:grab;
+      user-select:none;
+      touch-action:none;
+      transition:transform 0.25s cubic-bezier(0.34,1..56,0.64,1);
+    }
+    .mag-glass:hover{
+      transform:scale(1.05);
+    }
+    .mag-glass:dragging{
+      cursor:grabbing;
+      transform:none;
+      transition:none;
+    }
+    .mag-lens{
+      position:absolute;
+      top:0;
+      left:53%;
+      transform:translateX(-50%);
+      width:88px;
+      height:88px;
+      border-radius:50%;
+      background: 
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 35%, rgba(255,255,255,0) 55%),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.05) 100%);
+      border:4px solid #b8860b;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.25),
+      inset 0 0 4px rgba(255,255,255,0.3),
+      0 6px 16px rgba(0,0,0,0.45);
+      overflow:hidden;
+      z-index:2;
+    }
+    .mag-lens::before{
+      content:'';
+      position:absolute;
+      top:10%;
+      left:12%;
+      width:28%;
+      height:20%;
+      background:linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 55%);
+      border-radius:50%;
+      transform:rotate(-25deg);
+      pointer-events:none;
+      z-index:4;
+    }
+    .mag-lens::after{
+      content:'';
+      position:absolute;
+      inset:-5px;
+      border-radius:50%;
+      border:1px solid rgba(212,175,55,0.5);
+      pointer-events:none;
+    }
+    .mag-view{
+      position:absolute;
+      top:0;
+      left:0;
+      transform-origin:0 0;
+      will-change:transform;
+      pointer-events:none;
+    }
+    .mag-handle{
+      position:absolute;
+      top:90px;
+      left:50%;
+      transform:translateX(-50%) rotate(2deg);
+      width:14px;
+      height:68px;
+      background:linear-gradient(90deg, #2c1810 0%, #5d4037 35%, #8d6e63 50%, #5d4037 65%, #2c1810 100%);
+      border-radius:0 0 10px 10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1);
+      z-index:1;
+    }
+    .mag-handle::before{
+      content:'';
+      position:absolute;
+      top:6px;
+      left:50%;
+      transform:translateX(-50%);
+      width:24px;
+      height:10px;
+      background:linear-gradient(90deg, #b8860b, #d4af37, #b8860b);
+      border-radius:2px;
+      box-shadow:0 1px 4px rgba(0,0,0,0.4);
+    }
   
   </style>
   </head>
@@ -1485,6 +1576,12 @@
 
     <button class="close-shelf-btn" id="closeShelfBtn">🔄 Restart</button>
     <div id="measure-container"></div>
+
+    <div class="mag-glass" id="magGlass">
+      <div class="mag-lens">
+        <div class="mag-view" id="magView"></div>
+      </div>
+      <div class="mag-handle"></div>
 
     <script>
       const booksData = [
@@ -2028,6 +2125,138 @@
         });
       }, {threshold: 0.5});
       document.querySelectorAll('.landing-section').forEach(sec => navObserver.observe(sec));
+
+      const magGlass = document.getElementById('magGlass');
+      const magView = document.getElementById('magView');
+      const ZOOM = 2.2;
+      const LENS_R = 44;
+      const LENS_CX = 50;
+      const LENS_CY = 44;
+
+      let isMagDragging = false;
+      let magOffsetX = 0;
+      let magAddedNoScroll = false;
+
+      function refreshMagView(){
+        const clone = document.body.classNode(true);
+        clone.classList.remove('no-scroll');
+        clone.querySelectorAll('.mag-glass, .site-nav, .reader-scene, .controls, .close-shelf-btn, .hint').forEach(el => el.remove());
+        clone.querySelectorAll('..landing-site').forEach(sec => sec.classList.add('in-view'));
+
+        const liveSections = document.querySelectorAll('.landing-section');
+        const cloneSections = clone.querySelectorAll('.landing-section');
+        liveSections.forEach((liveSec, i) => {
+          const cloneSec = cloneSections[i];
+          if (!cloneSec) return;
+          const rect = liveSec.getBoundingClientRect();
+          cloneSec.style.position = 'absolute';
+          cloneSec.style.top = (rect.top + window.scrollY) + 'px';
+          cloneSec.style.left = '0';
+          cloneSec.style.width = '100%';
+          cloneSec.style.minHeight = rect.height + 'px';
+        });
+        clone.style.position = 'relative';
+
+        magView.innerHTML = '';
+        magView.appendChild(clone);
+        magView.style.width = document.body.scrollWidth + 'px';
+        magView.style.height = document.body.scrollHeight + 'px';
+      }
+
+      function updateMagLens(clientX, clientY){
+        const glassLeft = clientX - maggOffsetX;
+        const glassTop = clientY - magOffsetY;
+
+        magGlass.style.left = glassLeft + 'px';
+        magGlass.style.top = glassTop + 'px';
+        magGlass.style.right = 'auto';
+        magGlass.style.bottom = 'auto';
+
+        const lensCX = glassLeft + LENS_CX + window.scrollX;
+        const lensCY = glassTop + LENS_CY + window.scrollY;
+
+        magView.style.transform = `scale(${ZOOM})`;
+        magView.style.left = (LENS_R - lensCX * ZOOM) + 'px';
+        magView.style.top = (LENS_R - lensCY * ZOOM) + 'px';
+      }
+
+      function isOverDock(){
+        isMagDragging = false;
+        magGlass.classList.remove('dragging');
+        magGlass.style.left = 'auto';
+        magGlass.style.top = 'auto';
+        magGlass.style.right = '24px';
+        magGlass.style.bottom = '24px';
+        magView.innerHTML = '';;
+        if (magAddedNoScroll) {
+          document.body.classList.remove('no-scroll');
+          magAddedNoScroll = false;
+        }
+      }
+
+      function startMagDrag(e){
+        e.preventDefault();
+        const cx = e.touches ? e.touches[0].clientX : e.clientX;
+        const cy = e.touches ? e.touches[0].clientY : e.clientY;
+        const rect = magGlass.getBoundingClientRect();
+        magOffsetX = cx - rect.left;
+        magOffsetY = cy - rect.top;
+        isMagDragging = true;
+        magGlass.classList.add('dragging');
+        if (!document.body.classList.contains('no-scroll')){
+          document.body.classList.add('no-scroll');
+          magAddedNoScroll = true;
+        }
+        refreshMagView();
+        updateMagLens(cx, cy);
+      }
+
+      function onMagMove(e){
+        if (!isMagDragging) return;
+        e.preventDefault();
+        const cx = e.touches ? e.touches[0].clientX : e.clientX;
+        const cy = e.touches ? e.touches[0].clientY : e.clientY;
+        updateMagLens(cx, cy);
+      }
+
+      function onMagEnd(e){
+        if (isMagDragging) return;
+        const cx = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+        const cy = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+
+        if (isOverDock(cx, cy)){
+          snapMagToDock();
+        } else {
+          isMagDragging = false;
+          magGlass.classList.remove('dragging');
+          if (magAddedNoScroll) {
+            document.body.classList.remove('no-scroll');
+            magAddedNoScroll = false;
+          }
+        }
+      }
+
+      let magScrollQueued = false;
+      window.addEventListener('scroll', () => {
+        if (!isMagDragging || magScrollQueued) return;
+        magScrollQueued = true;
+        requestAnimationFrame(() => {
+          refreshMagView();
+          magScrollQueued = false;  
+        });
+      }, {passive:true});
+
+      magGlass.addEventListener('mousedown', startMagDrag);
+      magGlass.addEventListener('touchstart', startMagDrag, {passive:false});
+      document.addEventListener('mousemove', onMagMove);
+      document.addEventListener('touchmove', onMagMove, {passive:false});
+      document.addEventListener('mouseup', onMagEnd);
+      document.addEventListener('touchend', onMagEnd, {passive:true});
+
+      const _origOpenBook = openBook;
+      openBook = function(book){
+        if (isMagDragging) setTimeout(refreshMagView, 120);
+      };
       
     </script>
   </body>
