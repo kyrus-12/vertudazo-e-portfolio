@@ -1525,7 +1525,7 @@
       <div class="parallax-layer"></div>
       <div class="home-header">
         <div class="home-text">
-          <h1 style="font-size:clamp(10px, 3vw, 20px);">Welcome to my e-Portfolio.</p>
+          <h1 style="font-size:clamp(10px, 3vw, 20px);">Welcome to my e-Portfolio.</h1>
           <h1>John Renz I. Vertudazo</h1>
           <p class="reveal-item">Scroll down to learn more, or explore my work.</p>
         </div>
@@ -2273,8 +2273,12 @@
       document.addEventListener('mouseup', onMagEnd);
       document.addEventListener('touchend', onMagEnd, {passive:true});
 
+      const _origOpenBook = openBook;
+      openBook = function(book){
+        _origOpenBook(book);
+        if (isMagDragging) setTimeout(refreshMagView, 120);
+      };
 
-      
       if ('scrollrestoration' in history){
         history.scrollRestoration = 'manual';
       }
@@ -2285,10 +2289,6 @@
         }
       );
 
-      var isPhone = /iPhone|Android/i.test(navigator.userAgent) && Math.min(window.innerWidth, wwindow.innerHeight) < 900;
-      if (isPhone){
-        meta.setAttribute('content', 'width=1280, initial-scale=' + (window.innerWidth/1280) + ', user-scalable=yes');
-      }
 
     </script>
   </body>
