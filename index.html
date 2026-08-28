@@ -1499,7 +1499,7 @@
     }
     @media (min-widthh:1200px){
       html{
-        zoom0.8;
+        zoom:0.8;
       }
     }
   
@@ -2274,11 +2274,7 @@
       document.addEventListener('touchend', onMagEnd, {passive:true});
 
 
-      openBook = function(book){
-        _origOpenBook(book);
-        if (isMagDragging) setTimeout(refreshMagView, 120);
-      };
-
+      
       if ('scrollrestoration' in history){
         history.scrollRestoration = 'manual';
       }
