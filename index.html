@@ -2157,6 +2157,17 @@
         });
         clone.style.position = 'relative';
 
+        const liveNav = document.querySelector('.site-nav');
+        const cloneNav = clone.querySelector('.site-nav');
+        if (liveNav && cloneNav){
+          const navRect = liveNav.getBoundingClientRect();
+          cloneNav.style.position = 'absolute';
+          cloneNav.style.top = (navRect.top + window.scrollY) + 'px';
+          cloneNav.style.left = (navRect.left + window.scrollX) + 'px';
+          cloneNav.style.right = 'auto';
+          cloneNav.style.width = navRect.width + 'px';
+        }
+
         magView.innerHTML = '';
         magView.appendChild(clone);
         magView.style.width = document.body.scrollWidth + 'px';
