@@ -2140,7 +2140,7 @@
       function refreshMagView(){
         const clone = document.body.cloneNode(true);
         clone.classList.remove('no-scroll');
-        clone.querySelectorAll('.mag-glass, .site-nav, .reader-scene, .controls, .close-shelf-btn, .hint').forEach(el => el.remove());
+        clone.querySelectorAll('.mag-glass, .reader-scene, .controls, .close-shelf-btn, .hint').forEach(el => el.remove());
         clone.querySelectorAll('.landing-section').forEach(sec => sec.classList.add('in-view'));
 
         const liveSections = document.querySelectorAll('.landing-section');
