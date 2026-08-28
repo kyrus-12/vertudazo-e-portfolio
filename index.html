@@ -2157,17 +2157,6 @@
         });
         clone.style.position = 'relative';
 
-        const liveNav = document.querySelector('.site-nav');
-        const cloneNav = clone.querySelector('.site-nav');
-        if (liveNav && cloneNav){
-          const navRect = liveNav.getBoundingClientRect();
-          cloneNav.style.position = 'absolute';
-          cloneNav.style.top = (navRect.top + window.scrollY) + 'px';
-          cloneNav.style.left = (navRect.left + window.scrollX) + 'px';
-          cloneNav.style.right = 'auto';
-          cloneNav.style.width = navRect.width + 'px';
-        }
-
         magView.innerHTML = '';
         magView.appendChild(clone);
         magView.style.width = document.body.scrollWidth + 'px';
@@ -2191,7 +2180,11 @@
         magView.style.top = (LENS_R - lensCY * ZOOM) + 'px';
       }
 
-      function isOverDock(){
+      function isOverDock(cx, cy){
+        return (cx > window.innerWidth - 140 && cy > window.innerHeight - 140);
+      }
+
+      function snapMagToDock(){
         isMagDragging = false;
         magGlass.classList.remove('dragging');
         magGlass.style.left = 'auto';
