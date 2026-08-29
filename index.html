@@ -1502,6 +1502,21 @@
         zoom:0.8;
       }
     }
+    .fs-form-img, .fs-section-img{
+      display:block;
+      width:100%;
+      max-width:100%;
+      height:auto;
+      object-fit:contain;
+      background:transparent;
+      border-radius:3px;
+      margin-bottom:12px;
+    }
+    .fs-section-img{
+      border:none;
+      background:transparent;
+      margin:18px 0 22px;
+    }
   
   </style>
   </head>
@@ -1643,10 +1658,10 @@
           palette:'ocean', 
           year:'2026',
 
-          fstitle:'John Renz I. Vertudazo',
-          titleEpisode:'Classroom Routines',
+          fstitle:'Observations of Teaching - Learning in Actual School Environment',
+          titleEpisode:'The School Environment',
           coverQoute:'Every story begins with a single line of code.',
-          titlePageEyebrow:'Episode 2',
+          titlePageEyebrow:'Episode 1',
           endingMessage:'Thank you for reading',
           backCoverTitle:'The End',
           copyright:'&copy; MMXXVI',
@@ -1661,6 +1676,14 @@
             `<p>This is my portfolio.</p>`
             ],
           activity_1: [
+            makeFSFormImage('https://i.imgur.com/ujlu03z.jpg', 'Activity 6.1 Form'),
+
+            makeFSSectionImage('https://i.imgur.com/06UWDGQ.jpg', 'Observe Section'),
+
+            makeFSSectionImage('https://i.imgur.com/uTIKUGh.jpg', 'Analyze Section'),
+
+            makeFSSectionImage('https://i.imgur.com/lccOGYA.jpg', 'Reflect Section'),
+            
             `<p>Basta activity ito.</p>`,
             ],
           activity_2: [
@@ -1858,7 +1881,7 @@
 
         sheets.push(mk(
           `<div class="ornament">෴</div><p style="font-family:var(--font-script); font-size:24px; color:var(--gold); text-align:center;">${book.endingMessage}</p><div class="ornament">෴</div>`,
-          `<p class="the-end">${book.backCoverTitle}</p><div class="cover-line" style="background:var(--gold-light); margin:14px auto;"></div><p class="back-script">${book.title}</p><p class="cover-kicker" style="margin-top:26px; font-size:10px; opacity:0.6; color:var(--gold);">&copy; MMXXVI</p>`,
+          `<p class="the-end">${book.backCoverTitle}</p><div class="cover-line" style="background:var(--gold-light); margin:14px auto;"></div><p class="back-script">${book.titlePageEyebrow}</p><p class="cover-kicker" style="margin-top:26px; font-size:10px; opacity:0.6; color:var(--gold);">&copy; MMXXVI</p>`,
           false, true
         ));
 
@@ -2327,6 +2350,14 @@
           window.scrollTo(0, 0);
         }
       );
+
+      function makeFSFormImage(imgUrl, altText){
+        return `<img class="fs-form-img" src="${imgUrl}" alt="${altText || 'Activity Form'}">`;
+      }
+
+      function makeFSSectionImage(imgUrl, altText){
+        return `<img class="fs-section-img" src="${imgUrl}" alt="${altText || 'Section Header'}">`;
+      }
 
 
     </script>
