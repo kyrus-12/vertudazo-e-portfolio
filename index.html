@@ -1669,7 +1669,7 @@
           fstitle:'Observations of Teaching - Learning in Actual School Environment',
           titleEpisode:'The <br> School <br> Environment',
           coverQoute:'Every story begins with a single line of code.',
-          titlePageEyebrow:'Episode 1',
+          titlePageEyebrow:'Learning Assessment Strategies on Becoming a Teacher',
           endingMessage:'Thank you for reading',
           backCoverTitle:'The End',
           copyright:'&copy; MMXXVI',
@@ -1687,15 +1687,15 @@
           },
 
           chapters: [
-            {name:'Foreword', type:'foreword'},
-            {name:'Activity_1', type:'activity_1'},
-            {name:'Activity_2', type:'activity_2'},
-            {name:'Activity_3', type:'activity_3'},
+            {name:'Introductory Framework', type:'introductory_framework'},
+            {name:'Activity_1.1', type:'activity_1'},
+            {name:'Activity_1.2', type:'activity_2'},
             ],
           foreword: [
             `<p>This is my portfolio.</p>`
             ],
           activity_1: [
+
             makeFSFormImage('https://i.imgur.com/ojlu03z.jpg', 'Activity 6.1 Form'),
             pageBreak(),
             makeFSSectionImage('https://i.imgur.com/06UWDGQ.jpg', 'Observe Section'),
@@ -1754,8 +1754,8 @@
 
           chapters: [
             {name:'Foreword', type:'foreword'},
-            {name:'Activity_1', type:'activity_1'},
-            {name:'Activity_2', type:'activity_2'},
+            {name:'Activity_1.1', type:'activity_1.1'},
+            {name:'Activity_1.2', type:'activity_1.2'},
             {name:'Activity_3', type:'activity_3'},
             ],
           foreword: [
@@ -1954,10 +1954,10 @@
           false, false
         ));
 
-        const fwChunks = book.foreword.map(p => `<div class="ornament">෴</div>` + p);
+        const fwChunks = book.introductory_framework.map(p => `<div class="ornament">෴</div>` + p);
         const fwPages = paginateContent(fwChunks);
         fwPages.forEach((content, i) => {
-          const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+          const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Introductory Framework<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });
