@@ -1519,6 +1519,58 @@
       background:transparent;
       margin:18px 0 22px;
     }
+    .book-table-wrap{
+      margin:14px 0 16px;
+      overflow-x:auto;
+    }
+    .book-table{
+      width:100%;
+      border-collapse:collapse;
+      font-family:var(--font-body);
+      font-size:clamp(11px, 1.9vw, 13.5px);
+      line-height:1.4;
+    }
+    .book-table caption{
+      font-family:var(--font-title);
+      font-weight:800;
+      font-style:italic;
+      font-size:clamp(13px, 2.1vw, 16px);
+      color:var(--ink);
+      text-align:center;
+      margin-bottom:8px;
+      caption-side:top;
+    }
+    .book-table thead th{
+      font-family:var(--font-title);
+      font-weight:700;
+      letter-spacing:0.02em;
+      text-transform:uppercase;
+      font-size:clamp(10px, 1.6vw, 12px);
+      color:#fff;
+      background:var(--burgundy);
+      border:1px solid var(--ink);
+      padding:7px 9px;
+      text-align:left;
+    }
+    .book-table tbody td{
+      border:1px solid var(--parchment-dark);
+      padding:7px 9px;
+      color:var(--ink);
+      vertical-align:top;
+      overflow-wrap:break-word;
+    }
+    .book-table tbody tr:nth-child(even){
+      background:rgba(184,134,11,0.08);
+    }
+    .book-table tbody tr:hover{
+      background:rgba(184,134,11,0.16);
+    }
+    .book-table th, .book-table td{
+      text-align:center;
+    }
+    .book-table th, .book-table td{
+      text-align:right;
+    }
   
   </style>
   </head>
@@ -2408,6 +2460,40 @@
       function pageBreak(){
         return '<!--PAGEBREAK-->';
       }
+
+      function makeTable(opts){
+        const {caption = '', columns = [], rows = []} = opts || {};
+
+        const colgroupHTML = columns.some(c => c.width)
+        ? `<colgroup>${columns.map(c => `<col${c.width ? ` style="width:${c.width}"` : ''}>`).join('')}</colgroup>`
+          : '';
+          
+          const headHTML = columns.length
+          ? `<thead><tr>${columns.map(c => 
+            `<th${c.align ? ` data-align="${c.align}"` : ''}>${c.label || ''}</th>`
+          ).join('')}</tr></head>`
+          : '';
+
+          const bodyHTML = rows.map(row => 
+            `<tr>${row.map((cell, i) => {
+              const isObj = cell && typeof cell === 'object';
+              const value = isObj ? cell.value : cell;
+              const align = (isObj && cell.align) || (columns[i] && columns[i].align) || '';
+              return `<td${align ? ` data-align="${align}"` : ''}>${value != null ? value : ''}</td>`;
+            }).join('')}</tr>`
+          ).join('');
+
+          return `<div class="book-table-wrap">
+            <table class="book-table">
+              ${caption ? `<caption>${caption}</caption>` : ''}
+              ${colgroupHTML}
+              ${headHTML}
+              <tbody>${bodyHTML}</tbody>
+              </table>
+              </div>`;
+      }
+
+
 
 
     </script>
