@@ -1627,7 +1627,8 @@
               'Success is not the key to happiness. Happiness is the key to success.',
               'The best way to predict the future is to invent it.',
               'Dont watch the clock; do what it does. Keep going.',
-              'The harder I work, the luckier I get.'
+              'The harder I work, the luckier I get.',
+              'Success is not final, failure is not fatal: It is the courage to continue that counts.',
             ]
           },
 
@@ -1857,7 +1858,7 @@
         let idx = 0, pg = 1;
         let quoteIdx = 0;
         const nextQuote = () => {
-          const list = book.qoutes.pages;
+          const list = book.quotes.pages;
           if (!list || !list.length) return '';
           const q = list[quoteIdx % list.length];
           quoteIdx++;
