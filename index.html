@@ -1591,7 +1591,20 @@
     <script>
       const booksData = [
         {
-          id:'ep1', episode:'Field Study 1', title:'Episode 1', palette:'classic', year:'2026',
+          id:'ep1', 
+          episode:'Field Study 1', 
+          title:'Episode 1', 
+          palette:'classic', 
+          year:'2026',
+
+          fstitle:'John Renz I. Vertudazo',
+          titleEpisode:'Classroom Management',
+          coverQoute:'Every story begins with a single line of code.',
+          titlePageEyebrow:'Episode 1',
+          endingMessage:'Thank you for reading',
+          backCoverTitle:'The End',
+          copyright:'&copy; MMXXVI',
+
           chapters: [
             {name:'Foreword', type:'foreword'},
             {name:'Activity_1', type:'activity_1'},
@@ -1624,7 +1637,20 @@
           contact: {email:'rusky0537@gmail.com', github:'kyky-12', linkedin: 'in/kyky-12'}
         },
          {
-          id:'ep2', episode:'Field Study 1', title:'Episode 2', palette:'ocean', year:'2026',
+          id:'ep2', 
+          episode:'Field Study 1', 
+          title:'Episode 2', 
+          palette:'ocean', 
+          year:'2026',
+
+          fstitle:'John Renz I. Vertudazo',
+          titleEpisode:'Classroom Routines',
+          coverQoute:'Every story begins with a single line of code.',
+          titlePageEyebrow:'Episode 2',
+          endingMessage:'Thank you for reading',
+          backCoverTitle:'The End',
+          copyright:'&copy; MMXXVI',
+
           chapters: [
             {name:'Foreword', type:'foreword'},
             {name:'Activity_1', type:'activity_1'},
@@ -1657,7 +1683,20 @@
            contact: {email:'rusky0537@gmail.com', github:'kyky-12', linkedin: 'in/kyky-12'}
         },
          {
-          id:'ep3', episode:'Field Study 1', title:'Episode 3', palette:'forest', year:'2026',
+          id:'ep3', 
+          episode:'Field Study 1', 
+          title:'Episode 3', 
+          palette:'forest', 
+          year:'2026',
+
+          fstitle:'John Renz I. Vertudazo',
+          titleEpisode:'Classroom Rules',
+          coverQoute:'Every story begins with a single line of code.',
+          titlePageEyebrow:'Episode 1',
+          endingMessage:'Thank you for reading',
+          backCoverTitle:'The End',
+          copyright:'&copy; MMXXVI',
+
           chapters: [
             {name:'Foreword', type:'foreword'},
             {name:'Activity_1', type:'activity_1'},
@@ -1768,7 +1807,7 @@
         };
 
         sheets.push(mk(
-          `<h1 class="cover-title" style="color:var(--gold);">Observations of Teaching - Learning in Actual School Environment</h1>`,
+          `<h1 class="cover-title" style="color:var(--gold);">${book.fstitle}</h1>`,
           `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:14px;">"Every story begins with a single line of code."</p><div class="ornament">෴</div>`,
           true, false
         ));
@@ -1777,7 +1816,7 @@
           `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I', 'II', 'III', 'IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${3 + i*2}</span></button>`).join('');
 
         sheets.push(mk(
-          `<p class="page-eyebrow">${book.title}</p><div class="ornament">෴</div><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:10px;">Physical and Personal Aspects of Classroom Management</h1><div class="stamp"><span>Est.<br>${book.year}</span></div>`,
+          `<p class="page-eyebrow">${book.titlePageEyebrow}</p><div class="ornament">෴</div><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:10px;">${book.titleEpisode}</h1><div class="stamp"><span>Est.<br>${book.year}</span></div>`,
           `<p class="page-eyebrow">Contents</p><h2 class="page-title">Table of Contents</h2><div class="ornament">෴</div>${tocItems}`,
           false, false
         ));
@@ -1818,8 +1857,8 @@
         });  
 
         sheets.push(mk(
-          `<div class="ornament">෴</div><p style="font-family:var(--font-script); font-size:24px; color:var(--gold); text-align:center;">Thank you for reading...</p><div class="ornament">෴</div>`,
-          `<p class="the-end">The End</p><div class="cover-line" style="background:var(--gold-light); margin:14px auto;"></div><p class="back-script">${book.title}</p><p class="cover-kicker" style="margin-top:26px; font-size:10px; opacity:0.6; color:var(--gold);">&copy; MMXXVI</p>`,
+          `<div class="ornament">෴</div><p style="font-family:var(--font-script); font-size:24px; color:var(--gold); text-align:center;">${book.endingMessage}</p><div class="ornament">෴</div>`,
+          `<p class="the-end">book.backCoverTitle</p><div class="cover-line" style="background:var(--gold-light); margin:14px auto;"></div><p class="back-script">${book.title}</p><p class="cover-kicker" style="margin-top:26px; font-size:10px; opacity:0.6; color:var(--gold);">&copy; MMXXVI</p>`,
           false, true
         ));
 
