@@ -1983,7 +1983,7 @@
           false, false
         ));
 
-        const fwChunks = book.introductory_framework.map(p => + p);
+        const fwChunks = book.introductory_framework.map(renderChunk);
         const fwPages = paginateContent(fwChunks);
         fwPages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[0].name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">Introductory Framework<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
