@@ -1895,7 +1895,7 @@
         fwPages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:14px;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });
 
         const workChunks = book.activity_1.map(renderChunk);
@@ -1903,7 +1903,7 @@
         workPages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[1].name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">Activity 1<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:14px;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });
         
         const  skillGroups = Object.entries(book.skills).map(([label, items]) => 
@@ -1914,7 +1914,7 @@
         activity2Pages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[2].name}</h2>` : `<p class="page-eyebrow">Activity 2<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:14px;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });
 
         const activity3Chunks = book.activity_3.map(renderChunk);
@@ -1922,7 +1922,7 @@
         activity3Pages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[3].name}</h2>` : `<p class="page-eyebrow">Activity 3<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:14px;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });  
 
         sheets.push(mk(
