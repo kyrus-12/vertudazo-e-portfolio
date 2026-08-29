@@ -1613,12 +1613,23 @@
           year:'2026',
 
           fstitle:'Observations of Teaching - Learning in Actual School Environment',
-          titleEpisode:'The School Environment',
+          titleEpisode:'The <br><br> School <br><br> Environment',
           coverQoute:'Every story begins with a single line of code.',
           titlePageEyebrow:'Episode 1',
           endingMessage:'Thank you for reading',
           backCoverTitle:'The End',
           copyright:'&copy; MMXXVI',
+
+          quotes: {
+            cover: 'Every story begins with a single line of code.',
+            pages: [
+              'The only way to do great work is to love what you do.',
+              'Success is not the key to happiness. Happiness is the key to success.',
+              'The best way to predict the future is to invent it.',
+              'Dont watch the clock; do what it does. Keep going.',
+              'The harder I work, the luckier I get.'
+            ]
+          },
 
           chapters: [
             {name:'Foreword', type:'foreword'},
@@ -1844,6 +1855,14 @@
       function buildBookHTML(book){
         const sheets = [];
         let idx = 0, pg = 1;
+        let quoteIdx = 0;
+        const nextQuote = () => {
+          const list = book.qoutes.pages;
+          if (!list || !list.length) return '';
+          const q = list[quoteIdx % list.length];
+          quoteIdx++;
+          return q;
+        }
         const mk = (f, b, fc, bc) => {
           const i = idx++;
           const fC = fc ? 'cover-content' : '';
@@ -1855,7 +1874,7 @@
 
         sheets.push(mk(
           `<h1 class="cover-title" style="color:var(--gold);">${book.fstitle}</h1>`,
-          `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:14px;">"${book.coverQoute}"</p><div class="ornament">෴</div>`,
+          `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:14px;">"${book.quotes.cover}"</p><div class="ornament">෴</div>`,
           true, false
         ));
         
@@ -1863,7 +1882,7 @@
           `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I', 'II', 'III', 'IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${3 + i*2}</span></button>`).join('');
 
         sheets.push(mk(
-          `<p class="page-eyebrow">${book.titlePageEyebrow}</p><div class="ornament">෴</div><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:10px;">${book.titleEpisode}</h1><div class="stamp"><span>Est.<br>${book.year}</span></div>`,
+          `<p class="page-eyebrow">${book.titlePageEyebrow}</p><div class="ornament">෴</div><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:50px; text-align:center;">${book.titleEpisode}</h1><div class="stamp" style="position:absolute; bottom:0; right:0;"><span>Est.<br>${book.year}</span></div>`,
           `<p class="page-eyebrow">Contents</p><h2 class="page-title">Table of Contents</h2><div class="ornament">෴</div>${tocItems}`,
           false, false
         ));
@@ -1873,7 +1892,7 @@
         fwPages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<p class="page-eyebrow">Foreword</p><h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Foreword<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="align-items:center; text-align:center; justify-content:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p>`, false, false));
         });
 
         const workChunks = book.activity_1.map(renderChunk);
@@ -1881,7 +1900,7 @@
         workPages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 1</p><h2 class="page-title">${book.chapters[1].name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">Activity 1<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">More works ahead...</p>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p>`, false, false));
         });
 
         const  skillGroups = Object.entries(book.skills).map(([label, items]) => 
@@ -1892,7 +1911,7 @@
         activity2Pages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 2</p><h2 class="page-title">${book.chapters[2].name}</h2>` : `<p class="page-eyebrow">Activity 2<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p>`, false, false));
         });
 
         const activity3Chunks = book.activity_3.map(renderChunk);
@@ -1900,7 +1919,7 @@
         activity3Pages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<p class="page-eyebrow">Activity 3</p><h2 class="page-title">${book.chapters[3].name}</h2>` : `<p class="page-eyebrow">Activity 3<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">Turn the page to continue...</p>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p>`, false, false));
         });  
 
         sheets.push(mk(
