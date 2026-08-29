@@ -1976,7 +1976,7 @@
           `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I', 'II', 'III', 'IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${3 + i*2}</span></button>`).join('');
 
         sheets.push(mk(
-          `<p class="page-eyebrow">${book.titlePageEyebrow}</p><div class="ornament">෴</div><div style=" text-align:center; justify-content:center; align-items:center; display:flex; flex:1; flex-direction:column;"><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:50px;">${book.titleEpisode}</h1><div class="stamp"><span>Est.<br>${book.year}</span></div></div>`,
+          `<div class="page-eyebrow">${book.titlePageEyebrow}</div><div class="ornament">෴</div><div style=" text-align:center; justify-content:center; align-items:center; display:flex; flex:1; flex-direction:column;"><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:50px;">${book.titleEpisode}</h1><div class="stamp"><span>Est.<br>${book.year}</span></div></div>`,
           `<h2 class="page-title">Table of Contents</h2><div class="ornament">෴</div>${tocItems}`,
           false, false
         ));
@@ -1984,7 +1984,7 @@
         const fwChunks = book.introductory_framework.map(p => `<div class="ornament">෴</div>` + p);
         const fwPages = paginateContent(fwChunks);
         fwPages.forEach((content, i) => {
-          const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[0].name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">Introductory Framework<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+          const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[0].name}</h2>` : `<p class="page-eyebrow">Introductory Framework<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });
