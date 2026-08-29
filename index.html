@@ -1612,8 +1612,8 @@
           palette:'classic', 
           year:'2026',
 
-          fstitle:'John Renz I. Vertudazo',
-          titleEpisode:'Classroom Management',
+          fstitle:'Observations of Teaching - Learning in Actual School Environment',
+          titleEpisode:'The School Environment',
           coverQoute:'Every story begins with a single line of code.',
           titlePageEyebrow:'Episode 1',
           endingMessage:'Thank you for reading',
@@ -1630,6 +1630,14 @@
             `<p>This is my portfolio.</p>`
             ],
           activity_1: [
+            makeFSFormImage('https://i.imgur.com/ujlu03z.jpg', 'Activity 6.1 Form'),
+            pageBreak(),
+            makeFSSectionImage('https://i.imgur.com/06UWDGQ.jpg', 'Observe Section'),
+
+            makeFSSectionImage('https://i.imgur.com/uTIKUGh.jpg', 'Analyze Section'),
+
+            makeFSSectionImage('https://i.imgur.com/lccOGYA.jpg', 'Reflect Section'),
+
             `<p>Basta activity ito.</p>`,
              {
                fig: 'Fig. 1',
@@ -1730,6 +1738,14 @@
             `<p>This is my portfolio.</p>`
             ],
           activity_1: [
+            makeFSFormImage('https://i.imgur.com/ujlu03z.jpg', 'Activity 6.1 Form'),
+            pageBreak(),
+            makeFSSectionImage('https://i.imgur.com/06UWDGQ.jpg', 'Observe Section'),
+
+            makeFSSectionImage('https://i.imgur.com/uTIKUGh.jpg', 'Analyze Section'),
+
+            makeFSSectionImage('https://i.imgur.com/lccOGYA.jpg', 'Reflect Section'),
+
             `<p>Basta activity ito.</p>`,
             ],
           activity_2: [
@@ -1802,6 +1818,14 @@
         const pages = [];
         let current = '';
         for (let i = 0; i < chunks.length; i++){
+          const chunk = chunks[i];
+          if (chunk === '<!--PAGEBREAK-->'){
+            if (current !== ''){
+              pages.push(current);
+              current = '';
+            }
+            continue;
+          }
           const test = current + chunks[i];
           measure.innerHTML = test;
           if (measure.scrollHeight > pageH && current !== ''){
@@ -2357,6 +2381,10 @@
 
       function makeFSSectionImage(imgUrl, altText){
         return `<img class="fs-section-img" src="${imgUrl}" alt="${altText || 'Section Header'}">`;
+      }
+
+      function pageBreak(){
+        return '<!--PAGE BREAK-->';
       }
 
 
