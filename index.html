@@ -1879,11 +1879,11 @@
           true, false
         ));
         
-        const tocItems = book.chapters.map((c, i) =>
+        const tocItems = book.chapters.masssp((c, i) =>
           `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I', 'II', 'III', 'IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${3 + i*2}</span></button>`).join('');
 
         sheets.push(mk(
-          `<p class="page-eyebrow">${book.titlePageEyebrow}</p><div style=" text-align:center; justify-content:center; align-items:center; display:flex; flex:1; flex-direction:column;"><div class="ornament">෴</div><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:50px;">${book.titleEpisode}</h1><div class="stamp"><span>Est.<br>${book.year}</span></div></div>`,
+          `<p class="page-eyebrow">${book.titlePageEyebrow}</p><div class="ornament">෴</div><div style=" text-align:center; justify-content:center; align-items:center; display:flex; flex:1; flex-direction:column;"><h1 class="page-title" style="font-size:clamp(22px, 3.6vw, 32px); margin-bottom:50px;">${book.titleEpisode}</h1><div class="stamp"><span>Est.<br>${book.year}</span></div></div>`,
           `<h2 class="page-title">Table of Contents</h2><div class="ornament">෴</div>${tocItems}`,
           false, false
         ));
@@ -1903,7 +1903,7 @@
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:14px;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p></div>`, false, false));
         });
-
+        
         const  skillGroups = Object.entries(book.skills).map(([label, items]) => 
           `<div class="margin-group"><span class="margin-label">${label.charAt(0).toUpperCase()+label.slice(1)}</span><div class="margin-items">${items.map(it => `<span class="margin-item">${it}</span>`).join('')}</div></div>`
           ).join('');
@@ -1912,7 +1912,7 @@
         activity2Pages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[2].name}</h2>` : `<p class="page-eyebrow">Activity 2<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
           const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
-          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:row; align-items:center; justify-content:center; text-align:center; gap:14px;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p></div>`, false, false));
+          sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:14px;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint);">${nextQuote()}</p></div>`, false, false));
         });
 
         const activity3Chunks = book.activity_3.map(renderChunk);
