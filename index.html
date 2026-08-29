@@ -1879,7 +1879,7 @@
           true, false
         ));
         
-        const tocItems = book.chapters.masssp((c, i) =>
+        const tocItems = book.chapters.map((c, i) =>
           `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I', 'II', 'III', 'IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${3 + i*2}</span></button>`).join('');
 
         sheets.push(mk(
