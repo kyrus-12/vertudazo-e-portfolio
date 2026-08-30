@@ -2017,7 +2017,7 @@
           const start = nextStart;
           const end = start + count + 1;
           nextStart = end + 1;
-          return {start, end};
+          return {start, end, empty:false};
         });
         const formatRange = ({start, end}) => start === end ? `${start}` : `${start}\u2013${end}`;
 
@@ -2055,7 +2055,14 @@
           false, true
         ));
 
-        return sheets.join('');
+        const sheetLabels = ['Cover', 'Contents'];
+        book.chapters.forEach((chapter, ci) => {
+          const count = chapterPageCounts[ci];
+          for (let p = 0; p < count; p++) sheetLabels.push(chapter.name);
+        });
+        sheetLabels.push('End');
+
+        return {html: sheets.join(''), labels: sheetLabels};
       }
 
       let currentBook = null; 
