@@ -2011,8 +2011,8 @@
         let nextStart = 4;
         const chapterRanges = chapterPageCounts.map(count => {
           const start = nextStart;
-          const end = start + count + 2;
-          nextStart = end + 2;
+          const end = start + count + 1;
+          nextStart = end + 1;
           return {start, end};
         });
         const formatRange = ({start, end}) => start === end ? `${start}` : `${start}\u2013${end}`;
