@@ -2074,7 +2074,9 @@
       function openBook(book){
         currentBook = book;
         applyPalette(book.palette);
-        document.getElementById('book').innerHTML = buildBookHTML(book);
+        const built = buildBookHTML(book);
+        document.getElementById('book').innerHTML = built.html;
+        sheetLabels = built.labels;
         sheets = Array.from(document.querySelectorAll('.sheet'));
         total = sheets.length;
         current = 0;
@@ -2095,6 +2097,7 @@
         document.body.classList.remove('no-scroll');
         document.getElementById('book').innerHTML = '';
         currentBook = null;
+        sheetLabels = [];
       }
 
       const btnPrev = document.getElementById('btnPrev');
