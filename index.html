@@ -1572,10 +1572,42 @@
     .book-table th[data-align="left"], .book-table td[data-align="left"]{
       text-align:left;
     }
-    .vertical-line{
+    .fs-section-header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin:20px 0 14px;
+      padding-bottom:6px;
       width:100%;
-      height:10%;
-      border:1px solid black;
+    }
+    .fs-section-header .section-emoji{
+      font-size:clamp(36px, 5vw, 52px);
+      line-height:1;
+      flex-shrink:0;
+      user-select:none;
+    }
+    .fs-section-header .section-text{
+      display:flex;
+      flex-direction:column;
+      flex:1;
+      min-width:0;
+    }
+    .fs-section-header .section-title{
+      font-family:var(--title);
+      font-size:clamp(16px, 2.6vw, 22px);
+      font-weight:700;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      color:var(--ink);
+      line-height:1.1;
+    }
+    .fs-section-header .section-line{
+      display:block;
+      width:100%;
+      height:2px;
+      margin-top:5px;
+      background:linear-gradient(90deg, var(--ink) 0%, var(--ink) 70%, var(--ink) 100%);
+      opacity:0.85;
     }
   </style>
   </head>
@@ -1697,8 +1729,7 @@
             {name:'Activity 1.2', type:'activity_2'},
             ],
           introductory_framework: [
-            `<p style="font-size:3rem;">👁 SPARK Your Interest</p>`, 
-            `<div class="vertical-line"></div>`,
+            makeFSSectionHEader('SPARK YOUR INTEREST', '👁'),
             makeFSSectionImage('https://i.imgur.com/JVIiJE4.jpg', 'Spark Section'),
             `<p>This Episode 1 provides an opportunity for students to examine and reflect on a school environment that promotes learning and development.</p>`,
             makeFSSectionImage('https://i.imgur.com/nqgDXlr.jpg', 'Target Section'),
@@ -2575,6 +2606,18 @@
               <tbody>${bodyHTML}</tbody>
               </table>
               </div>`;
+      }
+
+      function makeFSSectionHeader(title, emoji){
+        const icon = emoji || '😎';
+        return `
+        <div class="fs-section-header">
+          <span class="section-emoji" aria-hidden="true">${icon}</span>
+          <div class="section-text">
+            <span class="section-title">${title}</span>
+            <span class="section-line"></span>
+            </div>
+            </div`;
       }
 
 
