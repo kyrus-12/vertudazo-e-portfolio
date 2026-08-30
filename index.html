@@ -1758,10 +1758,22 @@
             `<p style="text-indent:15px;">𝒃) Photo essay</p>`,
             `<p style="text-indent:15px;">𝐜) Sketch or drawing</p>`,
             `<p style="text-indent:15px;">𝒅) Poem, song or rap</p>`,
-            makeFSSectionImage('https://i.imgur.com/06UWDGQ.jpg', 'Observe Section'),
+            makeFSSectionHeader('OBSERVE', '👀'),
             `<p>Move around the campus observation forms are provided for you to document or observations. It is advised that you read the entire word ship before proceeding to the school side. A good understanding of the activities and tasks to be accomplished in the activity sheets will yield better learning results.</p>`,
-            `<p style="text-align:center;"><b>SCHOOL FACILITIES OBSERVATION CHECKLIST</b></p>`,
             `<p>Familiarize yourself with the different areas and facilities of the school. Check the column to indicate their availability. Give a brief description of those that are available. And see how each will contribute to the students learning and development.</p>`,
+            makeTable({
+              caption: 'SCHOOL FACILITIES OBSERVATION CHECKLIST',
+              columns: [
+                {label:'Facilities', width:'20%'},
+                {label: '✔', width:'10%'},
+                {label: 'Insight', Description:'30%'},
+                {label: "Will it contribute to student's learning and development. Why?", width:'30%'}
+              ],
+              rows: [
+                ['Aug 11, 2026', 'Students worked in small groups.', 'Peer learning was active.'],
+                ['August 12, 2026', 'Teacher used visual aids', 'Improved engagement.']
+              ]
+            }),
             {
                fig: 'Fig. 1',
                title: 'First Image',
