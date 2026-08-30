@@ -2124,7 +2124,7 @@
         });
         btnPrev.disabled = current === 0;
         btnNext.disabled = current === total;
-        indicator.textContent = sheetlabels[current] || (current >= total ? 'End' : current + 1);
+        indicator.textContent = sheetLabels[current] || (current >= total ? 'End' : current + 1);
         if (current > 0) hint.style.opacity = '0';
       }
 
