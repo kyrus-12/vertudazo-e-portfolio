@@ -2015,7 +2015,7 @@
           nextStart = end;
           return {start, end};
         });
-        const formatRange = ({start, end}) => start === end ? `${start}` : `{start}\u2013${end}`;
+        const formatRange = ({start, end}) => start === end ? `${start}` : `${start}\u2013${end}`;
         
         const tocItems = book.chapters.map((c, i) =>
           `<button type="button" class="toc-item" data-goto="${i+2}"><span class="toc-num">${['I', 'II', 'III', 'IV'][i]}.</span><span class="toc-name">${c.name}</span><span class="toc-leader"></span><span class="toc-page">${formatRange(chapterRanges[i])}</span></button>`).join('');
