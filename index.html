@@ -2012,7 +2012,7 @@
         const fwPages = paginateContent(fwChunks);
         fwPages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[0].name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">Introductory Framework<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
-          const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
+          const nav = `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:20px; font-weight:500;">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });
 
@@ -2020,7 +2020,7 @@
         const workPages = paginateContent(workChunks);
         workPages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[1].name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">Activity 1<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
-          const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
+          const nav = `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:20px; font-weight:500;">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });
         
@@ -2031,7 +2031,7 @@
         const activity2Pages = paginateContent(activity2Chunks);
         activity2Pages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[2].name}</h2>` : `<p class="page-eyebrow">Activity 2<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
-          const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
+          const nav = `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:20px; font-weight:500;">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });
 
@@ -2039,7 +2039,7 @@
         const activity3Pages = paginateContent(activity3Chunks);
         activity3Pages.forEach((content, i) => {
           const eyebrow = i === 0 ? `<h2 class="page-title">${book.chapters[3].name}</h2>` : `<p class="page-eyebrow">Activity 3<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
-          const nav = i === 0 ? `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
+          const nav = `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>` : '';
           sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:20px; font-weight:500;">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));
         });  
 
