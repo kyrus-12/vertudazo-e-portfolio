@@ -1982,7 +1982,7 @@
         const paddingH = isMobile ? 36 : 72;
         const paddingV = isMobile ? 104 : 72;
         const pageW = (document.querySelector('.book-wrap')?.offsetWidth || 680) / 2 - paddingH;
-        const headerReserve = 140;
+        const headerReserve = 80;
         const navReserve = 48;
         const pageH = (document.querySelector('.book-wrap')?.offsetHeight || 530) - paddingV - headerReserve - navReserve;
         measure.style.cssText = `position:fixed; left:-9999px; width:${pageW}px; height:${pageH}px; overflow:hidden; visibility:hidden; pointer-events:none; display:flex; flex-direction:column;`;
