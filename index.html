@@ -2004,7 +2004,14 @@
           true, false
         ));
 
-        
+        const fwChunks = book.introductory_framework.map(renderChunk);
+        const fwPages = paginateContent(fwChunks);
+        const workChunks = book.activity_1.map(renderChunk);
+        const workPages = paginateContent(workChunks);
+        const activity2Chunks = book.activity_2.map(renderChunk);
+        const activity2Pages = paginateContent(activity2Chunks);
+        const activity3Chunks = book.activity_3.map(renderChunk);
+        const activity3Pages = paginateContent(activity3Chunks);
         const chapterPageCounts = chapterPagesList.map(pages => pages.length);
         const chapterPagesList = book.chapters.map(chapter => {
           const items = book[chapter.type];
