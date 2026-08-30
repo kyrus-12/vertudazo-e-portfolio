@@ -2124,10 +2124,7 @@
         });
         btnPrev.disabled = current === 0;
         btnNext.disabled = current === total;
-        const labels = ["Cover", "Title", "Contents"].concat(
-          currentBook ? currentBook.chapters.map(c => c.name) : []
-          ).concat(["End"]);
-        indicator.textContent = labels[current] || (current >= total ? 'End' : current + 1);
+        indicator.textContent = sheetlabels[current] || (current >= total ? 'End' : current + 1);
         if (current > 0) hint.style.opacity = '0';
       }
 
