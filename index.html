@@ -2006,7 +2006,7 @@
 
         const chapterPagesList = book.chapters.map(chapter => {
           const items = book[chapter.type];
-          if (!isArray.isArray(items) || !items.length) return [];
+          if (!Array.isArray(items) || !items.length) return [];
           return paginateContent(items.map(renderChunk));
         });
         const chapterPageCounts = chapterPagesList.map(pages => pages.length);
