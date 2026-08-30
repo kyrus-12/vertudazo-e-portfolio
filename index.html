@@ -831,7 +831,7 @@
       padding:clamp(20px,4.5vw,36px);
       display:flex;
       flex-direction:column;
-      overflow-y:auto;
+      overflow-y:hidden;
       scrollbar-width:thin;
       scrollbar-color:var(--gold-pale) transparent;
     }
@@ -1726,7 +1726,7 @@
             pageBreak(),
             makeFSSectionImage('https://i.imgur.com/06UWDGQ.jpg', 'Observe Section'),
             `<p>Move around the campus observation forms are provided for you to document or observations. It is advised that you read the entire word ship before proceeding to the school side. A good understanding of the activities and tasks to be accomplished in the activity sheets will yield better learning results.</p>`,
-            `<p style="text-align:center;">SCHOOL FACILITIES OBSERVATION CHECKLIST</p>`,
+            `<p style="text-align:center;"><b>SCHOOL FACILITIES OBSERVATION CHECKLIST</b></p>`,
             `<p>Familiarize yourself with the different areas and facilities of the school. Check the column to indicate their availability. Give a brief description of those that are available. And see how each will contribute to the students learning and development.</p>`,
 
 
@@ -1948,6 +1948,7 @@
         const pageW = (document.querySelector('.book-wrap')?.offsetWidth || 680) / 2 - paddingH;
         const headerReserve = 140;
         const navReserve = 48;
+        const safetyBuffer = isMobile ? 48 : 0;
         const pageH = (document.querySelector('.book-wrap')?.offsetHeight || 530) - paddingV - headerReserve - navReserve;
         measure.style.cssText = `position:fixed; left:-9999px; width:${pageW}px; height:${pageH}px; overflow:hidden; visibility:hidden; pointer-events:none; display:flex; flex-direction:column;`;
 
@@ -2302,6 +2303,26 @@
       window.addEventListener('resize', () => {
         positionCarouselItems();
         updateCarousel();
+      });
+
+      let repaginateTimer = null;
+      let lastViewportW = window.innerWidth;
+      let lastViewportH = window.innerHeight;
+      window.addEventListener('resize', () => {
+        if (!currentBook) return;
+        const dw = Math.abs(window.innerWidth - lastViewportW);
+        const dh = Math.abs(window.innerHeight - lastViewportH);
+        if (dw < 5 && dh < 80) return;
+        clearTimeout(repaginateTimer);
+        repaginateTimer = setTimeout(() => {
+          lastViewportW = window.innerWidth;
+          lastViewportH = window.innerHeight;
+          const book = currentBook;
+          const wasCurrent = current;
+          openBook(book);
+          current = Math.min(wasCurrent, total - 1);
+          render();
+        }, 200);
       });
 
       buildCarousel(galleryImages);
