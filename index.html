@@ -1715,11 +1715,11 @@
           activity_1: [
             makeFSFormImage('https://i.imgur.com/ojlu03z.jpg', 'Activity 6.1 Form'),
             `<p>To realize the <b>Intended Learning Outcome.</b> Work my way through this steps:</p>`,
-            `<p>❶</p>`,
-            `<p>❷</p>`,
-            `<p>❸</p>`,
-            `<p>❹</p>`,
-            `<p>❺</p>`,
+            `<p>❶ Visit the school. Look into facilities and support learning areas in the campus. Then in the classroom.</p>`,
+            `<p>❷ Observe and used to check police as you move around the school premises.</p>`,
+            `<p>❸Analyze and gather data about the school environment.</p>`,
+            `<p>❹ Reflect on the characteristics of a school environment that promotes learning.</p>`,
+            `<p>❺ Present your idea of a good school environment through any of these:</p>`,
             `<p style="text-indent:15px;">𝐚) Descriptive paragraph</p>`,
             `<p style="text-indent:15px;">𝒃) Photo essay</p>`,
             `<p style="text-indent:15px;">𝐜) Sketch or drawing</p>`,
@@ -1943,7 +1943,8 @@
         const paddingH = isMobile ? 36 : 72;
         const paddingV = isMobile ? 104 : 72;
         const pageW = (document.querySelector('.book-wrap')?.offsetWidth || 680) / 2 - paddingH;
-        const pageH = (document.querySelector('.book-wrap')?.offsetHeight || 530) - paddingV;
+        const headerReserve = 140;
+        const pageH = (document.querySelector('.book-wrap')?.offsetHeight || 530) - paddingV - headerReserve;
         measure.style.cssText = `position:fixed; left:-9999px; width:${pageW}px; height:${pageH}px; overflow:hidden; visibility:hidden; pointer-events:none; display:flex; flex-direction:column;`;
 
         const pages = [];
