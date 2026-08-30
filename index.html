@@ -1761,9 +1761,10 @@
             pageBreak(),
             makeFSSectionHeader('OBSERVE', '👀'),
             `<p>Move around the campus observation forms are provided for you to document or observations. It is advised that you read the entire word ship before proceeding to the school side. A good understanding of the activities and tasks to be accomplished in the activity sheets will yield better learning results.</p>`,
+            `<p style="text-align:center; font-weight:700;">SCHOOL FACILITIES OBSERVATION CHECKLIST</p>`
             `<p>Familiarize yourself with the different areas and facilities of the school. Check the column to indicate their availability. Give a brief description of those that are available. And see how each will contribute to the students learning and development.</p>`,
             makeTable({
-              caption: 'SCHOOL FACILITIES OBSERVATION CHECKLIST',
+              caption: '',
               columns: [
                 {label:'Facilities', width:'20%'},
                 {label: '✔', width:'10%'},
@@ -2135,7 +2136,7 @@
           const pages = chapterPagesList[ci];
           if (!pages.length) return;
           pages.forEach((content, i) => {
-            const eyebrow = i === 0 ? `<h2 class="page-title">${chapter.name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">${chapter.name}<span style="color:var(--ink-faint); font-size:10px;">(continued)</span></p><div class="ornament">෴</div>`;
+            const eyebrow = i === 0 ? `<h2 class="page-title">${chapter.name}</h2><div class="ornament">෴</div>` : `<p class="page-eyebrow">${chapter.name}</p><div class="ornament">෴</div>`;
             const nav = `<div class="page-nav"><button type="button" class="back-btn" data-goto="2">&lsaquo; Contents</button></div>`;
             sheets.push(mk(eyebrow + content + nav, `<div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;"><div class="ornament">෴</div><p style="text-align:center; font-style:italic; color:var(--ink-faint); font-size:20px; font-weight:500;">${nextQuote()}</p><div class="ornament">෴</div></div>`, false, false));        
           });
