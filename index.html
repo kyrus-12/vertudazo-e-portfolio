@@ -1875,6 +1875,7 @@
             `<p style="text-indent:15px;"><u>It is also not well-ventilated because the door and windows are always closed.</u></p>`,
             `<p style="text-indent:15px;"><u>When it comes to comfort room and floor, they are neat and clean.</u></p>`,
             `<br>`,
+            `<p>Be guided by this task as you do your observation. Then accomplish the matrix to record your data. </p>`,
             makeTable({
               caption: 'CLASSROOM FACILITIES MATRIX',
               columns: [
@@ -1884,10 +1885,20 @@
               rows:[
                 ['1) Wall Displays','• At the back, in front and side near the entrance<br>• Six (6)<br>• Arranged in the right place<br>• Some of it were in good condition'],
                 ["2) Teacher’s Table", "• At the back<br>• One (1)<br>• Arranged in the right place<br>• Somehow, it is in good condition"],
+              ]
+            }),
+            pageBreak(),
+            makeTable({
+              caption: '',
+              columns: [
+                {label:'Classroom Facilities', width:'30%'},
+                {label: 'Description <br> (location, number, arrangement, condition)', Description:'60%'}
+              ],
+              rows:[
                 ["3) Learner’s Desks", "• At the center and back<br>• Three (2)<br>• Arranged in the right place<br>• Somehow, it is in good condition"],
                 ['4) Blackboard', '• In front<br>• Two (2)<br>• Arranged in the right place<br>• Yes, it is in good condition'],
                 ['5) Learning Materials/Visual Aids', '• On the left side and at the front<br>• One (1) television<br>• One (1) bookshelf<br>• Arranged in the right place<br>• Yes, it is in good condition'],
-              ]
+            ]
             }),
             {
                fig: 'Fig. 1',
