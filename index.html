@@ -2240,7 +2240,7 @@
         let nextStart = 4;
         const chapterRanges = chapterPageCounts.map(count => {
           const start = nextStart;
-          const end = start + count + 1;
+          const end = start + (count * 2) -  1;
           nextStart = end + 1;
           return {start, end};
         });
