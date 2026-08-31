@@ -1730,6 +1730,7 @@
             {name:'Introductory Framework', type:'introductory_framework'},
             {name:'Activity 1.1', type:'activity_1'},
             {name:'Activity 1.2', type:'activity_2'},
+            {name:'Photos', type:'photos'},
             ],
           introductory_framework: [
             makeFSSectionHeader('SPARK YOUR INTEREST', '👁'),
@@ -2135,7 +2136,6 @@
             `<p>Let your Creativity Shine!</p>`,
             `<p>On the opposite box, present an illustration showing your idea of an effective school environment through any of these:</p>`,
             `<p style="text-indent:15px;">➢ A Descriptive Paragraph &nbsp &nbsp ➢ A Photo Essay &nbsp &nbsp ➢ A Sketch or Drawing &nbsp &nbsp ➢ A poem, song or rap</p>`,
-            `<br>`,
             {
                fig: '',
                title: 'MY PERSONAL ILLUSTRATION OF AN EFFECTIVE SCHOOL ENVIRONMENT',
@@ -2150,8 +2150,8 @@
             `<br>`,
             `<p>Reflecting on my journey, I recall that during my elementary school days, our classroom was filled with interaction whenever we played games like “texts”, “pogs”, Chinese garter, “habulan”, “taguan”, “agawan-base”, Enter-in, “luksongtinik”, jump rope, and other traditional Filipino games. Through communication, we got to know each other; we learned to work together, understand one another's needs, and cooperate in keeping our classroom both inside and out, neat and clean. One of the effects of this communication was forming friendships with the other section, since everyone found out that our classmate's crush was in that section. A simple feeling evolved into unity and a bond between two classes, not for the sake of a romantic relationship, but to strengthen our connection, briefly forget the mockery of others, and pass the time while within our second home.</p>`,
             `<br>`,
-            `<p>When I entered junior high school, I was no longer classmates with the people I used to be with. I am no longer with the fun-loving friends I used to hang out with anytime, anywhere, both inside and outside of school. I realized here that everyone has their own distinct groups, and you can't really join their circle if their interests don't align with yours. However, despite the existence of various friendship groups within a section or classroom, everyone gets along well during group activities and random group assignments, and the tasks are divided equally. This is where mutual acceptance comes in, despite the differences in the cultures to which they belong. Mutual acceptance paved the way for successfully defending our research, bringing “Ibong Adarna” to life, performing “Florante at Laura” at the covered court, and experiencing the art of storytelling. When the pandemic hit the Philippines, the physical interactions began to transform</p>`,
-            `<p>into digital communication and friendships that emerged through tiktok, instagram, facebook, and other social media platforms. Social media platforms did help make my studies more flexible, but they also significantly affected my social, emotional, and mental health. I gradually became addicted to online games and endless scrolling; I stopped leaving my room, failed to stick to a proper schedule, avoided working on modules whenever I saw walls of text or numbers, and much more. Owning a cellphone became a major challenge for me due to the distractions and entertainment it brings.</p>`,
+            `<p>When I entered junior high school, I was no longer classmates with the people I used to be with. I am no longer with the fun-loving friends I used to hang out with anytime, anywhere, both inside and outside of school. I realized here that everyone has their own distinct groups, and you can't really join their circle if their interests don't align with yours. However, despite the existence of various friendship groups within a section or classroom, everyone gets along well during group activities and random group assignments, and the tasks are divided equally. This is where mutual acceptance comes in, despite the differences in the cultures to which they belong. Mutual acceptance paved the way for successfully defending our research, bringing “Ibong Adarna” to life, performing “Florante at Laura” at the covered court, and experiencing the art of storytelling. When the pandemic hit the Philippines, the physical interactions began to transform into digital communication and friendships that emerged through tiktok, instagram, facebook, and other social media platforms. Social media platforms did help make my studies more flexible, but they also</p>`,
+            `<p>significantly affected my social, emotional, and mental health. I gradually became addicted to online games and endless scrolling; I stopped leaving my room, failed to stick to a proper schedule, avoided working on modules whenever I saw walls of text or numbers, and much more. Owning a cellphone became a major challenge for me due to the distractions and entertainment it brings.</p>`,
             `<br>`,
             `<p>As I continued my journey through senior high school, the community I was connected with, both personally and through the pages I joined on online platforms kept growing. Every time I enter and leave school, I see many workers who are exhausted and sleep-deprived, each with a unique life experience based on their own stories. When I opened my online account, my newsfeed was filled with various statuses, emotions, and posts. It was then that I realized school helps me grow in the direction I want for myself. These were the years that taught me to grow with the right attitude and to pursue my dreams, knowing that no one else would make them a reality for everyone has different dreams, and different strategies to achieve them.</p>`,
             `<br>`,
@@ -2171,28 +2171,37 @@
                stack: '',
                link: ''
              },
-             pageBreak(),
-            makeTable({
-              caption: 'Observation Log',
-              columns: [
-                {label:'Date', width:'20%'},
-                {label: 'Observation'},
-                {label: 'Insight', width:'30%'}
-              ],
-              rows: [
-                ['Aug 11, 2026', 'Students worked in small groups.', 'Peer learning was active.'],
-                ['August 12, 2026', 'Teacher used visual aids', 'Improved engagement.']
-              ]
-            }),
-            `<p>Pangalawang activity ito.</p>`,
             ],
-          activity_3: [
-            `<p>Pangatlong activity ito.</p>`,
+          photos: [
+            {
+               fig: '',
+               title: '',
+               image: 'https://i.imgur.com/sAqHDH8.jpg',
+               imageCaption: 'LIBRARY 1st IMAGE',
+               desc: '',
+               stack: '',
+               link: ''
+             },
+             {
+               fig: '',
+               title: '',
+               image: 'https://i.imgur.com/ZQhWOcv.jpg',
+               imageCaption: 'LIBRARY 2nd IMAGE',
+               desc: '',
+               stack: '',
+               link: ''
+             },
+             {
+               fig: '',
+               title: '',
+               image: 'https://i.imgur.com/vD0GICh.jpg',
+               imageCaption: 'LIBRARY 3rd IMAGE',
+               desc: '',
+               stack: '',
+               link: ''
+             },
             ],
-          
-          skills: {language: ['CSS', 'HTML', 'JAVASCRIPT']},
-          contact: {email:'rusky0537@gmail.com', github:'kyky-12', linkedin: 'in/kyky-12'}
-        },
+         },
          {
           id:'ep2', 
           episode:'Field Study 1', 
@@ -2254,6 +2263,19 @@
              },
             ],
           activity_3: [
+            pageBreak(),
+            makeTable({
+              caption: 'Observation Log',
+              columns: [
+                {label:'Date', width:'20%'},
+                {label: 'Observation'},
+                {label: 'Insight', width:'30%'}
+              ],
+              rows: [
+                ['Aug 11, 2026', 'Students worked in small groups.', 'Peer learning was active.'],
+                ['August 12, 2026', 'Teacher used visual aids', 'Improved engagement.']
+              ]
+            }),
            `<p></p>`,
             ],
            
