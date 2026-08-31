@@ -1135,6 +1135,19 @@
       border-radius:2px;
       filter:sepia(0.12) saturate(1.05);
     }
+    .plate-img-2{
+      display:block;
+      width:80%;
+      height:80%;
+      aspect-ratio:16/9;
+      object-fit:cover;
+      background:var(--parchment-shade);
+      border:2px solid var(--gold);
+      outline:1px solid var(--gold-pale);
+      outline-offset:4px;
+      border-radius:2px;
+      filter:sepia(0.12) saturate(1.05);
+    }
     figure.plate-figure figcaption{
       font-family:var(--font-title);
       font-size:10px;
@@ -1936,6 +1949,7 @@
                fig: 'Fig. 1',
                title: 'First Image',
                image: 'https://i.imgur.com/roKDA4r.jpg',
+               image_2:'',
                imageCaption: 'Basta',
                desc: 'Haist',
                stack: 'Secret',
@@ -1981,6 +1995,7 @@
                fig: '',
                title: 'Observation Report',
                image: 'https://i.imgur.com/gZh3lOf.jpg',
+               image_2:'',
                imageCaption: '',
                desc: '',
                stack: '',
@@ -2068,6 +2083,7 @@
                fig: '',
                title: 'MY BOARD DISPLAY LAYOUT',
                image: 'https://i.imgur.com/Lte9nJu.jpg',
+               image_2:'',
                imageCaption: '',
                desc: 'Do you want to create your own card? <br> You can access the board via this link: https://vertudazo-bulletin-board.netlify.app/',
                stack: '',
@@ -2140,6 +2156,7 @@
                fig: '',
                title: 'MY PERSONAL ILLUSTRATION OF AN EFFECTIVE SCHOOL ENVIRONMENT',
                image: 'https://i.imgur.com/FVrtY9x.jpg',
+               image_2:'',
                imageCaption: '',
                desc: '',
                stack: '',
@@ -2166,6 +2183,7 @@
                fig: '',
                title: '',
                image: 'https://i.imgur.com/OPRvyxs.jpg',
+               image_2:'',
                imageCaption: '',
                desc: '',
                stack: '',
@@ -2176,7 +2194,8 @@
             {
                fig: '',
                title: '',
-               image: 'https://i.imgur.com/sAqHDH8.jpg',
+               image: '',
+               image_2:'https://i.imgur.com/sAqHDH8.jpg',
                imageCaption: 'LIBRARY 1st IMAGE',
                desc: '',
                stack: '',
@@ -2185,7 +2204,8 @@
              {
                fig: '',
                title: '',
-               image: 'https://i.imgur.com/ZQhWOcv.jpg',
+               image: '',
+               image_2:'https://i.imgur.com/ZQhWOcv.jpg',
                imageCaption: 'LIBRARY 2nd IMAGE',
                desc: '',
                stack: '',
@@ -2194,7 +2214,8 @@
              {
                fig: '',
                title: '',
-               image: 'https://i.imgur.com/vD0GICh.jpg',
+               image: '',
+               image_2:'https://i.imgur.com/vD0GICh.jpg',
                imageCaption: 'LIBRARY 3rd IMAGE',
                desc: '',
                stack: '',
@@ -2256,6 +2277,7 @@
                fig: 'Fig. 2',
                title: 'Second Image',
                image: 'https://i.imgur.com/1A8G8po.jpg',
+               image_2:'',
                imageCaption: 'Basta',
                desc: 'Haist',
                stack: 'Secret',
@@ -2339,6 +2361,7 @@
                fig: 'Fig. 3',
                title: 'Third Image',
                image: 'https://i.imgur.com/494TnSC.jpg',
+               image_2:'',
                imageCaption: 'Basta',
                desc: 'Haist',
                stack: 'Secret',
@@ -2589,6 +2612,7 @@
         if (item.fig) html += `<span class="plate-fig">${item.fig}</span>`;
         if (item.title) html += `<h3 class="plate-title">${item.title}</h3>`;
         if (item.image) html += `<figure class="plate-figure"><img class="plate-img" src="${item.image}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
+        if (item.image_2) html += `<figure class="plate-figure"><img class="plate-img-2" src="${item.image}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
         if (item.desc) html += `<p class="plate-desc">${item.desc}</p>`;
         if (item.stack) html += `<p class="plate-stack">${item.stack}</p>`;
         if (item.link) html += `<a class="plate-link" href="${item.link}">View the work &arr</a>`;
