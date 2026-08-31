@@ -1137,8 +1137,8 @@
     }
     .plate-img-2{
       display:block;
-      width:80%;
-      height:80%;
+      width:70%;
+      height:70%;
       aspect-ratio:16/9;
       object-fit:cover;
       background:var(--parchment-shade);
@@ -1147,6 +1147,11 @@
       outline-offset:4px;
       border-radius:2px;
       filter:sepia(0.12) saturate(1.05);
+      justify-content:center;
+      align-items:center;
+      display:flex;
+      flex:1;
+      flex-direction:row;
     }
     figure.plate-figure figcaption{
       font-family:var(--font-title);
@@ -2612,7 +2617,7 @@
         if (item.fig) html += `<span class="plate-fig">${item.fig}</span>`;
         if (item.title) html += `<h3 class="plate-title">${item.title}</h3>`;
         if (item.image) html += `<figure class="plate-figure"><img class="plate-img" src="${item.image}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
-        if (item.image_2) html += `<figure class="plate-figure"><img class="plate-img-2" src="${item.image}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
+        if (item.image_2) html += `<figure class="plate-figure"><img class="plate-img-2" src="${item.image_2}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
         if (item.desc) html += `<p class="plate-desc">${item.desc}</p>`;
         if (item.stack) html += `<p class="plate-stack">${item.stack}</p>`;
         if (item.link) html += `<a class="plate-link" href="${item.link}">View the work &arr</a>`;
