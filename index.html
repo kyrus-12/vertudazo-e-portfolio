@@ -1636,6 +1636,45 @@
       background:linear-gradient(90deg, var(--ink) 0%, var(--ink) 70%, var(--ink) 100%);
       opacity:0.85;
     }
+    .leaf-fan-layer{
+      position:fixed;
+      inset:0;
+      z-index:9996;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .leaf-fan-piece{
+      position:absolute;
+      left:0;
+      top:0;
+      transform-origin:50% 100%;
+      filter:drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+      animation:leaf-fan-open var(--fan-dur, 650ms) cubic-bezier(0.22,0.9,0.32,1.1) forwards;
+    }
+    .leaf-fan-piece svg{
+      width:var(--leaf-size, 34px);
+      height:calc(var(--leaf-size, 34px) * 1.35);
+      display:block;
+    }
+    @keyframes leaf-fan-open{
+      0% {
+        transform:rotate(0deg) scale(0.25);
+        opacity:0;
+      }
+      18% {
+        transform:rotate(0deg) scale(1);
+        opacity:1;
+      }
+      70% {
+        transform:rotate(var(--fan-angle)) scale(1);
+        opacity:1;
+      }
+      100% {
+        transform:rotate(var(--fan-angle)) scale(0.9);
+        opacity:0;
+      }
+    }
+
   </style>
   </head>
   
@@ -3069,6 +3108,57 @@
             </div>`;
       }
 
+      const leafCursorSvg = "<svg xmlns='http://www.w3.org/2000/svg' width='28' height='34' viewBox='0 0 28 34'>"
+        + "<path d='M14 33C4 27 0 15 4 6 7 0 11 1 14 1c3 0 7-1 10 5 4 9 0 21-10 27z' fill='%237c9473'/>"
+        + "<path d='M14 30V4' stroke='%23d4af37' stroke-width='1.1' opacity='0.75'/>"
+        + "<path d='M14 12l-4-3M14 18l-4.5-2.5M14 24l-4-2' stroke='%23d4af37' stroke-width='0.8' opacity='0.55'/>"
+        + "<path d='M14 12l4-3M14 18l4.5-2.5M14 24l4-2' stroke='%23d4af37' stroke-width='0.8' opacity='0.55'/>"
+        +"</svg>";
+        const leafCursorUrl = "data:image/svg+xml," + leafCursorSvg.replace(/#/g, '%23');
+        const leafCursorStyle = document.createElement('style');
+        leafCursorStyle.textContent = `body, body *  {cursor: url("${leafCursorUrl}") 14 32, auto;}`;
+        document.head.appendChild(leafCursorStyle); 
+
+        let leafFanLayer = document.getElementById('leafFanLayer');
+        if (!leafFanLayer) {
+          leafFanLayer = document.createElement('div');
+          leafFanLayer.id = 'leafFanLayer';
+          leafFanLayer.className = 'leaf-fan-layer';
+          document.body.appendChild(leafFanLayer);
+        }
+
+        const leafColors = ['#6b8e4e', '#7fa65a', '#4f7942'];
+        const leafPieceMarkup = `<svg viewBox="0 0 34 46" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 45C5 38 1 24 6 12 9 4 14 1 17 1c3 0 8 3 11 11 5 12 1 26-11 33z" fill="currentColor" opacity="0.95"/>
+          <path d="M17 42V4" stroke="#2c1810" stroke-width="1" opacity="0.35"/>
+          </svg>`;
+
+          function spawnLeafFan(x, y){
+            const dur = 620 + Math.random() * 160; 
+            [-34, 0, 34].forEach((baseAngle, idx) => {
+              const angle = baseAngle + (Math.random() * 8 - 4);
+              const size = 30 + Math.random() * 8;
+              const el = document.createElement('div');
+              el.className = 'leaf-fan-piece';
+              el.style.left = (x - size / 2) + 'px';
+              el.style.top = (y - size * 1.35) + 'px';
+              el.style.color = leafColors[idx % leafColors.length];
+              el.style.setProperty('--fan-angle', angle + 'deg');
+              el.style.setProperty('--fan-dur', dur + 'ms');
+              el.style.setProperty('--leaf-size', size + 'px');
+              el.innerHTML = leafPieceMarkup;
+              leafFanLayer.appendChild(el);
+
+              const cleanup = () => {if (el.parentNode) el.remove(); };
+              el.addEventListener('animationend', cleanup);
+              setTimeout(cleanup, dur + 200);
+            });
+          }
+
+          document.addEventListener('pointerdown', function(e){
+            if (readerScene.classList.contains('active') && readerScene.contains(e.target)) return;
+            spawnLeafFan(e.clientX, e.clientY);
+          });
 
 
 
