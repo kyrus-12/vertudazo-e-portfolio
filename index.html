@@ -1703,6 +1703,36 @@
       transform-origin:32px 34px;
       animation:bf-flap-l 0.22s ease-in-out infinite alternate;
     }
+    @keyframes bf-fly-path{
+      0%{
+        transform:translate(-50%, -50%) translate(0px, 0px) scale() rotate(var(--r0, 0deg));
+        opacity:0;
+      }
+      6%{
+        transform:translate(-50%, -50%) translate(var(--p0x), var(--p0y)) scale (1) rotate(var(--r0));
+        opacity:1;
+      }
+      25%{
+        transform:translate(-50%, -50%) translate(var(--p1x), var(--p1y)) scale (1) rotate(var(--r1));
+        opacity:1;
+      }
+      45%{
+        transform:translate(-50%, -50%) translate(var(--p2x), var(--p2y)) scale (0.98) rotate(var(--r2));
+        opacity:1;
+      }
+      65%{
+        transform:translate(-50%, -50%) translate(var(--p3x), var(--p3y)) scale (0.92) rotate(var(--r3));
+        opacity:1;
+      }
+      85%{
+        transform:translate(-50%, -50%) translate(var(--p4x), var(--p4y)) scale (0.82) rotate(var(--r4));
+        opacity:1;
+      }
+      100%{
+        transform:translate(-50%, -50%) translate(var(--p5x), var(--p5y)) scale (0.7) rotate(var(--r5));
+        opacity:1;
+      }
+    }
 
   </style>
   </head>
@@ -3220,7 +3250,7 @@
 
                 const flowerCursorUrl = "data:image/svg+xml," + flowerSvg.replace(/#/g, '%23');
                 const flowerCursorStyle = document.createElement('style');
-                cursor.style.textContent = `.reader-scene.active, .reader-scene.active * {cursor: url("${flowerCursorUrl}") 17 17, auto;}`;
+                flowerCursorStyle.textContent = `.reader-scene.active, .reader-scene.active * {cursor: url("${flowerCursorUrl}") 17 17, auto;}`;
                 document.head.appendChild(flowerCursorStyle);
 
                 let burstLayer = document.getElementById('clickBurstLayer');
@@ -3230,7 +3260,80 @@
                   burstLayer.className = 'click-burst-layer';
                   document.body.appendChild(burstLayer);
                 }
+
+                const burstColors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#a18cd1', '#ff9f43', '#e6c86e'];
+                const butterflyMarkup = `<svg class="bf-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path class="wing-l" d="M30 34c-8-2-18-8-20-16-1-5 4-8 8-6 5 3 8 10 10 16 1 4 0 6 2 6z"  fill="currentColor" opacity="0.9"/>
+                  <path class="wing-l" d="M30 34c-6 2-12 8-14 14-1 4 3 7 7 5 4-2 7-8 7-14 0-3-1-5 0-5z" fill="currentColor" opacity="0.75"/>
+                  <path class="wing-r" d="M34 34c8-2 18-8 20-16 1-5-4-8-8-6-5 3-8 10-10 16-1 4 0 6-2 6z" fill="currentColor" opacity="0.9"/>
+                  <path class="wing-r" d="M34 34c6 2 12 8 14 14 1 4-3 7-7 5-4-2-7-8-7-14 0-3 1-5 0-5z" fill="currentColor" opacity="0.75"/>
+                  <ellipse cx="32" cy="34" rx="1.8" ry="10" fill="#2c1810" stroke="none"/>
+                  <circle cx="32" cy="23" r="2.2" fill="#2c1810" stroke="none"/>
+                  <path d="M31 22q-3-6-6-8M33 22q3-6 6-8" stroke="currentColor" stroke-width="1" opacity="0.8"/>
+                  </svg>`;
+
+                  function buildFlightPath(originX, originY){
+                    const mainAngle = Math.random() * Math.PI * 2;
+                    const viewSpan = Math.min(window.innerWidth, window.innerHeight);
+                    const totalDist = Math.max(260, Math.min(viewSpan * 0.85, 260 + Math.random() * 420));
+                    const flutterAmp = 35 + Math.random() * 45;
+                    const flutterFreq = 1.5 + Math.random() * 1.5;
+                    const phase = Math.random() * Math.PI * 2;
+                    const perpAngle = mainAngle + Math.PI / 2;
+                    const dirX = Math.cos(mainAngle), dirY = Math.sin(mainAngle);
+                    const perpX = Math.cos(perpAngle), perpY = Math.sin(perpAngle);
+
+                    const points = [];
+                    const rots = [];
+                    [0.06, 0.25, 0.45, 0.65, 0.85, 1].forEach((t, i) => {
+                      const progress = t * totalDist;
+                      const wave = Math.sin(t * Math.PI * flutterFreq + phase) * flutterAmp * (0.4 + t * 0.6);
+                      let px = dirX * progress + perpX * wave;
+                      let py = dirY * progress + perpY * wave;
+
+                      px = Math.max(-originX + 20, Math.min(window.innerWidth - originX - 20, px));
+                      py = Math.max(-originY + 20, Math.min(window.innerHeight - originY - 20, py));
+                      points.push({x: px, y: py});
+                      const prev = i === 0 ? {x:0, y:0} : points[i-1];
+                      const segAngle = Math.atan2(py - prev.y, px - prev.x) * (180 / Math.PI);
+                      rots.push(segAngle + (Math.random() * 20 - 10));
+                    });
+                    return {points, rots};
+                  }
+                  function spawnButterflyBurst(x, y){
+                    const count = 5 + Math.floor(Math.random() * 3);
+                    for (let i = 0; i < count; i++){
+                    const dur = 2200 + Math.random() * 1400;
+                    const size = 18 + Math.random() * 14;
+                    const color = burstColors[Math.floor(Math.random() * burstColors.length)];
+                    const {points, rots} = buildFlightPath(x, y);
+
+                    const el = document.createElement('div');
+                    el.className = 'click-butterfly';
+                    el.style.left = x + 'px';
+                    el.style.top = y + 'px';
+                    el.style.color = color;
+                    el.style.setProperty('--burst-dur', dur + 'ms');
+                    el.style.setProperty('--bf-size', size + 'px');
+                    el.style.setProperty('--r0', rots[0] + 'deg');
+                    points.forEach((p, idx) => {
+                      el.style.setProperty(`--p${idx}x`, p.x + 'px');
+                      el.style.setProperty(`--p${idx}y`, p.y + 'px');
+                      el.style.setProperty(`--r${idx}`, rots[idx] + 'deg');
+                    });
+                    el.innerHTML = butterflyMarkup;
+                    burstLayer.appendChild(el);
+
+                    const cleanup = () => {if (el.parentNode) el.remove(); };
+                    el.addEventListener('animationend', cleanup);
+                    setTimeout(cleanup, dur + 200);
+                  }
+                }
+                  readerScene.addEventListener('pointerdown', function(e){
+                    if (!readerScene.classList.contains('active')) return;
+                    spawnButterflyBurst(e.clientX, e.clientY);
           });
+        })();
 
 
 
