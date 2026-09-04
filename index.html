@@ -2551,122 +2551,28 @@
 
         const pages = [];
         let current = '';
-        const queue = chunks.slice();
-        let i = 0;
-        const FORCE_BREAK_RATIO = 0.85;
-        while (i < queue.length){
-          const chunk = queue[i];
+        for (let i = 0; i < chunks.length; i++){
+          const chunk = chunks[i];
           if (chunk === '<!--PAGEBREAK-->'){
             if (current !== ''){
-              measure.innerHTML = current;
-              const filledRatio = measure.scrollHeight / pageH;
-              if (filledRatio >= FORCE_BREAK_RATIO){
-                pages.push(current);
-                current = '';
-              }
-            }
-            i++;
-            continue;
-        }
-          const test = current + chunk;
-          measure.innerHTML = test;
-          if (measure.scrollHeight > pageH){
-            measure.innerHTML = current;
-            const usedHeight = current ? measure.scrollHeight : 0;
-            const remainingHeight = pageH - usedHeight;
-            const split = splitChunkToFit(chunk, remainingHeight, measure, pageH);
-            if (split){
-              current += split.fits;
               pages.push(current);
               current = '';
-              queue[i] = split.remainder;
-              continue;
-            } else if (current !== ''){
-              pages.push(current);
-              current = chunk;
-              i++;
-            } else {
-              current = chunk;
-              i++;
             }
-          } else { 
+            continue;
+          }
+          const test = current + chunks[i];
+          measure.innerHTML = test;
+          if (measure.scrollHeight > pageH && current !== ''){
+            pages.push(current);
+            current = chunks[i];
+          } else {
             current = test;
-            i++;
           }
         }
         if (current) pages.push(current);
         if (!pages.length) pages.push('');
         measure.innerHTML = '';
         return pages;
-      }
-
-      function splitChunkToFit(chunkHTML, remainingHeight, measure, pageH){
-        if (remainingHeight < pageH * 0.15) return null;
-        return splitParagraphChunk(chunkHTML, remainingHeight, measure, pageH) || splitTableChunk(chunkHTML, remainingHeight, measure);
-      }
-
-      function splitParagraphChunk(chunkHTML, remainingHeight, measure){
-        const match = chunkHTML.match(/^(<p[^>]*>)([\s\S]*)(<\/p>)$/i);
-        if (!match) return null;
-        const [, openTag, innerHTML, closeTag] = match;
-
-        const tokens = innerHTML.match(/<[^>]+>|[^<\s]+|\s+/g);
-        if (!tokens || tokens.length < 8) return null;
-
-        const cutPoints = [];
-        let openTags = 0;
-        tokens.forEach((tok, idx) => {
-          if (/^<[^/][^>]*[^/]>$/.test(tok)) openTags++;
-          else if (/^<\/[^>]+>$/.test(tok)) openTags = Math.max(0, openTags - 1);
-          else if (/^\s+$/.test(tok) && openTags === 0) cutPoints.push(idx);
-        });
-        if (cutPoints.length < 3) return null;
-
-        let lo = 0, hi = cutPoints.length - 1, bestIdx = -1;
-        while (lo <= hi){
-          const mid = Math.floor((lo + hi) / 2);
-          const cut = cutPoints[mid];
-          measure.innerHTML = openTag + tokens.slice(0, cut).join('') + closeTag;
-          if (measure.scrollHeight <= remainingHeight){
-            bestIdx = mid;
-            lo = mid + 1;
-          } else {
-            hi = mid - 1;
-          }
-        }
-        if (bestIdx < 0) return null;
-        const cut = cutPoints[bestIdx];
-        if (cut < 6 || cut > tokens.length - 4) return null;
-
-        const fits = openTag + tokens.slice(0, cut).join('').trim() + closeTag;
-        const remainder = openTag + tokens.slice(cut).join('').trim() + closeTag;
-        return {fits, remainder};
-      }
-
-      function splitTableChunk(chunkHTML, remainingHeight, measure){
-        const tbodyMatch = chunkHTML.match(/^([\s\S]*?<tbody>)([\s\S]*?)(<\/tbody>[\s\S]*)$/i);
-        if (!tbodyMatch) return null;
-        const [,prefix, rowsHTML, suffix] = tbodyMatch;
-        const rows = rowsHTML.match(/<tr[\s\S]*?<\/tr>/gi);
-        if (!rows || rows.length < 2) return null;
-
-        let lo = 1, hi = rows.length - 1, bestCount = 0;
-        while (lo <= hi){
-          const mid = Math.floor((lo + hi) / 2);
-          measure.innerHTML = prefix + rows.slice(0, mid).join('') + suffix;
-          if (measure.scrollHeight <= remainingHeight){
-            bestCount = mid;
-            lo = mid + 1;
-          } else {
-            hi = mid - 1;
-          }
-        }
-        if (bestCount < 1) return null;
-
-        const fits = prefix + rows.slice(0, bestCount).join('') + suffix;
-        const remainderPrefix = prefix.replace(/<caption>[\s\S]*?<\/caption>/i, '');
-        const remainder = remainderPrefix + rows.slice(bestCount).join('') + suffix;
-        return {fits, remainder};
       }
 
       function buildBookHTML(book){
