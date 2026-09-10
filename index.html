@@ -127,7 +127,7 @@
     .nav-links-row{
       display:flex;
       gap:8px;
-      flex-wrap:nowrap;
+      flex-wrap:wrap;
       justify-content:flex-end;
     }
     .nav-links a{
@@ -197,10 +197,10 @@
     }
     .parallax-layer{
       position:absolute;
-      top:-20%;
+      top:-40%;
       left:0;
       right:0;
-      bottom:-20%;
+      bottom:-40%;
       z-index:0;
       pointer-events:none;
       will-change:transform;
@@ -1598,6 +1598,40 @@
         padding:6px 12px;
         font-size:10px;
       }
+      .site-nav{
+        top:10px;
+        left:10px;
+        right:10px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:8px;
+        overflow-x:visible;
+      }
+      .nav-logo{
+        justify-content:center;
+      }
+      .logo-img{
+        height:40px;
+        width:40px;
+      }
+      .nav-logo img:first-child{
+        width:64px;
+        height:40px;
+      }
+      .nav-links{
+        align-items:center;
+      }
+      .nav-links-row{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+      .nav-links a{
+        font-size:11px;
+        padding:6px 12px;
+      }
+      .landing-section{
+        padding:150px;
+      }
     }
     @media (prefers-reduced-motion: reduce){
       .sheet{
@@ -1989,7 +2023,7 @@
 
     <section id="retrospection" class="landing-section">
       <div class="parallax-layer"></div>
-      <h2 class="reveal-item">Restrospection</h2>
+      <h2 class="reveal-item">Retrospection</h2>
       <p class="reveal-item">Retrospection here.</p>
     </section>
 
