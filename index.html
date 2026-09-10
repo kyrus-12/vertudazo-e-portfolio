@@ -120,6 +120,12 @@
     }
     .nav-links{
       display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:8px;
+    }
+    .nav-links-row{
+      display:flex;
       gap:8px;
       flex-wrap:nowrap;
       justify-content:flex-end;
@@ -1785,11 +1791,21 @@
       </div>
 
       <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#contents">Contents</a>
-      <a href="#image">Album</a>
-      </div>
+        <div class="nav-links-row">
+          <a href="#home">Home</a>
+          <a href="#introduction">Introduction</a>
+          <a href="#about">Biography</a>
+          <a href="#beliefs">Beliefs</a>
+          <a href="#contents">Worksheets</a>
+        </div>
+        <div class="nav-links">
+        <div class="nav-links-row">
+          <a href="#reflection">Reflection</a>
+          <a href="#certificate">Certificate</a>
+          <a href="#restrospection">Restrospection</a>
+          <a href="#image">Evidence</a>
+        </div>
+      </div>    
     </nav>
 
     <section id="home" class="landing-section">
