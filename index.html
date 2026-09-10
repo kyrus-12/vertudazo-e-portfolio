@@ -171,14 +171,29 @@
     #home{
       z-index:1;
     }
-    #about{
+    #introduction{
       z-index:2;
     }
-    #contents{
+    #about{
       z-index:3;
     }
-    #image{
+    #beliefs{
       z-index:4;
+    }
+    #contents{
+      z-index:5;
+    }
+    #reflection{
+      z-index:6;
+    }
+    #certificate{
+      z-index:7;
+    }
+    #retrospection{
+      z-index:8;
+    }
+    #image{
+      z-index:9;
     }
     .parallax-layer{
       position:absolute;
@@ -1683,7 +1698,7 @@
       border-radius:2px;
       box-shadow:0 1px 4px rgba(0,0,0,0.4);
     }
-    @media (min-widthh:1200px){
+    @media (min-width:1200px){
       html{
         zoom:0.8;
       }
@@ -1911,7 +1926,7 @@
         <div class="nav-links-row">
           <a href="#reflection">Reflection</a>
           <a href="#certificate">Certificate</a>
-          <a href="#restrospection">Restrospection</a>
+          <a href="#retrospection">Retrospection</a>
           <a href="#image">Evidence</a>
         </div>
       </div>    
@@ -4139,7 +4154,7 @@
           const headHTML = columns.length
           ? `<thead><tr>${columns.map(c => 
             `<th${c.align ? ` data-align="${c.align}"` : ''}>${c.label || ''}</th>`
-          ).join('')}</tr></head>`
+          ).join('')}</tr></thead>`
           : '';
 
           const bodyHTML = rows.map(row => 
