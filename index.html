@@ -272,10 +272,13 @@
     }
     .home-header{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:center;
       gap:36px;
       flex-wrap:wrap;
+      width:100%;
+      max-width:1000px;
+      align-self:stretch;
     }
     .home-photo{
       width:clamp(250px, 20vw, 350px);
@@ -1528,7 +1531,7 @@
       visibility:hidden;
       pointer-events:none;
     }
-    @media (max-width:980px){
+    @media (max-width:720px){
       .shelf-row{
         gap:6px;
         padding:16px 12px 10px;
