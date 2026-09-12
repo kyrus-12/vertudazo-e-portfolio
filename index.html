@@ -4392,6 +4392,28 @@
           });
         })();
 
+        (function(){
+          var PHONE_THRESHOLD = 500;
+
+          function isPhoneHardware(){
+            var shortSide = Math.min(window.screen.width, window.screen.height);
+            return shortSide <= PHONE_THRESHOLD;
+          }
+
+          function applyPhotoLayout(){
+            var phone = isPhoneHardware();
+            document.querySelectorAll('.photo-full').forEach(function (img){
+              img.style.display = phone ? 'none' : 'block';
+            });
+            document.querySelectorAll('.photo-half').forEach(function (img){
+              img.style.display = phone ? 'block' : 'none';
+            });
+          }
+
+          applyPhotoLayout();
+          window.addEventListener('resize', applyPhotoLayout);
+          window.addEventListener('orientationchange', applyPhotoLayout);
+        })();
 
 
     </script>
