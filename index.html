@@ -1958,6 +1958,296 @@
         opacity:1;
       }
     }
+    .doors-scene{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:26px;
+      max-width:min(95vw, 1100px);
+      width:100%;
+      padding:46px 20px 30px;
+    }
+    .doors-header{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:4px;
+    }
+    .doors-header h2{
+      font-family:var(--font-display);
+      font-size:clamp(22px, 4vw, 34px);
+      color:var(--gold-pale);
+      letter-spacing:0.08em;
+      text-shadow:0 2px 12px rgba(0,0,0,0.6);
+    }
+    .doors-header p{
+      font-family:var(--font-script);
+      font-size:clamp(18px, 2.2vw, 26px);
+      color:var(--gold-light);
+    }
+    .doors-container{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:flex-end;
+      justify-content:center;
+      gap:clamp(18px, 3vw, 34px);
+      padding:10px 6px 30px;
+    }
+    .door-frame{
+      position:relative;
+      width:clamp(110px, 16vw, 168px);
+      height:clamp(190px, 30vh, 290px);
+      border-radius:6px 6px 2px 2px;
+      background:linear-gradient(90deg, #3e2723 0%, #5d4037 15%, #4e342e 85%, #3e2723 100%);
+      box-shadow:inset 0 0 0 4px rgba(0,0,0,0.25), 0 12px 30px rgba(0,0,0,0.5);
+      padding:9px;
+      perspective:1400px;
+      animation:fadeInUp 0.7s ease backwards;
+    }
+    .door-room{
+      position:absolute;
+      inset:9px;
+      border-radius:2px;
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      background-color:var(--burgundy);
+      box-shadow:inset 0 0 10px rgba(0,0,0,0.25);
+    }
+    .door-room-caption{
+      width:100%;
+      padding:10px 6px;
+      font-family:var(--font-body);
+      font-style:italic;
+      font-size:clamp(11px, 1.4vw, 13px);
+      text-align:center;
+      color:#fff;
+      background:linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+      text-shadow:0 1px 14px rgba(0,0,0,0.7);
+    }
+    .door{
+      position:absolute;
+      inset:9px;
+      transform-style:preserve-3d;
+    }
+    .door-flip{
+      position:absolute;
+      inset:0;
+      transform-style:preserve-3d;
+      transform-origin:left center;
+      transition:transform 0.85s cubic-bezier(0.34,1.15,0.34,1);
+    }
+    .door-panel{
+      position:absolute;
+      inset:0;
+      background-color:var(--burgundy);
+      background-size:cover;
+      background-position:center;
+      border:2px solid rgba(212,175,55,0.35);
+      border-radius:2px;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-end;
+      padding-bottom:10px;
+      box-shadow:inset 2px 0 6px rgba(255,255,255,0.1), inset -2px 0 6px rgba(0,0,0,0.3), 2px 4px 14px rgba(0,0,0,0.5);
+      backface-visibility:hidden;
+      overflow:hidden;
+    }
+    .door-panel::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 32%, rgba(0,0,0,0.28) 100%);
+      pointer-events:none;
+    }
+    .door-back{
+      position:absolute;
+      inset:0;
+      background:#0a0a0a;
+      border:2px solid rgba(212,175,55,0.2);
+      border-radius:2px;
+      box-shadow:inset 0 0 30px rgba(0,0,0,0.9);
+      backface-visibility:hidden;
+      transform:rotateY(180deg);
+    }
+    .door-panel-inset{
+      position:absolute;
+      inset:14px 10px 45px;
+      border:1px solid rgba(255,255,255,0.35);
+      border-radius:2px;
+      pointer-events:none;
+    }
+    .door-panel-inset::after{
+      content:'';
+      position:absolute;
+      inset:calc(100% + 10px) 0 -55%;
+      border:1px solid rgba(255,255,255,0.35);
+      border-radius:2px;
+    }
+    .door-knob{
+      position:absolute;
+      right:10px;
+      top:52%;
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:radial-gradient(circle at 35% 35% var(--gold-pale), var(--gold) 70%);
+      box-shadow:0 1px 3px rgba(0,0,0,0.6);
+      z-index:1;
+    }
+    .door-title{
+      position:relative;
+      z-index:1;
+      font-family:var(--font-title);
+      font-size:clamp(10px, 1.3vw, 12px);
+      letter-spacing:0.07em;
+      text-transform:uppercase;
+      color:var(--gold-pale);
+      text-shadow:0 1px 4px rgba(0,0,0,0.6);
+      text-align:center;
+      padding:0 8px;
+    }
+    .door-frame:hover .door-panel{
+      filter:brightness(1.12);
+    }
+    .door-frame.door-open .door-flip{
+      transform:rotateY(-108deg);
+    }
+    .door-modal{
+      position:fixed;
+      inset:0;
+      z-index:4000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity 0.35s ease;
+    }
+    .door-modal.active{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .door-modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(10,6,4,0.82);
+      backdrop-filter:blur(4px);
+    }
+    .door-modal-content{
+      position:relative;
+      z-index:1;
+      width:min(92vw, 760px);
+      max-height:86vh;
+      overflow-y:auto;
+      background:var(--parchment);
+      color:var(--ink);
+      border-radius:8px;
+      border:1px solid rgba(184,134,11,0.4);
+      box-shadow:0 30px 70px rgba(0,0,0,0.6);
+      padding:clamp(24px, 4vw, 44px);
+      transform:translateY(24px) scale(0.97);
+      transition:transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .door-modal.active .door-modal-content{
+      transform:translateY(0) scale(1);
+    }
+    .door-modal-close{
+      position:sticky;
+      top:0;
+      float:right;
+      margin-left:12px;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      border:1px solid rgba(44,24,16,0.25);
+      background:var(--parchment-shade);
+      color:var(--ink);
+      font-size:18px;
+      line-height:1;
+      cursor:pointer;
+      transition:all 0.2s ease;
+      z-index:2;
+    }
+    .door-modal-close:hover{
+      background:var(--burgundy);
+      color:#fff;
+      border-color:var(--burgundy);
+    }
+    .door-modal-title{
+      font-family:var(--font-display);
+      font-size:clamp(22px, 3.6vw, 30px);
+      color:var(--burgundy);
+      margin-bottom:16px;
+      padding-right:40px;
+    }
+    .door-modal-text p{
+      font-family:var(--font-body);
+      font-size:clamp(16px, 1.9vw, 19px);
+      line-height:1.7;
+      color:var(--ink-soft);
+      margin-bottom:14px;
+    }
+    .door-modal-images{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+      gap:12px;
+      margin-bottom:20px;
+    }
+    .door-modal-images img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:6px;
+      border:2px solid var(--gold);
+      box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      cursor:zoom-in;
+    }
+    .door-modal-videos{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .door-video-wrap{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      border-radius:6px;
+      overflow:hidden;
+      border:2px solid var(--gold);
+      box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      background:#000;
+    }
+    .door-video-wrap iframe, .door-video-wrap video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+    .door-modal-empty{
+      font-family:var(--font-body);
+      font-style:italic;
+      color:var(--ink-faint);
+    }
+    @media (max-width:640px){
+      .door-modal-content{
+        padding:20px;
+      }
+      .door-modal-images img{
+        height:120px;
+      }
+    }
 
   </style>
   </head>
@@ -2034,6 +2324,20 @@
       <div class="parallax-layer"></div>
       <h2 class="reveal-item">Reflection</h2>
       <p class="reveal-item">Reflection here.</p>
+      <div class="doors-scene reveal-item">
+        <div class="doors-header">
+          <h2>Choose a Door</h2>
+          <p>Click to open</p>
+        </div>
+        <div class="doors-container" id="doorsContainer"></div>
+      </div>
+      <div class="door-modal" id="doorModal">
+        <div class="door-modal-backdrop" id="doorModalBackDrop"></div>
+        <div class="door-modal-content">
+          <button class="door-modal-close" id="doorModalClose" aria-label="Close">&times;</button>
+          <div id="doorModalBody"></div>
+        </div>
+      </div>
     </section>
 
     <section id="certificate" class="landing-section align-top">
