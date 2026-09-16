@@ -4720,6 +4720,29 @@
           window.addEventListener('orientationchange', applyPhotoLayout);
         })();
 
+        function buildDoorModalContent(door){
+          const c = door.content || {};
+          let html = `<h2 class="door-modal-title">${door.title || ''}</h2>`;
+          const paragraphs = Array.isArray(c.text) ? c.text : (c.text ? [c.text] : []);
+          if (paragraphs.length){
+            html += `<div class="door-modal-text">${paragraphs.map(p => `<p>${p}</p>`).join('')}</div>`;
+          }
+          if (Array.isArray(c.images) && c.images.length){
+            html += `<div class="door-modal-images">${c.images.map(src => `<img src="${src}" alt="${door.title || ''}" loading="lazy">`).join('')}</div>`;
+          }
+          if (Array.isArray(c.videos) && c.videos.length){
+            html += `<div class="door-modal-videos">${c.videos.map(src => {
+              if (isYouTubeUrl(src)){
+                return `<div class="door-video-wrap"><iframe src="${youTubeEmbedUrl(src)}" title="video" allowfullscreen loading="lazy"></iframe></div>`;
+              }
+              return `<div class="door-video-wrap"><video controls src="${src}"></video></div>`; }).join('')}</div>`;
+          }
+         if (!paragraphs.length && !(c.images && c.images.length) && !(c.videos && c.videos.length)){
+          html += `<p class="door-modal-empty">Nothing has been added for this door yet.</p>`;
+         }
+         return html;
+       }
+
 
     </script>
   </body>
