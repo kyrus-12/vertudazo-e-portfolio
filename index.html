@@ -2332,7 +2332,7 @@
         <div class="doors-container" id="doorsContainer"></div>
       </div>
       <div class="door-modal" id="doorModal">
-        <div class="door-modal-backdrop" id="doorModalBackDrop"></div>
+        <div class="door-modal-backdrop" id="doorModalBackdrop"></div>
         <div class="door-modal-content">
           <button class="door-modal-close" id="doorModalClose" aria-label="Close">&times;</button>
           <div id="doorModalBody"></div>
@@ -3869,6 +3869,42 @@
         luxeBlue: {parchment:'#e6edf5', parchmentShade:'#cedae8', parchmentDark:'#a8bcd0', ink:'#0a1628', inkSoft:'#1c3a5f', inkFaint:'#5a7fa8', gold:'#c9a84c', goldLight:'#d4b896', goldPale:'#e8dcc8', burgundy:'#0d3b66', cover:'#0a1628', coverLight:'#122240'},
       };
 
+      const doorsData = [
+        {
+          title:'Door One',
+          image:'https://i.imgur.com/D6ymQtG.jpg',
+          color:'#2c2810',
+          caption:'',
+          content: {
+            text:'Basta yun na yun.',
+            images:'',
+            videos:''
+          }
+        },
+        {
+          title:'Door Two',
+          image:'',
+          color:'#1b4332',
+          caption:'',
+          content: {
+            text:'Pangalawa na yun.',
+            images:'',
+            videos:''
+          }
+        },
+        {
+          title:'Door Three',
+          image:'https://i.imgur.com/D6ymQtG.jpg',
+          color:'pink',
+          caption:'',
+          content: {
+            text:'Pangatlo na ito.',
+            images:'',
+            videos:''
+          }
+        },
+      ];
+
       function renderBookshelf(){
         const row1 = document.getElementById('shelfRow1');
         const row2 = document.getElementById('shelfRow2');
@@ -4741,6 +4777,82 @@
           html += `<p class="door-modal-empty">Nothing has been added for this door yet.</p>`;
          }
          return html;
+       }
+
+       function openDoorModal(door){
+        const modal = document.getElementById('doorModal');
+        const body = document.getElementById('doorModalBody');
+        body.innerHTML = buildDoorModalContent(door);
+        modal.classList.add('active');
+        document.body.classList.add('no-scroll');
+       }
+
+       function closeDoorModal(){
+        const modal = document.getElementById('doorModal');
+        if (!modal.classList.contains('active')) return;
+        modal.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        document.querySelectorAll('.door-frame.door-open').forEach(f => f.classList.remove('door-open'));
+       }
+
+       document.getElementById('doorModalClose').addEventListener('click', closeDoorModal);
+       document.getElementById('doorModalBackdrop').addEventListener('click', closeDoorModal);
+       document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDoorModal();
+       });
+
+       function renderDoors(){
+        const container = document.getElementById('doorsContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        doorsData.forEach((door, i) => {
+          const frame = document.createElement('div');
+          frame.className = 'door-frame';
+          frame.style.animationDelay = `${i * 0.1}s`;
+
+          const applyDoorSkin = (el) => {
+            if (door.image && door.image.trim() !== ''){
+              el.style.backgroundImage = `url('${door.image}')`;
+              el.style.backgroundSize = 'cover';
+              el.style.backgroundPosition = 'center';
+            } else {
+              el.style.backgroundColor = door.color || 'var(--burgundy)';
+            }
+          };
+
+          const room = document.createElement('div');
+          room.className = 'door-room';
+          applyDoorSkin(room);
+          if (door.caption){
+            const cap = document.createElement('div');
+            cap.className = 'door-room-caption';
+            cap.textContent = door.caption;
+            room.appendChild(cap);
+          }
+
+          const doorWrap = document.createElement('div');
+          doorWrap.className = 'door';
+          doorWrap.innerHTML = `
+          <div class="door-flip">
+            <div class="door-panel">
+              <div class="door-panel-inset"></div>
+              <div class="door-knob"></div>
+              <span class="door-title">${door.title || `Door ${i + 1}`}</span>
+            </div>
+              <div class="door-back"></div>
+          </div>`;
+          
+          applyDoorSkin(doorWrap.querySelector('.door-panel'));
+          doorWrap.querySelector('.door-panel').addEventListener('click', (e) => {
+            e.stopPropagation();
+            frame.classList.add('door-open');
+            setTimeout(() => openDoorModal(door), 420);
+          });
+          
+          frame.appendChild(room);
+          frame.appendChild(doorWrap);
+          container.appendChild(frame);
+        });
        }
 
 
