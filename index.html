@@ -673,7 +673,7 @@
       width:100%;
       padding:0 20px;
     }
-    .shelf-header h1{
+    .shelf-header h2{
       font-family:var(--font-display);
       font-size:clamp(28px, 5vw, 48px);
       color:var(--gold-pale);
@@ -682,9 +682,9 @@
       text-align:center;
     }
     .shelf-header p{
-      font-family:var(--font-script);
+      font-family:var(--font-body);
       font-size:clamp(22px, 2.5vw, 34px);
-      color:var(--gold-light);
+      color:var(--parchment-dark, #ddd);
       margin-top:4px;
     }
     .shelf-container{
@@ -2309,10 +2309,10 @@
 
     <section id="contents" class="landing-section align-top"> 
       <div class="parallax-layer"></div>
-      <h2 class="reveal-item">Title of the Shelves</h2>
-          <p class="reveal-item">Choose a book</p>
       <div class="bookshelf-scene" id="bookshelfScene">
         <div class="shelf-header reveal-item">
+          <h2>Title of the Shelves</h2>
+          <p>Choose a book</p>
         </div>
         <div class="shelf-container reveal-item">
           <div class="shelf-row" id="shelfRow1"></div>
