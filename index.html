@@ -1328,13 +1328,30 @@
       border-radius:2px;
       filter:sepia(0.12) saturate(1.05);
     }
-    .plate img, .plate-img-2{
+    .plate-img-3{
+      display:block;
+      width:100%;
+      height:50%;
+      aspect-ratio:16/9;
+      object-fit:contain;
+      background:var(--parchment-shade);
+      border:2px solid var(--gold);
+      outline:1px solid var(--gold-pale);
+      outline-offset:4px;
+      border-radius:2px;
+      filter:sepia(0.12) saturate(1.05);
+    }
+    .plate img, .plate-img-2, .plate-img-3{
       display:block;
       margin-left:auto;
       margin-right:auto;
       max-width:100%;
       height:auto;
       object-fit:contain;
+    }
+    .plate-figure img{
+      margin-top:10px;
+      margin-bottom:10px;
     }
     .plate-figure img{
       margin-top:10px;
@@ -3727,7 +3744,8 @@
                fig: '',
                title: '',
                image: '',
-               image_2:'https://i.imgur.com/oAUucRs.jpeg',
+               image_2:'',
+               image_3:'https://i.imgur.com/oAUucRs.jpeg',
                imageCaption: '',
                desc: '',
                stack: '',
@@ -3738,6 +3756,7 @@
                title: '',
                image: '',
                image_2:'https://i.imgur.com/yPu9wxl.png',
+               image_3:'https://i.imgur.com/oAUucRs.jpeg',
                imageCaption: '',
                desc: '',
                stack: '',
@@ -4587,6 +4606,11 @@
         if (item.title) html += `<h3 class="plate-title">${item.title}</h3>`;
         if (item.image) html += `<figure class="plate-figure"><img class="plate-img" src="${item.image}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
         if (item.image_2) html += `<figure class="plate-figure"><img class="plate-img-2" style="justify-content:center; align-items:center; text-align:center;" src="${item.image_2}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
+        if (Array.isArray(item.images)){
+          itm.images.forEach((src => {
+            html+= `<figure class="plate-image"><img class="plate-img" src="${src}" alt="${item.title || ''} screenshot=" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
+          }));
+        }       
         if (item.desc) html += `<p class="plate-desc">${item.desc}</p>`;
         if (item.stack) html += `<p class="plate-stack">${item.stack}</p>`;
         if (item.link) html += `<a class="plate-link" href="${item.link}">View the work &arr</a>`;
