@@ -1718,7 +1718,7 @@
       cursor:grab;
       user-select:none;
       touch-action:none;
-      transition:transform 0.25s cubic-bezier(0.34,1..56,0.64,1);
+      transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
     }
     .mag-glass:hover{
       transform:scale(1.05);
@@ -1865,6 +1865,19 @@
     }
     .book-table th[data-align="left"], .book-table td[data-align="left"]{
       text-align:left;
+    }
+    .book-table.plain thead th{
+      background:transparent;
+      color:var(--ink);
+      border:1px solid var(--ink);
+      text-transform:none;
+    }
+    .book-table.plain tbody td{
+       border:1px solid var(--ink);
+    }
+    .book-table.plain tbody tr:nth-child(even),
+    .book-table.plain tbody tr:hover{
+       background:transparent;
     }
     .fs-section-header{
       display:flex;
@@ -4618,63 +4631,134 @@
           year:'2026',
 
           fstitle:'Observations of Teaching - Learning in Actual School Environment',
-          titleEpisode:'Focus on Gender, Needs, Strengths, Interests, Experiences Language, Race, Culture, Religion, Socio-economic Status, Difficult Circumstances, and Indigenous People',
-          coverQoute:'Every story begins with a single line of code.',
-          titlePageEyebrow:'Episode 1',
+          titleEpisode:'Preparing for Teaching and Learning',
+          coverQoute:'',
+          titlePageEyebrow:'Episode 9',
           endingMessage:'Thank you for reading',
           backCoverTitle:'The End',
           copyright:'&copy; MMXXVI',
 
           quotes: {
-            cover: 'Every story begins with a single line of code.',
+            cover: '',
             pages: [
-              'The only way to do great work is to love what you do.',
-              'Success is not the key to happiness. Happiness is the key to success.',
-              'The best way to predict the future is to invent it.',
-              'Dont watch the clock; do what it does. Keep going.',
-              'The harder I work, the luckier I get.',
-              'Success is not final, failure is not fatal: It is the courage to continue that counts.',
+              
             ]
           },
           chapters: [
             {name:'Introductory Framework', type:'introductory_framework'},
-            {name:'Activity_3.1', type:'activity_1'},
-            {name:'Activity_3.2', type:'activity_2'},
-            {name:'Rubrics', type:'rubrics'},
+            {name:'Activity_9.1', type:'activity_1'},
+            {name:'Activity_9.2', type:'activity_2'},
+            {name:'Activity_9.3', type:'activity_3'},
+            {name:'Rubric', type:'rubric'},
             ],
           introductory_framework: [
-            `<p>This is my portfolio.</p>`
-            ],
-          activity_1: [
-            makeFSFormImage('https://i.imgur.com/ojlu03z.jpg', 'Activity 6.1 Form'),
-            pageBreak(),
-            makeFSSectionImage('https://i.imgur.com/06UWDGQ.jpg', 'Observe Section'),
-
-            makeFSSectionImage('https://i.imgur.com/uTIKUGh.jpg', 'Analyze Section'),
-
-            makeFSSectionImage('https://i.imgur.com/lccOGYA.jpg', 'Reflect Section'),
-
-            `<p>Basta activity ito.</p>`,
-            ],
-          activity_2: [
-            `<p>Pangalawang activity ito.</p>`,
-            ],
-          rubrics: [
-            `<p>Pangatlong activity ito.</p>`,
+            makeFSSectionHeader('SPARK YOUR INTEREST', '👁'),
+            `<p>This Episode emphasizes the principles of learning which must be applied to ensure quality instruction. It also focuses on the intended learning outcomes which set the direction of the lesson. They must be (SMART) Specific, Measurable, Realistic, and Time-bound) and formulated by time-tested principles. it also determines the teaching method used by the Resource Teacher whether (inductive or deductive) which is the practical realization or application of an approach. This episode dovetails with the course on Facilitating Learner-Centered Teaching.</p>`,
+            makeFSSectionHeader('TARGET YOUR LEARNING OUTCOME', '📄'),
+            `<p>At the end of this Episode, I must be able to: <br>➢ Identify the teaching-learning practices that apply or violate the principles of teaching-learning; <br>➢ Determine the guiding principles on lesson objectives/learning outcomes applied in instruction; <br>➢ Judge if lesson objectives/intended learning outcomes are SMART; <br>➢ Determine whether or not the intended learning outcomes are achieved at the end of the lesson; <br>➢ Observe the teaching methods used by the Resource Teacher; and <br>➢ Differentiate the different methods of teaching.</p>`,
+            makeFSSectionHeader('REVISIT THE LEARNING ESSENTIALS ', '👨‍🏫'),
+            `<p>These are the time-tested principles of teaching and learning;</p>`,
+            `<p>❶ Effective learning begins with setting clear expectations and learning outcomes.</p>`,
+            `<p>❷ Learning is an active process. “What I hear, I forget, what I see, I remember; what I do, I understand.”</p>`,
+            `<p>❸ Learning is the discovery of the personal meaning of ideas. Students are allowed to connect what they learned with other concepts to learn with real-world experiences and with their own lives.</p>`,
+            `<p>❹ Learning is a cooperative and collaborative process.</p>`,
+            `<p>A teaching method consists of systematic and orderly steps in the teaching-learning process. It is a practical realization or application of an approach. All methods of teaching can be classified either as deductive (direct) or inductive (indirect).</p>`,
             {
-               fig: 'Fig. 3',
-               title: 'Third Image',
-               image: 'https://i.imgur.com/494TnSC.jpg',
+               fig: '',
+               title: '',
+               image: 'https://i.imgur.com/.jpg',
                image_2:'',
-               imageCaption: 'Basta',
-               desc: 'Haist',
-               stack: 'Secret',
-               link: 'https://imgur.com/494TnSC'
+               imageCaption: '',
+               desc: '',
+               stack: '',
+               link: ''
              },
             ],
+          activity_1: [
+            makeFSFormImage('https://i.imgur.com/.jpg', 'Activity 6.1 Form'),
+            makeFSSectionHeader('OBSERVE', '👀'),
+            `<p>Observe a class with the use of principles of learning given in Revisit the Learning Essentials. I will identify evidence of applications/violations of the principles of learning. I can cite more than one piece of evidence per principle of learning.</p>`,
+            makeTable({
+              caption: '',
+              columns: [
+                {label:'Principles of Learning', width:'30%'},
+                {label:'What did the Resource Teacher do to apply the principle of learning', width:'70%'},
+              ],
+              rows: [
+                ['1. Effective learning begins with the setting of clear and high expectations of learning outcomes.', '• The teacher explain the goals in simple terms before the lesson begins. If the learners are forgetting it, he/she reminds the students during.'],
+              ],
+            }),
+            pageBreak(),
+            makeTable({
+              caption: '',
+              columns: [
+                {label:'Principles of Learning', width:'30%'},
+                {label:'What did the Resource Teacher do to apply the principle of learning', width:'70%'},
+              ],
+              rows: [
+                ['2. Learning is an active process.', '• The teacher ensure that students are mentally and physically engaging with the task and discussion.'],
+                ['3. The discovery of personal meaning and relevance of ideas.', '• The teacher always use practical examples of observable problems, also give students time to share their own opinions or thoughts.'],
+                ['4. Learning is a cooperative, but a collaborative process. Learning is enhanced in an atmosphere of cooperation and collaboration.', '• The teacher build this environment through group activities in constructing ideas, groupings in solving problems, and open discussions.'],
+              ],
+            }),
+            pageBreak(),
+            makeFSSectionHeader('ANALYZE', '🔍'),
+            `<p>What principles of learning were most applied? least applied?</p>`,
+            `<p style="text-indent:15px;"><b>Most Applied</b><br><u>The most applied principle is “Learning is a cooperative and collaborative process.” Since the presentation is student-led, each presenter belongs to a specific group. They each have their own questions and hold differing opinions on the subject or topic, leading to a great deal of idea construction and sharing.</u></p>`,
+            `<br>`,
+            `<p style="text-indent:15px;"><b>Least Applied</b><br><u>The least applied principle is "Learning is an active process. “What I hear, I forget, what I see, I remember; what I do, I understand.” Since the presentation is student-led, it relies more on verbal communication, with PowerPoint serving as the only instructional material.</u></p>`,
+            `<br>`,
+            `<p>Give instances where this/these principles/s could have been applied?</p>`,
+            `<p style="text-indent:15px;"><u>The least learning principle can be applied by making a collage of random examples from various places or just choose one barangay or municipality and identify its details along with the collage.</u></p>`,
+           pageBreak(),
+            makeFSSectionHeader('REFLECT', '💭'),
+            `<p>From among the principles of learning, which one do you think is the most important?</p>`,
+            `<p style="text-indent:15px;"><u>Among the principles of learning, from my perspective the most important is "Effective learning begins with setting clear expectations and learning outcomes." Because every person has the ability to learn even within their own homes. A person has their own beliefs or develops their own philosophy based on their experiences. Of course, within our own lives, we have some people who we interact with, talk to, and share our sorrows or joys. But what exactly is the purpose of their study if they want to learn something? What is its significance to them? Why do they want to study or understand it? This is where clear expectations and learning outcomes come into play for the learner. Without learning goals, they might develop misconceptions, believing something incorrect rather than the truth; without a roadmap, where would they even begin? What should they prioritize identifying? How can they apply this to their lives? Once they understand the reasons and know what to do before, during, and after studying, the learning principle: "Learning is an active process. 'What I hear, I forget; what I see, I remember; what I do, I understand.'" comes into play. This demonstrates that curiosity must first be ignited to foster the initiative to expand one's knowledge. As Tony Robbins said, "Setting goals is the first step in turning the invisible into visible."</u></p>`,
+            ],
+          activity_2: [
+            makeFSFormImage('https://i.imgur.com/.jpg', 'Activity 6.1 Form'),
+            makeFSSectionHeader('OBSERVE', '👀'),
+            `<p></p>`,
+            `<p></p>`,
+            makeTable({
+              className: 'plain',
+              columns: [
+                {width:'58%', align:'left'},
+                {width:'10%', align:'center'},
+                {width:'10%', align:'center'},
+                {width:'11%', align:'center'},
+                {width:'11%', align:'center'}
+              ],
+              headerRows: [
+                [
+                  {label:'Learning Outcomes', rowspan:2},
+                  {label:'(SMART Objectives)', colspan:2},
+                  {label:'Achieved', colspan:2}
+                ],
+                [
+                  {label:'Yes'}, {label:'No'},
+                  {label:'Yes'}, {label:'No'}
+                ]
+              ],
+              rows: [
+                ['<b>1)</b> Explain how topography and ocean circulation affect climate.', '✔', '', '✔', ''],
+                ['<b>2)</b> Value oceans and landforms as interconnected parts of Earth’s climate system.', '✔', '', '✔', ''],
+                ['<b>3)</b> Trace airflow and ocean-current movement using diagrams.', '✔', '', '✔', '']
+              ]
+            }),
+            `<p></p>`,
+            makeFSSectionHeader('ANALYZE', '🔍'),
+            makeFSSectionHeader('REFLECT', '💭'),
+            ],
+            activity_3: [
+            makeFSFormImage('https://i.imgur.com/.jpg', 'Activity 6.1 Form'),
+            makeFSSectionHeader('OBSERVE', '👀'),
+            makeFSSectionHeader('ANALYZE', '🔍'),
+            makeFSSectionHeader('REFLECT', '💭'),
+            ],
+          rubric: [
             
-           skills: {language: ['CSS', 'HTML', 'JAVASCRIPT']},
-           contact: {email:'rusky0537@gmail.com', github:'kyky-12', linkedin: 'in/kyky-12'}
+            ],
         },
         {
           id:'ep10', 
@@ -5977,35 +6061,44 @@
       }
 
       function makeTable(opts){
-        const {caption = '', columns = [], rows = []} = opts || {};
-
+        const {caption = '', columns = [], rows = [], headerRows = null, className = ''} = opts || {};
+        
         const colgroupHTML = columns.some(c => c.width)
         ? `<colgroup>${columns.map(c => `<col${c.width ? ` style="width:${c.width}"` : ''}>`).join('')}</colgroup>`
           : '';
           
-          const headHTML = columns.length
-          ? `<thead><tr>${columns.map(c => 
-            `<th${c.align ? ` data-align="${c.align}"` : ''}>${c.label || ''}</th>`
-          ).join('')}</tr></thead>`
-          : '';
-
-          const bodyHTML = rows.map(row => 
+          const headSource = headerRows !== null ? headerRows : (columns.length ? [columns] : []);
+          
+          const headHTML = headSource.length
+          ? `<thead>${headSource.map(r =>
+            `<tr>${r.map(c => {
+              const rs = c.rowspan ? ` rowspan="${c.rowspan}"` : '';
+              const cs = c.colspan ? ` colspan="${c.colspan}"` : '';
+              const al = c.align ? ` data-align="${c.align}"` : '';
+              return `<th${rs}${cs}${al}>${c.label || ''}</th>`;
+              }).join('')}</tr>`
+            ).join('')}</thead>`
+            : '';
+            
+            const bodyHTML = rows.map(row =>
             `<tr>${row.map((cell, i) => {
               const isObj = cell && typeof cell === 'object';
               const value = isObj ? cell.value : cell;
               const align = (isObj && cell.align) || (columns[i] && columns[i].align) || '';
-              return `<td${align ? ` data-align="${align}"` : ''}>${value != null ? value : ''}</td>`;
-            }).join('')}</tr>`
-          ).join('');
-
-          return `<div class="book-table-wrap">
-            <table class="book-table">
-              ${caption ? `<caption>${caption}</caption>` : ''}
-              ${colgroupHTML}
-              ${headHTML}
-              <tbody>${bodyHTML}</tbody>
-              </table>
-              </div>`;
+              const rs = isObj && cell.rowspan ? ` rowspan="${cell.rowspan}"` : '';
+              const cs = isObj && cell.colspan ? ` colspan="${cell.colspan}"` : '';
+              return `<td${rs}${cs}${align ? ` data-align="${align}"` : ''}>${value != null ? value : ''}</td>`;
+              }).join('')}</tr>`
+            ).join('');
+            
+            return `<div class="book-table-wrap">
+               <table class="book-table${className ? ' ' + className : ''}">
+                 ${caption ? `<caption>${caption}</caption>` : ''}
+                 ${colgroupHTML}
+                 ${headHTML}
+                 <tbody>${bodyHTML}</tbody>
+                 </table>
+                 </div>`;
       }
 
       function makeFSSectionHeader(title, emoji){
