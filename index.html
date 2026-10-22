@@ -2303,6 +2303,39 @@
         height:120px;
       }
     }
+    .plate-multi{
+      margin-bottom:5px;
+    }
+    .plate-multi-item{
+       margin:0 0 10px;
+    }
+    .plate .plate-multi-img{
+      display:block;
+      width:100%;
+      height:clamp(120px, 20vh, 190px);
+      max-width:100%;
+      object-fit:contain;
+      background:var(--parchment-shade);
+      border:2px solid var(--gold);
+      outline:1px solid var(--gold-pale);
+      outline-offset:4px;
+      border-radius:2px;
+      margin:8px auto 6px;
+    }
+    .plate-multi-title{
+      font-family:var(--font-title);
+      font-size:12px;
+      color:var(--burgundy);
+      text-align:center;
+      margin:0;
+    }
+    .plate .plate-multi-desc{
+      font-size:12px;
+      line-height:1.35;
+      text-align:center;
+      margin:2px 0 0;
+      color:var(--ink-soft);
+    }
 
   </style>
   </head>
@@ -4750,85 +4783,33 @@
             pageBreak(),
             `<p>2. Cite pieces of evidences that these learning outcomes were achieved.</p>`,
              {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
+              title: '',
+              images: [
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''},
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''}
+              ]
+            },
              {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
+              title: '',
+              images: [
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''},
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''}
+              ]
+            },
              {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
+              title: '',
+              images: [
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''},
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''}
+              ]
+            },
              {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
-             {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
-             {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
-             {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
-             {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
+              title: '',
+              images: [
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''},
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''}
+              ]
+            },
             pageBreak(),
             makeFSSectionHeader('ANALYZE', '🔍'),
             `<p>1) Do SMART objectives make a lesson more focused?</p>`,
@@ -4840,20 +4821,32 @@
             activity_3: [
             makeFSFormImage('https://i.imgur.com/.jpg', 'Activity 6.1 Form'),
             makeFSSectionHeader('OBSERVE', '👀'),
-            `<p></p>`,
+            `<p>I will observe one Resource Teacher with the use of this observation sheet. Using the guide questions, I shall reflect on my observations and analysis.</p>`,
             makeTable({
-              caption: 'I will observe one Resource Teacher with the use of this observation sheet. Using the guide questions, I shall reflect on my observations and analysis.',
+              caption: '',
               columns: [
                 {label:'Teacher-centered', width:'10%'},
                 {label:'Student-centered', width:'40%'},
               ],
               rows: [
                 ['Did the teacher lecture all the time? <br> • No, the teacher is not just lecturing all the time.', 'Were students involved in the teaching-learning process? How? Or were they mere passive recipients of instructions? <br> • They are involved in the teaching-learning process by asking questions and discussing some subtopics.'],
+              ],
+            }),
+            pageBreak(),
+             makeTable({
+              caption: '',
+              columns: [
+                {label:'Teacher-centered', width:'10%'},
+                {label:'Student-centered', width:'40%'},
+              ],
+              rows: [
                 ['Was the emphasis on the mastery of the lesson or on the test? Prove. <br> • The mastery of the learners emphasized through oral recitacion.', 'Was the emphasis on the students’ application of the lesson in real life? Give proofs. <br> • Yes, they are giving examples o real life problems that they are seeing in their generation.'],
                 ['Was class atmosphere competitive? Why? <br> • No, the class atmosphere is not competitive.', 'Was class atmospehere collaborative? Why? <br> • Yes, the class atmosphere is collaborative because they are sharing their own ideas when the teacher ask questions, or when they classmates needs ore explanation.'],
                 ['Did teacher focus only on one discipline/subject? <br> • Yes, the teacher applies discipline under agriculture and history.', 'Did teacher connect lesson to other disciplines/subjects? <br> • Yes, the teacher connects the lesson mostly on agricullture and history.'],
               ],
             }),
+            `<br>`,
+            `<br>`,
             `<p>What teaching-learning practice shows that teaching approach was:</p>`,
             `<p>a) Constructivist – connected to past experiences of learners; learners constructed new lesson meanings</p>`,
             `<p>b) Inquiry-based</p>`,
@@ -4878,45 +4871,19 @@
             makeFSSectionHeader('SHOW YOUR LEARNING ARTIFACTS', '🗃️'),
             `<p>Post proofs of learning that you were able to gain in this Episode. You may attach the lesson plan (s) used by your Resource Teacher to show the intended learning outcomes and the method used in class.</p>`,
             {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/8JqctGY.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
-             {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/8JqctGY.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
-             {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/8JqctGY.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
-             {
-               fig: '',
-               title: '',
-               image: '',
-               image_2:'https://i.imgur.com/8JqctGY.jpg',
-               imageCaption: '',
-               desc: '',
-               stack: '',
-               link: ''
-             },
+              title: '',
+              images: [
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''},
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''}
+              ]
+            },
+            {
+              title: '',
+              images: [
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''},
+                {src:'https://i.imgur.com/.jpg', title:'', desc:''}
+              ]
+            },
           ],
           rubric: [
             makeFSSectionHeader('EVALUATE PERFORMANCE TASK', '🗂️'),
@@ -5831,18 +5798,22 @@
         if (item.image) html += `<figure class="plate-figure"><img class="plate-img" src="${item.image}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
         if (item.image_2) html += `<figure class="plate-figure"><img class="plate-img-2" style="justify-content:center; align-items:center; text-align:center;" src="${item.image_2}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
         if (item.image_3) html += `<figure class="plate-figure"><img class="plate-img-3" style="justify-content:center; align-items:center; text-align:center;" src="${item.image_3}" alt="${item.title || ''} screenshot" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
-        if (Array.isArray(item.images)){
-          itm.images.forEach((src => {
-            html+= `<figure class="plate-image"><img class="plate-img" src="${src}" alt="${item.title || ''} screenshot=" loading="lazy"><figcaption>${item.imageCaption || ''}</figcaption></figure>`;
-          }));
-        }       
+        if (Array.isArray(item.images) && item.images.length){
+          html += `<div class="plate-multi">` + item.images.map(im => {
+            const o = typeof im === 'string' ? {src: im} : im;
+            return `<figure class="plate-multi-item">`
+              + (o.title ? `<h4 class="plate-multi-title">${o.title}</h4>` : '')
+              + `<img class="plate-multi-img" src="${o.src}" alt="${o.title || item.title || ''}">`
+              + (o.desc ? `<p class="plate-multi-desc">${o.desc}</p>` : '')
+              + `</figure>`;
+             }).join('') + `</div>`;
+        }  
         if (item.desc) html += `<p class="plate-desc">${item.desc}</p>`;
         if (item.stack) html += `<p class="plate-stack">${item.stack}</p>`;
         if (item.link) html += `<a class="plate-link" href="${item.link}">View the work &arr</a>`;
         html += `</article>`;
         return html;
       }
-
       function next(){
         turnTo(current + 1);
       }
