@@ -5281,12 +5281,11 @@
             `<p>4. Read the guidelines/procedures for borrowing materials. Are these guidelines? procedures posted are available for the users to refer to?</p>`,
             `<p>5. Familiarize yourself with the guidelines and procedures. Take photos of the center (if allowed).</p>`,
             `<p>After you are through with your observation, classify the resources available that you believe? are most useful. Use the activity form provided for you.</p>`,
-            `<br>`,
+            pageBreak(),
             `<p>Name of Center Observed: <u>UCN - Abaño Campus Library</u></p>`,
             `<p>Date of Observation: <u>September 7, 2026</u></p>`,
             `<p>Name of Observer: <u>John Renz I. Vertudazo</u></p>`,
             `<p>Course/Year/School: <u>BSED 4A – Major in Sciences / UCN – Abaño Campus</u></p>`,
-            pageBreak(),
             makeTable({
               caption: 'List of Available Learning Resources',
               columns: [
@@ -5297,6 +5296,17 @@
               rows: [
                 ['1. Print Resources <br> • Academic Books <br> • Journal <br> • Magazines <br> • Literary Books', 'The learners and employees can use, handle, and read them without using any equipment. <br> These are easily accessible inside the library.', 'References for Group or Independent Oral Reporting of both unfamiliar and new topics.'],
                 ['2. Audio Resources <br> • None', 'Unfortunately, our library does not currently hold audio resources in our collection. But with the help of this resource, the learner can develop good listening skills, and storytelling skills.', 'Roleplay and video presentations that music and sound effects can be incorporated.'],
+              ],
+            }),
+            pageBreak(),
+            makeTable({
+              caption: 'List of Available Learning Resources',
+              columns: [
+                {label:'Available Learning Resources (Enumerate in Bullet Form)', width:'35%'},
+                {label:'Characteristics and Unique Capabilities', width:'35%'},
+                {label:'Teaching Approaches where the Resource is Most Useful', width:'30%'},
+              ],
+              rows: [
                 ['3. Non-electronic Visual Resources <br> • Service workflow diagram <br> • Library Bulletin Board <br> • Gender and Development Poster <br> • Philippine E-Journals (poster) <br> • 8S Program Poster', 'Serves as a fixed content, reliable instructional partner in any classroom setting', 'Station rotation to review posters and display charts that act as reminders inside a specific room.'],
                 ['4. ICT Resources <br> • Internet Connection (Wi-Fi) <br> • Public Access Computer <br> • Digital Log Record <br> • OPAC (Online Public Access Computer) <br> • SMART Television', 'These resources enhance the access to various platforms that serve as support material to monitor and improve one’s performance with convenience.', 'Research and Development activities through investigation of open-ended questions, and, finding facts, testing and building new knowledge.'],
               ],
