@@ -1879,6 +1879,15 @@
     .book-table.plain tbody tr:hover{
        background:transparent;
     }
+    .book-table.fixed{
+       table-layout:fixed;
+    }
+    .book-table.fixed th,
+    .book-table.fixed td{
+       overflow-wrap:anywhere;
+       word-break:break-word;
+       padding:5px 4px;
+    }
     .fs-section-header{
       display:flex;
       align-items:center;
@@ -5444,12 +5453,12 @@
             `<p>Analyzing the information, you got from observing the class, surf the internet to select electronic resources, including OERs, social networking sites, and apps with virtual or augmented reality that will be useful in teaching the same lesson. Evaluate the resources you found, using the set of criteria discussed in the Revisit the Learning Essentials part of this Episode. Use the form below to note your analysis and evaluation.</p>`,
             makeTable({
               caption: 'Electronic Resources Evaluation Form',
-              className: 'plain', 
+              className: 'plain fixed', 
               headerRows: [],
               columns: [
-                 {width:'17%'}, {width:'10%'},
+                 {width:'10%'}, {width:'15%'},
                  {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'},
-                 {width:'35%'}
+                 {width:'37%'}
                 ],
                 rows: [
                   [
@@ -5493,13 +5502,13 @@
             }), 
             pageBreak(),
             makeTable({
-              caption: 'Electronic Resources Evaluation Form',
-              className: 'plain', 
+              caption: '',
+              className: 'plain fixed', 
               headerRows: [],
               columns: [
-                 {width:'17%'}, {width:'10%'},
+                 {width:'10%'}, {width:'15%'},
                  {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'},
-                 {width:'35%'}
+                 {width:'37%'}
                 ],
                 rows: [
                   [
