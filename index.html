@@ -5413,6 +5413,54 @@
           activity_3: [
             makeFSFormImage('https://i.imgur.com/.jpg', 'Activity 6.1 Form'),
             makeFSSectionHeader('OBSERVE', '👀'),
+            makeTable({
+              className: 'plain', 
+              headerRows: [],
+              columns: [
+                 {width:'17%'}, {width:'19%'},
+                 {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'}, {width:'6%'},
+                 {width:'28%'}
+                ],
+                rows: [
+                  [
+                    {value:'Grade/Year Level', align:'center'},
+                    {value:'', colspan:8}
+                  ],
+                  [
+                    {value:'Subject Matter/Topic (Based on the class you observed)', align:'center'},
+                    {value:'', colspan:8}
+                  ],
+                  [
+                    {value:'Lesson Objectives/Learning Outcomes', align:'center'},
+                    {value:'', colspan:8}
+                  ],
+                  [
+                    {value:'<b>Name and Type of Electronic Resources</b>', rowspan:2, align:'center'},
+                    {value:'<b>Describe the electronic resource (include author/publisher/source).</b>', rowspan:2, align:'center'},
+                    {value:'<b>Put a check if the resource satisfies this criterion.</b>', colspan:6, align:'center'},
+                    {value:'<b>Describe how you can use it if you were to teach in the class you observed.</b>', rowspan:2, align:'center'}
+                  ],
+                  [
+                    {value:'<b style="font-size:0.8em;">Accurate</b>', align:'center'},
+                    {value:'<b style="font-size:0.8em;">Appropriate</b>', align:'center'},
+                    {value:'<b style="font-size:0.8em;">Clear</b>', align:'center'},
+                    {value:'<b style="font-size:0.8em;">Complete</b>', align:'center'},
+                    {value:'<b style="font-size:0.8em;">Motivating</b>', align:'center'},
+                    {value:'<b style="font-size:0.8em;">Organized</b>', align:'center'}
+                  ],
+                  [
+                    '',
+                    '',
+                    {value:'', align:'center'},
+                    {value:'', align:'center'},
+                    {value:'', align:'center'},
+                    {value:'', align:'center'},
+                    {value:'', align:'center'},
+                    {value:'', align:'center'},
+                    ''
+                  ]
+                ]
+            }), 
             makeFSSectionHeader('ANALYZE', '🔍'),
             makeFSSectionHeader('REFLECT', '💭'),
             ],
