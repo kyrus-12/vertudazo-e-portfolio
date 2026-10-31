@@ -883,6 +883,11 @@
       color:#ffd1a3;
       border:1px solid #8a4a1f;
     }
+    .palette-peach2{
+      background:linear-gradient(90deg, #4a2408, #6b3712, #4a2408);
+      color:#ffd1a3;
+      border:1px solid #8a4a1f;
+    }
     .palette-crocodile{
       background:linear-gradient(90deg, #232b1a, #344022, #232b1a);
       color:#a3b56a;
@@ -6841,9 +6846,7 @@
             {name:'Activity_13.5', type:'activity_5'},
             {name:'Rubric', type:'rubr'},
             {name:'Activity_13.6', type:'activity_6'},
-            {name:'Activity_13.7', type:'activity_7'},
-            {name:'Activity_13.8', type:'activity_8'},
-            {name:'Rubric', type:'rubric'},
+            {name:'Learning Artifacts', type:'artifa'},
             ],
           activity_5: [
             makeFSFormImage('https://i.imgur.com/.jpg', 'Activity 6.1 Form'),
@@ -7273,15 +7276,48 @@
                   {value: '<b style="font-size:0.9em;">Ev</b>', align: 'center'},
                   {value: '<b style="font-size:0.9em;">Cr</b>', align: 'center'}
                 ],
-                ['1.', '', '', '', '', '', '', '', ''],
-                ['2.', '', '', '', '', '', '', '', ''],
-                ['3.', '', '', '', '', '', '', '', ''],
-                ['4.', '', '', '', '', '', '', '', ''],
-                ['5.', '', '', '', '', '', '', '', ''],
-                ['6.', '', '', '', '', '', '', '', ''],
+                ['1. 1. Identify the parts of a compound microscope and describe their functions.', '0.75', '2', '2', '2', '1', '0', '0', '7'],
+              ]
+            }),
+            pageBreak(),
+            makeTable({
+              caption: '',
+              className: 'plain fixed',
+              headerRows: [],
+              columns: [
+                {width: '24%'}, 
+                {width: '10%'}, 
+                {width: '9%'},  
+                {width: '9%'}, 
+                {width: '9%'},  
+                {width: '9%'}, 
+                {width: '9%'},  
+                {width: '9%'},  
+                {width: '12%'}  
+              ],
+              rows: [
+                [
+                  {value: '<b>Learning Outcome</b>', rowspan: 2, align: 'center'},
+                  {value: '<b>No. of Class Hours</b>', rowspan: 2, align: 'center'},
+                  {value: '<b>Cognitive Level</b>', colspan: 6, align: 'center'},
+                  {value: '<b>Total</b>', rowspan: 2, align: 'center'}
+                ],
+                [
+                  {value: '<b style="font-size:0.9em;">Rem</b>', align: 'center'},
+                  {value: '<b style="font-size:0.9em;">Un</b>', align: 'center'},
+                  {value: '<b style="font-size:0.9em;">Ap</b>', align: 'center'},
+                  {value: '<b style="font-size:0.9em;">An</b>', align: 'center'},
+                  {value: '<b style="font-size:0.9em;">Ev</b>', align: 'center'},
+                  {value: '<b style="font-size:0.9em;">Cr</b>', align: 'center'}
+                ],
+                ['2. Recognize cell structures under a microscope (cell membrane, nucleus, cytoplasm, mitochondria, chloroplasts).', '0.75', '1', '3', '2', '2', '1', '0', '9'],
+                ['3. Explain key theoretical principles of microscopy (magnification, resolution, numerical aperture, illumination).', '0.75', '1', '3', '3', '2', '1', '0', '10'],
+                ['4. 4. Demonstrate correct procedures for handling, care, and storing a compound microscope.', '0.25', '1', '1', '1', '1', '0', '0', '4'],
+                ['5. Employ proper techniques to observe/identify cell parts, including wet mounts and oil immersion.', '0.25', '1', '1', '2', '1', '1', '0', '6'],
+                ['6. Recognize unicellular vs. multicellular organisms and create structural models/diagrams.', '0.25', '0', '1', '1', '1', '0', '1', '4'],
                 [
                   {value: '<b>Total</b>'},
-                  '', '', '', '', '', '', '', ''
+                  '3.00', '6', '11', '11', '8', '3', '1', '40'
                 ]
               ]
             }),
@@ -7313,6 +7349,35 @@
             `<p><b>Student B: </b>OO nga.! Nakakainis! (You are right! How annoying!”)</p>`,
             `<p>Did you have a similar experience? Reflect on it. Will the required use of Table of Specifications as guide in test construction solve the problem of misaligned tests?</p>`,
             `<p style="text-indent:15px;"><u>Based on my experience, yes, there are questions that are far from what was actually discussed in the lesson. You find yourself asking, "Where did this come from? We never covered this in class." It is only now that I realize a Table of Specifications should be prepared before constructing an exam. But if there was a Table of Specifications (TOS) and it was important, why wasn't it shown to us, so we’d know what to review? We were just told to review all the lessons. Yet, the exam turned out to be entirely situational, and sometimes the grammar was too complex for a high school student. That kind of situation is overwhelming and traumatic because you must sacrifice other subjects just for that one subject. So, using Table of Specifications as a guide in test construction solves the problem of misaligned tests because its goal is to MATCH (Measure Aims That Curriculum Holds). The TOS were not just a table, it is the blueprint of every teacher to make sure that every test content follows validity and reliability, fair proportions for each item, and balances the levels of difficulty of the whole content. As the motivational quote says, "Reliability is the quality that leads others not just to believe you, but to believe in you."</u></p>`,
+            ],
+          artifa: [
+            `<p>Pangalawang activity ito.</p>`,
+            ],
+        },
+        {
+          id:'ep13.3', 
+          episode:'Field Study 1', 
+          title:'Episode 13.3', 
+          palette:'peach2', 
+          year:'2026',
+
+          fstitle:'Observations of Teaching - Learning in Actual School Environment',
+          titleEpisode:'Assessment OF Learning (Summative Assessment)',
+          coverQoute:'',
+          titlePageEyebrow:'Episode 13.3',
+          endingMessage:'Thank you for reading',
+          backCoverTitle:'The End',
+          copyright:'&copy; MMXXVI',
+
+          quotes: {
+            cover: '',
+            pages: [
+            ]
+          },
+          chapters: [
+            {name:'Activity_13.7', type:'activity_7'},
+            {name:'Activity_13.8', type:'activity_8'},
+            {name:'Rubric', type:'rubric'},
             ],
           activity_7: [
             `<p>Pangalawang activity ito.</p>`,
@@ -7550,6 +7615,7 @@
         darkGray: {parchment:'#e9e9ea', parchmentShade:'#d4d4d6', parchmentDark:'#b8b8ba', ink:'#1c1c1e', inkSoft:'#3a3a3c', inkFaint:'#6e6e73', gold:'#71717a', goldLight:'#9999a1', goldPale:'#c4c4c9', burgundy:'#2f2f33', cover:'#141416', coverLight:'#242426'},
         peach: {parchment:'#fff1e6', parchmentShade:'#ffe0c7', parchmentDark:'#ffc999', ink:'#5a2d0c', inkSoft:'#8a4a1f', inkFaint:'#c17f4e', gold:'#ff8c42', goldLight:'#ffab66', goldPale:'#ffd1a3', burgundy:'#b35a1f', cover:'#4a2408', coverLight:'#6b3712'},
         peach1: {parchment:'#fff1e6', parchmentShade:'#ffe0c7', parchmentDark:'#ffc999', ink:'#5a2d0c', inkSoft:'#8a4a1f', inkFaint:'#c17f4e', gold:'#ff8c42', goldLight:'#ffab66', goldPale:'#ffd1a3', burgundy:'#b35a1f', cover:'#4a2408', coverLight:'#6b3712'},
+        peach2: {parchment:'#fff1e6', parchmentShade:'#ffe0c7', parchmentDark:'#ffc999', ink:'#5a2d0c', inkSoft:'#8a4a1f', inkFaint:'#c17f4e', gold:'#ff8c42', goldLight:'#ffab66', goldPale:'#ffd1a3', burgundy:'#b35a1f', cover:'#4a2408', coverLight:'#6b3712'},
         crocodile: {parchment:'#eef0df', parchmentShade:'#dde0c0', parchmentDark:'#c3c79a', ink:'#2b3321', inkSoft:'#4f5c3b', inkFaint:'#7c8a60', gold:'#5c6b2f', goldLight:'#75873d', goldPale:'#a3b56a', burgundy:'#3e4a22', cover:'#232b1a', coverLight:'#344022'},
         cantaloupe: {parchment:'#fff4e0', parchmentShade:'#ffe4b0', parchmentDark:'#ffcc80', ink:'#6b3a00', inkSoft:'#a35d00', inkFaint:'#d98f33', gold:'#ff9f1c', goldLight:'#ffb347', goldPale:'#ffd27f', burgundy:'#cc6a00', cover:'#5c3300', coverLight:'#7a4400'},
         pewter: {parchment:'#eceef0', parchmentShade:'#d8dce0', parchmentDark:'#b8c0c8', ink:'#2a2f35', inkSoft:'#4a525a', inkFaint:'#7a8590', gold:'#8a95a0', goldLight:'#a3aeb8', goldPale:'#c5ccd3', burgundy:'#3f4750', cover:'#1f2327', coverLight:'#2e3338'},
@@ -7737,7 +7803,7 @@
       function renderBookshelf(){
         const row1 = document.getElementById('shelfRow1');
         const row2 = document.getElementById('shelfRow2');
-        const splitAt = 8;
+        const splitAt = 11;
         booksData.forEach((book, i) => {
           const spine = document.createElement('div');
           spine.className = `book-spine palette-${book.palette}`;
