@@ -2105,7 +2105,7 @@
       display:flex;
       align-items:flex-end;
       justify-content:center;
-      background-color:var(--burgundy);
+      background-color:#000;
       box-shadow:inset 0 0 10px rgba(0,0,0,0.25);
     }
     .door-room-caption{
@@ -9577,7 +9577,6 @@
 
           const room = document.createElement('div');
           room.className = 'door-room';
-          applyDoorSkin(room);
           if (door.caption){
             const cap = document.createElement('div');
             cap.className = 'door-room-caption';
