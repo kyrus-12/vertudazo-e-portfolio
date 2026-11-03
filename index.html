@@ -2510,6 +2510,7 @@
         <div class="mag-view" id="magView"></div>
       </div>
       <div class="mag-handle"></div>
+    </div>
 
     <script>
       const booksData = [
@@ -8534,7 +8535,7 @@
         },
         {
           title:'8',
-          image:'',
+          image:'https://i.imgur.com/7AX0fiK.gif',
           color:'#ef4444',
           caption:'https://i.imgur.com/7AX0fiK.gif',
           content: {
@@ -9569,6 +9570,7 @@
           frame.style.animationDelay = `${i * 0.1}s`;
 
           const applyDoorSkin = (el) => {
+            el.style.backgroundColor = 'door.color || var(--burgundy)';
             if (door.image && door.image.trim() !== ''){
               el.style.backgroundImage = `url('${door.image}')`;
               el.style.backgroundSize = 'contain';
