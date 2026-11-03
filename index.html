@@ -8537,7 +8537,7 @@
           title:'',
           image:'https://i.imgur.com/7AX0fiK.gif',
           color:'#ef4444',
-          caption:'https://i.imgur.com/7AX0fiK.gif',
+          caption:'',
           content: {
             text:'In this episode, while making observations and answering the questions on my worksheet, I suddenly wondered if I could actually handle it, and I felt a sense of exhaustion. I realized, wouldn’t this just make things difficult for me? I’m the type of person who likes to incorporate lots of creative elements; if I have to use coding to create my instructional materials, how would I even manage my time? Between preparing lesson plans, planning activities, coding, and then practicing with my learning materials and the flow of the lesson, since that’s a lot to handle.  I suddenly asked myself: there’s PowerPoint, Canva, and other platforms I could use to make my work easier, so why am I putting myself through all this trouble instead of just using those? The thing is, I have ideas that PowerPoint and Canva simply cannot accommodate. I also have certain activities in mind that don’t quite fit the capabilities of existing platforms. Consequently, these issues present both an opportunity and a challenge: an opportunity to explore further using tools like PowerPoint and Canva to explain topics, and a challenge to build and create something within my timeframe, aligned with my objectives, and feasible to execute within the limited time available in the classroom.',
             images:'',
@@ -9570,7 +9570,7 @@
           frame.style.animationDelay = `${i * 0.1}s`;
 
           const applyDoorSkin = (el) => {
-            el.style.backgroundColor = 'door.color || var(--burgundy)';
+            el.style.backgroundColor = door.color || 'var(--burgundy)';
             if (door.image && door.image.trim() !== ''){
               el.style.backgroundImage = `url('${door.image}')`;
               el.style.backgroundSize = 'contain';
