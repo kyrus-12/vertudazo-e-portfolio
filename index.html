@@ -274,7 +274,7 @@
     }
     #home .parallax-layer{
       background:linear-gradient(180deg, rgba(20,12,8,0.55) 0%, rgba(20,12,8,0.65) 100%),
-      url('https://i.imgur.com/heAIKbg.jpeg') center/cover no-repeat;
+      url('https://i.imgur.com/heAIKbg.jpeg') center/contain no-repeat;
     }
     #home .home-text{
       text-align:center;
@@ -2406,7 +2406,7 @@
     <section id="introduction" class="landing-section align-top">
       <div class="parallax-layer"></div>
       <h2 class="reveal-item">Introduction</h2>
-      <p class="reveal-item">Introduction here.</p>
+      <p class="reveal-item">The Earth's atmosphere, especially the ozone layer in the stratosphere provides protection that absorbs, and blocks harmful ultraviolet (UV) radiation from the Sun, to prevent skin damage and DNA destruction.  People can't see the ozone layer from the ground yet all living organisms benefit from the defense it provides. In a similar way, educators serve as an unseen protective barrier for their students. Teachers protect students from failing, getting involved in bad habits, and discourage pursuing their dreams due to family problems, effects of disaster, poverty, unfair system, and others. Each educator encourages learners by providing guidance throughout their journey as their adviser or subject teacher. Students who are tired and thriving for getting good grades, also the parents who can't make it to attend in PTA meetings or didn't go in school due to busy schedule on their work might not notice the effort of teacher, yet both learners and families benefits from the supervision of teachers in the potential of the learners towards success. Furthermore, this portfolio showcases the expe-RENZ's of the author during the Field Study 1 entitled “Observation of Teaching-Learning in Actual School Environment.” This field study highlights the foundations in creating a fair and safe classroom environment for diverse learners that has various learning styles and preferences. It includes familiarization of the physical and spatial environment of a classroom in order to design better classroom layout. Also, creating classroom routines and classroom rules to have organization and proper system inside the school. Additionally, it details the calculation of table of specifications and report card grades to emphasize the process of proper way to develop questions for tests and fair grading practices. In general, this course allows the future educator to be aware and foresee the possible challenges once they become a teacher in the future. It hones the philosophy that the educator wants to possess while giving a glimpse of reality in the education field.</p>
     </section>
 
     <section id="about" class="landing-section align-top">
@@ -9568,7 +9568,7 @@
           const applyDoorSkin = (el) => {
             if (door.image && door.image.trim() !== ''){
               el.style.backgroundImage = `url('${door.image}')`;
-              el.style.backgroundSize = 'cover';
+              el.style.backgroundSize = 'contain';
               el.style.backgroundPosition = 'center';
             } else {
               el.style.backgroundColor = door.color || 'var(--burgundy)';
