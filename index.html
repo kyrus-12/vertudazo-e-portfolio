@@ -1723,7 +1723,7 @@
       .photo-half{
         display:block;
         width:100%;
-        max-width:500px;
+        max-width:350px;
         aspect-ratio:11 / 9;
         margin:0 auto 14px;
       }
@@ -9067,16 +9067,29 @@
         el.classList.add('split-text', isShort ? 'text-short' : 'text-long');
         el.classList.remove('reveal-item');
         const perLetterDelay = isShort ? 0.05 : 0.008;
-        [...text].forEach((ch, i) => {
-          const span = document.createElement('span');
-          span.className = 'letter';
-          span.textContent = ch === ' ' ? '\u00A0' : ch;
-          const ty = (Math.random() * 30 + 15).toFixed(0);
-          const rot = (Math.random() * 34 - 17).toFixed(0);
-          span.style.setProperty('--ty', ty + 'px');
-          span.style.setProperty('--rot', rot + 'deg');
-          span.style.transitionDelay = (i * perLetterDelay) + 's';
-          el.appendChild(span);
+        let i = 0;
+        text.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)){
+            el.appendChild(document.createTextNode(' '));
+            i++;
+            return;
+          }
+          const word = document.createElement('span');
+          word.className = 'word';
+          [...part].forEach((ch) => {
+            const span = document.createElement('span');
+            span.className = 'letter';
+            span.textContent = ch;
+            const ty = (Math.random() * 30 + 15).toFixed(0);
+            const rot = (Math.random() * 34 - 17).toFixed(0);
+            span.style.setProperty('--ty', ty + 'px');
+            span.style.setProperty('--rot', rot + 'deg');
+            span.style.transitionDelay = (i * perLetterDelay) + 's';
+            word.appendChild(span);
+            i++;
+          });
+          el.appendChild(word);
         });
       }
       document.querySelectorAll('#home h1, #home p, #about h2, #image h2').forEach(splitIntoLetters);
