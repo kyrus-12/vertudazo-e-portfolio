@@ -1722,9 +1722,11 @@
       }
       .photo-half{
         display:block;
-        width:100%;
+        width:100vw;
+        max-width:none;
         height:auto;
-        margin:0 auto 14px;
+        aspect-ratio: 11 / 9;
+        margin:0 calc(50% - 50vw) 14px;
       }
     }
     .photo-half{
