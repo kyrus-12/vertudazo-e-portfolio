@@ -1731,6 +1731,17 @@
     }
     .photo-half{
       display:none;
+      width:min(100%, 480px);  
+      max-width:none;
+      height:auto;
+      aspect-ratio:11 / 9;
+      margin:0 auto 14px;
+    }
+    @media (max-width:720px){
+      .photo-half{
+        width:100vw;            
+        margin:0 calc(50% - 50vw) 14px;
+      }
     }
     @media (prefers-reduced-motion: reduce){
       .sheet{
