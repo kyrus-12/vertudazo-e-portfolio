@@ -8765,15 +8765,14 @@
           spine.innerHTML = `<div class="spine-band top"></div><span class="spine-episode">${book.episode}</span><span class="spine-title">${book.title}</span><span class="spine-ornament">෴</span><div class="spine-band bottom"></div>`;
           spine.addEventListener('click', () => openBook(book));
           if (i < splitAt) {row1.appendChild(spine);} else {row2.appendChild(spine)};
-          spine.addEventListener('click', () => {
-            showButterflyLoader();
-            setTimeout(() => {
-              hideButterflyLoader();
-              openBook(book);
-            }, 1800); 
-          });
-          if (i < half) row1.appendChild(spine); else row2.appendChild(spine);
         });
+        spine.addEventListener('click', () => {
+  showButterflyLoader();
+  setTimeout(() => {
+    hideButterflyLoader();
+    openBook(book);
+  }, 1800); 
+          });
       }
 
       function applyPalette(name){
