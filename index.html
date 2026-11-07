@@ -502,7 +502,6 @@
       font-family:var(--font-body);
       font-size:clamp(16px, 2vw, 20px);
       color:var(--parchment-dark, #ddd);
-      max-width:900px;
       line-height:1.7;
       max-width:1000px;
     }
@@ -520,9 +519,10 @@
       max-width:none;
     }
     .certificate-img{
-      flex:1 1 45%;
-      max-width:50%;
-      height:45%;
+      flex:1 1 auto;
+      max-width:500px;
+      height:600px;
+      max-width:100%;
       object-fit:contain;
       border:2px solid var(--gold);
       border-radius:6px;
