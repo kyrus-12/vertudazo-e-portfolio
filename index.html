@@ -565,10 +565,9 @@
     }
     .shelf-header p{
       font-family:var(--font-body);
-      font-size:clamp(16px, 2vw, 20px);
+      font-size:clamp(22px, 2.5vw, 34px);
       color:var(--parchment-dark, #ddd);
       margin-top:4px;
-      max-width:1000px;
     }
     .shelf-container{
       position:relative;
@@ -2615,7 +2614,7 @@
         <div class="spine-shadow"></div>
         <div class="book" id="book"></div>
       </div>
-      <div class="hint" id="hint"></div>
+      <div class="hint" id="hint">Swipe to turn a page.</div>
       <div class="controls">
         <button class="ctrl-btn" id="btnPrev" aria-label="Previous page">⬅️</button>
         <span class="page-indicator" id="pageIndicator">Cover</span>
@@ -8764,16 +8763,17 @@
           spine.className = `book-spine palette-${book.palette}`;
           spine.style.animationDelay = `${i * 0.1}s`;
           spine.innerHTML = `<div class="spine-band top"></div><span class="spine-episode">${book.episode}</span><span class="spine-title">${book.title}</span><span class="spine-ornament">෴</span><div class="spine-band bottom"></div>`;
-          spine.addEventListener('click', () => {
+          spine.addEventListener('click', () => openBook(book));
           if (i < splitAt) {row1.appendChild(spine);} else {row2.appendChild(spine)};
-           showButterflyLoader();
-           setTimeout(() => {
-            hideButterflyLoader();
-            openBook(book);
-          }, 1800); 
+          spine.addEventListener('click', () => {
+            showButterflyLoader();
+            setTimeout(() => {
+              hideButterflyLoader();
+              openBook(book);
+            }, 1800); 
+          });
+          if (i < half) row1.appendChild(spine); else row2.appendChild(spine);
         });
-        if (i < half) row1.appendChild(spine); else row2.appendChild(spine);
-      });
       }
 
       function applyPalette(name){
