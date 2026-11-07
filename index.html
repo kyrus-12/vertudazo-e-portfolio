@@ -356,17 +356,18 @@
         font-size:clamp(14px, 2vw, 20px);
       }
     }
-    #about{
-      justify-content:center;
-      align-items:center;
-      gap:40px;
-      width:100%;
-      max-width:100%;
-      margin:0 auto;
-      flex:1 1 0;
-      min-width:0;
-      display:flex;
-      flex-direction:column;
+    #about .home-header{
+      padding-left: 0;
+      padding-right: 0;
+      max-width: 1000px;     
+      width: 100%;
+      margin: 0 auto;
+      justify-content: center;
+    }
+    #about .home-text{
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
     }
     #about .parallax-layer{
       background:
@@ -391,12 +392,8 @@
       font-family:var(--font-body);
       font-size:clamp(16px, 2vw, 20px);
       color:var(--parchment-dark, #ddd);
-      max-width:95%;
+      max-width:100%;
       line-height:1.7;
-    }
-    #about .home-header{
-      padding-left: clamp(60px, 30vw, 355px);
-      padding-right: clamp(24px, 8vw, 140px);
     }
     #contents{
       padding:170px;
