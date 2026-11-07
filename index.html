@@ -385,6 +385,9 @@
       max-width:100%;
       line-height:1.7;
     }
+    #about{
+      padding-left: clamp(24px, 8vw, 140px); 
+    }
     #contents{
       padding:170px;
       min-height:100vh;
@@ -1490,6 +1493,9 @@
       pointer-events:none;
     }
     @media (max-width:720px){
+      #about{
+        padding-left: 0; 
+      }
       .shelf-row{
         gap:6px;
         padding:16px 12px 10px;
