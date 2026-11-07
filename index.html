@@ -8926,6 +8926,7 @@
       let animating = false;
 
       function openBook(book){
+        showButterflyLoader();
         currentBook = book;
         applyPalette(book.palette);
         const built = buildBookHTML(book);
@@ -8942,6 +8943,7 @@
         document.body.classList.add('no-scroll');
 
         render();
+        hideButterflyLoader();
       }
 
       function closeBook(){
