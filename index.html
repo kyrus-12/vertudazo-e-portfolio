@@ -496,6 +496,28 @@
       line-height:1.7;
       max-width:1000px;
     }
+    .certificate-layout{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:40px;
+      width:100%;
+      max-width:1200px;
+    }
+    .certificate-layout p{
+      flex:1 1 50%;
+      text-align:left;      
+      max-width:none;
+    }
+    .certificate-img{
+      flex:1 1 45%;
+      max-width:45%;
+      height:auto;
+      object-fit:contain;
+      border:2px solid var(--gold);
+      border-radius:6px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.5);
+    }
     #retrospection{
       text-align:center;
     }
@@ -1495,6 +1517,16 @@
     @media (max-width:720px){
       #about{
         padding-left: 0; 
+      }
+      .certificate-layout{
+        flex-direction:column;
+        gap:20px;
+      }
+      .certificate-layout p,
+      .certificate-img{
+        flex:none;
+        max-width:100%;
+        width:100%;
       }
       .shelf-row{
         gap:6px;
@@ -2583,7 +2615,10 @@
     <section id="certificate" class="landing-section align-top">
       <div class="parallax-layer"></div>
       <h2 class="reveal-item">Certificate</h2>
+      <div class="certificate-layout"></div>
       <p class="reveal-item">Driven by the belief that “every finished milestone builds the foundation for the teacher you aim to become,” this section showcases the official Certificate of Completion for Field Study 1, earned after successfully finishing observations of teaching‑learning within an actual school environment, and it serves as tangible proof of dedication, commitment, and professionalism demonstrated throughout the field immersion, marking a key milestone toward meeting the program’s requirements for aspiring educators.</p>
+      <img class="certificate-img reveal-item" src="YOUR_IMAGE_URL.jpg" alt="Certificate of Completion">
+      </div>
     </section>
 
     <section id="retrospection" class="landing-section align-top">
