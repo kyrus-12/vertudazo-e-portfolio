@@ -2290,10 +2290,203 @@
       .filmstrip-frame-item-v{ height:clamp(140px, 34vw, 220px); }
     }
 
+
+    .butterfly-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26, 15, 10, 0.93);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    .butterfly-loader.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      width: var(--orbit-size);
+      height: var(--orbit-size);
+      border-radius: 50%;
+      animation: bf-orbit var(--orbit-dur) linear infinite;
+      animation-delay: var(--orbit-delay, 0s);
+    }
+    .orbit-ring:nth-child(even) {
+      animation-direction: reverse;
+    }
+
+        .butterfly-wrap {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      color: var(--bf-color);
+      transform: translateX(-50%) scale(var(--bf-scale));
+      transform-origin: center bottom;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.45));
+    }
+
+    .bf-svg {
+      width: 52px;
+      height: 52px;
+      display: block;
+      overflow: visible;
+    }
+
+    .wing-l {
+      transform-origin: 32px 34px;
+      animation: bf-flap-l var(--flap-dur) ease-in-out infinite alternate;
+    }
+    .wing-r {
+      transform-origin: 32px 34px;
+      animation: bf-flap-r var(--flap-dur) ease-in-out infinite alternate;
+    }
+
+    @keyframes bf-orbit {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes bf-flap-l {
+      from { transform: scaleX(1) rotate(0deg); }
+      to   { transform: scaleX(0.25) rotate(-8deg); }
+    }
+    @keyframes bf-flap-r {
+      from { transform: scaleX(1) rotate(0deg); }
+      to   { transform: scaleX(0.25) rotate(8deg); }
+    }
+
+    .bf-sparkle {
+      position: absolute;
+      left: var(--sp-x);
+      top: var(--sp-y);
+      width: 6px;
+      height: 6px;
+      background: var(--gold-pale);
+      border-radius: 50%;
+      box-shadow: 0 0 10px 3px rgba(230, 200, 110, 0.6);
+      animation: bf-sparkle var(--sp-dur) ease-in-out infinite;
+      animation-delay: var(--sp-delay, 0s);
+      opacity: 0;
+    }
+    @keyframes bf-sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50%      { opacity: 1; transform: scale(1); }
+    }
+
+    .loader-text {
+      position: absolute;
+      bottom: 16%;
+      font-family: var(--font-script);
+      font-size: clamp(26px, 3.5vw, 40px);
+      color: var(--gold-pale);
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      animation: bf-pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes bf-pulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50%      { opacity: 1;   transform: scale(1.06); }
+    }
+
+    @media (max-width: 640px) {
+      .orbit-ring:nth-child(4),
+      .orbit-ring:nth-child(5) { display: none; }
+      .butterfly-wrap { --bf-scale: 1.1 !important; }
+    }
+
   </style>
   </head>
   
   <body>
+
+    <div class="butterfly-loader" id="butterflyLoader">
+  
+      <div class="orbit-ring" style="--orbit-size:110px;--orbit-dur:2.2s;--orbit-delay:0s;">
+        <div class="butterfly-wrap" style="--flap-dur:.28s;--bf-color:#ff6b6b;--bf-scale:1.3;">
+          <svg class="bf-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
+            
+            <path class="wing-l" d="M30 34c-8-2-18-8-20-16-1-5 4-8 8-6 5 3 8 10 10 16 1 4 0 6 2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-l" d="M30 34c-6 2-12 8-14 14-1 4 3 7 7 5 4-2 7-8 7-14 0-3-1-5 0-5z" fill="currentColor" opacity=".75"/>
+            
+            <path class="wing-r" d="M34 34c8-2 18-8 20-16 1-5-4-8-8-6-5 3-8 10-10 16-1 4 0 6-2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-r" d="M34 34c6 2 12 8 14 14 1 4-3 7-7 5-4-2-7-8-7-14 0-3 1-5 0-5z" fill="currentColor" opacity=".75"/>
+                  <ellipse cx="32" cy="34" rx="1.8" ry="10" fill="#2c1810" stroke="none"/>
+            <circle cx="32" cy="23" r="2.2" fill="#2c1810" stroke="none"/>
+              <path d="M31 22q-3-6-6-8M33 22q3-6 6-8" stroke="currentColor" stroke-width="1" fill="none" opacity=".8"/>
+          </svg>
+        </div>
+      </div>
+
+        <div class="orbit-ring" style="--orbit-size:180px;--orbit-dur:3s;--orbit-delay:.2s;">
+        <div class="butterfly-wrap" style="--flap-dur:.35s;--bf-color:#4ecdc4;--bf-scale:1.6;">
+          <svg class="bf-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path class="wing-l" d="M30 34c-8-2-18-8-20-16-1-5 4-8 8-6 5 3 8 10 10 16 1 4 0 6 2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-l" d="M30 34c-6 2-12 8-14 14-1 4 3 7 7 5 4-2 7-8 7-14 0-3-1-5 0-5z" fill="currentColor" opacity=".75"/>
+            <path class="wing-r" d="M34 34c8-2 18-8 20-16 1-5-4-8-8-6-5 3-8 10-10 16-1 4 0 6-2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-r" d="M34 34c6 2 12 8 14 14 1 4-3 7-7 5-4-2-7-8-7-14 0-3 1-5 0-5z" fill="currentColor" opacity=".75"/>
+            <ellipse cx="32" cy="34" rx="1.8" ry="10" fill="#2c1810" stroke="none"/>
+            <circle cx="32" cy="23" r="2.2" fill="#2c1810" stroke="none"/>
+            <path d="M31 22q-3-6-6-8M33 22q3-6 6-8" stroke="currentColor" stroke-width="1" fill="none" opacity=".8"/>
+          </svg>
+        </div>
+      </div>
+
+        <div class="orbit-ring" style="--orbit-size:250px;--orbit-dur:3.8s;--orbit-delay:.4s;">
+        <div class="butterfly-wrap" style="--flap-dur:.32s;--bf-color:#ffe66d;--bf-scale:1.9;">
+          <svg class="bf-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path class="wing-l" d="M30 34c-8-2-18-8-20-16-1-5 4-8 8-6 5 3 8 10 10 16 1 4 0 6 2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-l" d="M30 34c-6 2-12 8-14 14-1 4 3 7 7 5 4-2 7-8 7-14 0-3-1-5 0-5z" fill="currentColor" opacity=".75"/>
+            <path class="wing-r" d="M34 34c8-2 18-8 20-16 1-5-4-8-8-6-5 3-8 10-10 16-1 4 0 6-2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-r" d="M34 34c6 2 12 8 14 14 1 4-3 7-7 5-4-2-7-8-7-14 0-3 1-5 0-5z" fill="currentColor" opacity=".75"/>
+            <ellipse cx="32" cy="34" rx="1.8" ry="10" fill="#2c1810" stroke="none"/>
+            <circle cx="32" cy="23" r="2.2" fill="#2c1810" stroke="none"/>
+            <path d="M31 22q-3-6-6-8M33 22q3-6 6-8" stroke="currentColor" stroke-width="1" fill="none" opacity=".8"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="orbit-ring" style="--orbit-size:320px;--orbit-dur:4.6s;--orbit-delay:.6s;">
+        <div class="butterfly-wrap" style="--flap-dur:.4s;--bf-color:#a18cd1;--bf-scale:2.2;">
+          <svg class="bf-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path class="wing-l" d="M30 34c-8-2-18-8-20-16-1-5 4-8 8-6 5 3 8 10 10 16 1 4 0 6 2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-l" d="M30 34c-6 2-12 8-14 14-1 4 3 7 7 5 4-2 7-8 7-14 0-3-1-5 0-5z" fill="currentColor" opacity=".75"/>
+            <path class="wing-r" d="M34 34c8-2 18-8 20-16 1-5-4-8-8-6-5 3-8 10-10 16-1 4 0 6-2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-r" d="M34 34c6 2 12 8 14 14 1 4-3 7-7 5-4-2-7-8-7-14 0-3 1-5 0-5z" fill="currentColor" opacity=".75"/>
+            <ellipse cx="32" cy="34" rx="1.8" ry="10" fill="#2c1810" stroke="none"/>
+            <circle cx="32" cy="23" r="2.2" fill="#2c1810" stroke="none"/>
+            <path d="M31 22q-3-6-6-8M33 22q3-6 6-8" stroke="currentColor" stroke-width="1" fill="none" opacity=".8"/>
+          </svg>
+        </div>
+      </div>
+
+        <div class="orbit-ring" style="--orbit-size:390px;--orbit-dur:5.4s;--orbit-delay:.8s;">
+        <div class="butterfly-wrap" style="--flap-dur:.3s;--bf-color:#ff9f43;--bf-scale:2.5;">
+          <svg class="bf-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path class="wing-l" d="M30 34c-8-2-18-8-20-16-1-5 4-8 8-6 5 3 8 10 10 16 1 4 0 6 2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-l" d="M30 34c-6 2-12 8-14 14-1 4 3 7 7 5 4-2 7-8 7-14 0-3-1-5 0-5z" fill="currentColor" opacity=".75"/>
+            <path class="wing-r" d="M34 34c8-2 18-8 20-16 1-5-4-8-8-6-5 3-8 10-10 16-1 4 0 6-2 6z" fill="currentColor" opacity=".9"/>
+            <path class="wing-r" d="M34 34c6 2 12 8 14 14 1 4-3 7-7 5-4-2-7-8-7-14 0-3 1-5 0-5z" fill="currentColor" opacity=".75"/>
+            <ellipse cx="32" cy="34" rx="1.8" ry="10" fill="#2c1810" stroke="none"/>
+            <circle cx="32" cy="23" r="2.2" fill="#2c1810" stroke="none"/>
+            <path d="M31 22q-3-6-6-8M33 22q3-6 6-8" stroke="currentColor" stroke-width="1" fill="none" opacity=".8"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="bf-sparkle" style="--sp-x:20%;--sp-y:30%;--sp-dur:2s;--sp-delay:0s;"></div>
+      <div class="bf-sparkle" style="--sp-x:80%;--sp-y:25%;--sp-dur:2.5s;--sp-delay:.4s;"></div>
+      <div class="bf-sparkle" style="--sp-x:70%;--sp-y:70%;--sp-dur:3s;--sp-delay:.8s;"></div>
+      <div class="bf-sparkle" style="--sp-x:30%;--sp-y:75%;--sp-dur:2.2s;--sp-delay:1.2s;"></div>
+      <div class="bf-sparkle" style="--sp-x:50%;--sp-y:50%;--sp-dur:1.8s;--sp-delay:.2s;"></div>
+
+      <p class="loader-text">Opening your book…</p>
+    </div>
+
     <nav class="site-nav" id="siteNav">
       <div class="nav-logo">
         <img style="margin-right:10px; width:155px;" src="https://i.imgur.com/Ebo7txC.jpg" alt="Logo" class="logo-img">
@@ -9499,6 +9692,18 @@
       }
 
       buildFilmstripGallery(galleryImages);
+
+      function showButterflyLoader() {
+        document.getElementById('butterflyLoader').classList.add('active');
+        document.body.classList.add('no-scroll');
+      }
+
+      function hideButterflyLoader() {
+        document.getElementById('butterflyLoader').classList.remove('active');
+        if (!document.getElementById('readerScene').classList.contains('active')) {
+          document.body.classList.remove('no-scroll');
+        }
+      }
 
 
     </script>
