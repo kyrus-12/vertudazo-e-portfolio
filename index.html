@@ -8764,9 +8764,16 @@
           spine.className = `book-spine palette-${book.palette}`;
           spine.style.animationDelay = `${i * 0.1}s`;
           spine.innerHTML = `<div class="spine-band top"></div><span class="spine-episode">${book.episode}</span><span class="spine-title">${book.title}</span><span class="spine-ornament">෴</span><div class="spine-band bottom"></div>`;
-          spine.addEventListener('click', () => openBook(book));
+          spine.addEventListener('click', () => {
           if (i < splitAt) {row1.appendChild(spine);} else {row2.appendChild(spine)};
+           showButterflyLoader();
+           setTimeout(() => {
+            hideButterflyLoader();
+            openBook(book);
+          }, 1800); 
         });
+        if (i < half) row1.appendChild(spine); else row2.appendChild(spine);
+      });
       }
 
       function applyPalette(name){
@@ -8927,7 +8934,6 @@
       let animating = false;
 
       function openBook(book){
-        showButterflyLoader();
         currentBook = book;
         applyPalette(book.palette);
         const built = buildBookHTML(book);
@@ -8944,7 +8950,6 @@
         document.body.classList.add('no-scroll');
 
         render();
-        hideButterflyLoader();
       }
 
       function closeBook(){
