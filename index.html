@@ -9342,15 +9342,22 @@
         if (isMagDragging) setTimeout(refreshMagView, 120);
       };
 
-      if ('scrollrestoration' in history){
+      if ('scrollRestoration' in history){
         history.scrollRestoration = 'manual';
       }
-      window.scrollTo(0, 0);
-      if (location.hash)(
-        'load', function(){
-          window.scrollTo(0, 0);
+
+      window.addEventListener('load', function(){
+        if (location.hash){
+          history.replaceState(null, '', location.pathname + location.search);
         }
-      );
+        window.scrollTo({top:0, left:0, behavior:'instant'});
+      });
+
+      window.addEventListener('pageshow', function(e){
+        if (e.persisted){
+          window.scrollTo({top:0, left:0, behavior:'instant'});
+        }
+      });
 
       function makeFSFormImage(imgUrl, altText){
         return `<img class="fs-form-img" src="${imgUrl}" alt="${altText || 'Activity Form'}">`;
