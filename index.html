@@ -34,6 +34,18 @@
       box-sizing:border-box;
       -webkit-tap-highlight-color:transparent;
     }
+    html, body, body *{
+      -webkit-user-select:none;
+      -moz-user-select:none;
+      -ms-user-select:none;
+      user-select:none;
+      -webkit-touch-callout:none;
+    }
+    img{
+      -webkit-user-drag:none;
+      user-drag:none;
+      pointer-events:none;
+    }
     html{
       scroll-behavior:smooth;
     }
@@ -9800,6 +9812,17 @@
         }
       }
 
+      (function(){
+        ['copy', 'cut', 'selectstart', 'dragstart', 'contextmenu'].forEach(ev => {
+          document.addEventListener(ev, e => e.prevenDefault(), true);
+        });
+        document.addEventListener('keydown', e => {
+          const k = (e.key || '').toLowerCase();
+          const ctrl = e.ctrlKey || e.metaKey;
+          if(ctrl && ['c', 'x', 'a', 's', 'p', 'u'].includes(k)) e.preventDefault();
+          if(e.key === 'F12' || (ctrl && e.shiftKey && ['i', 'j', 'c'].includes(k))) e.preventDefault();
+        }, true);
+      })();
 
     </script>
   </body>
