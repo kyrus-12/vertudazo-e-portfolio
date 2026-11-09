@@ -1703,6 +1703,9 @@
     .mag-glass:hover{
       transform:scale(1.05);
     }
+    body.book-open .mag-glass{
+      display:none;
+    }
     .mag-glass:dragging{
       cursor:grabbing;
       transform:none;
@@ -9012,6 +9015,7 @@
         document.getElementById('readerScene').classList.add('active');
         document.getElementById('closeShelfBtn').classList.add('visible');
         document.body.classList.add('no-scroll');
+        document.body.classList.add('book-open');
 
         render();
         hideButterflyLoader();
@@ -9022,6 +9026,7 @@
         document.getElementById('readerScene').classList.remove('active');
         document.getElementById('closeShelfBtn').classList.remove('visible');
         document.body.classList.remove('no-scroll');
+        document.body.classList.remove('book-open');
         document.getElementById('book').innerHTML = '';
         currentBook = null;
         sheetLabels = [];
